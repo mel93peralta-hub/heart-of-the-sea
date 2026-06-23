@@ -6,38 +6,39 @@
 -->
 <html>
 	<head>
-		<style>
-        /* Coloca la imagen de fondo en toda la pantalla */
-        body {
-            background-image: url('images/bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-color: #f4f7f6; /* Fondo de respaldo por si tarda en cargar la foto */
-        }
-
-        /* Crea una capa de lujo blanca semi-transparente sobre el contenido */
-        #wrapper {
-            background: rgba(255, 255, 255, 0.92); 
-            max-width: 76em;
-            margin: 0 auto;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); /* Sombra elegante en los bordes */
-            padding: 4em 3em 2em 3em;
-        }
-
-        /* Ajuste para pantallas de celulares */
-        @media screen and (max-width: 736px) {
-            #wrapper {
-                padding: 3em 1.5em 1em 1.5em;
-            }
-        }
-    </style>
 		<title>Heart of the Sea</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+		<style>
+			/* Coloca la imagen de fondo con prioridad absoluta */
+			body {
+				background-image: url('images/bg.jpg') !important;
+				background-size: cover !important;
+				background-position: center !important;
+				background-attachment: fixed !important;
+				background-repeat: no-repeat !important;
+				background-color: #f4f7f6 !important;
+			}
+
+			/* Capa elegante blanca semi-transparente sobre el contenido */
+			#wrapper {
+				background: rgba(255, 255, 255, 0.92) !important; 
+				max-width: 76em;
+				margin: 0 auto;
+				box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+				padding: 4em 3em 2em 3em;
+			}
+
+			/* Ajuste de legibilidad para pantallas de celulares */
+			@media screen and (max-width: 736px) {
+				#wrapper {
+					padding: 3em 1.5em 1em 1.5em;
+				}
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -45,99 +46,100 @@
 
 				<!-- Header -->
 					<header id="header">
-    <div class="inner">
-        <!-- Logo -->
-        <a href="index.html" class="logo">
-            <span class="title" style="font-weight: 800; letter-spacing: 1px;">HEART OF THE SEA</span>
-        </a>
-        <!-- Nav -->
-        <nav>
-            <ul>
-                <li><a href="#menu">Menu</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+						<div class="inner">
+							<!-- Logo -->
+							<a href="index.html" class="logo">
+								<span class="title" style="font-weight: 800; letter-spacing: 1px;">HEART OF THE SEA</span>
+							</a>
+							<!-- Nav -->
+							<nav>
+								<ul>
+									<li><a href="#menu">Menu</a></li>
+								</ul>
+							</nav>
+						</div>
+					</header>
 
 				<!-- Menu -->
-<nav id="menu">
-    <h2>Explore</h2>
-    <ul>
-        <li><a href="index.html">🏝️ Home</a></li>
-        <li><a href="#main">⚓ Our Fleet (Yachts)</a></li>
-        <li><a href="http://wa.me/17867644608" target="_blank" style="color: #f2849e; font-weight: bold;">📩 Get a Quote (WhatsApp)</a></li>
-        <li><a href="https://linktr.ee/heartofthesea" target="_blank">🔗 Full Directory</a></li>
-    </ul>
-</nav>
+					<nav id="menu">
+						<h2>Explore</h2>
+						<ul>
+							<li><a href="index.html">🏝️ Home</a></li>
+							<li><a href="#main">⚓ Our Fleet (Yachts)</a></li>
+							<li><a href="http://wa.me/17867644608" target="_blank" style="color: #f2849e; font-weight: bold;">📩 Get a Quote (WhatsApp)</a></li>
+							<li><a href="https://linktr.ee/heartofthesea" target="_blank">🔗 Full Directory</a></li>
+						</ul>
+					</nav>
 
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
 							<header>
-    <h1>Heart of the Sea</h1>
-    <p>Luxury yacht experiences in Miami — sunsets, celebrations, and unforgettable moments on the water 💫🌺🐬<br>
-    <strong>We offer 70+ yacht options</strong></p>
-    
-    <!-- Botón Destacado de Cotización Exclusiva -->
-    <ul class="actions" style="margin-top: 25px;">
-        <li><a href="http://wa.me/17867644608" target="_blank" class="button primary large">GET A QUOTE 📩 (Send us your inquiry)</a></li>
-    </ul>
-</header>
+								<h1>Heart of the Sea</h1>
+								<p>Luxury yacht experiences in Miami — sunsets, celebrations, and unforgettable moments on the water 💫🌺🐬<br>
+								<strong>We offer 70+ yacht options</strong></p>
+								
+								<!-- Botón Destacado de Cotización Exclusiva -->
+								<ul class="actions" style="margin-top: 25px;">
+									<li><a href="http://wa.me/17867644608" target="_blank" class="button primary large">GET A QUOTE 📩 (Send us your inquiry)</a></li>
+								</ul>
+							</header>
+							
 							<section class="tiles">
 
-    <!-- YATE 1: Barbie Pink Boat -->
-    <article class="style1">
-        <span class="image">
-            <img src="images/pic01.jpg" alt="Barbie Pink Boat" />
-        </span>
-        <a href="https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7" target="_blank">
-            <h2>42' Barbie Pink Boat</h2>
-            <div class="content">
-                <p>📍 Miami River</p>
-            </div>
-        </a>
-    </article>
+								<!-- YATE 1: Barbie Pink Boat -->
+								<article class="style1">
+									<span class="image">
+										<img src="images/pic01.jpg" alt="Barbie Pink Boat" />
+									</span>
+									<a href="https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7" target="_blank">
+										<h2>42' Barbie Pink Boat</h2>
+										<div class="content">
+											<p>📍 Miami River</p>
+										</div>
+									</a>
+								</article>
 
-    <!-- YATE 2: 110 Antago -->
-    <article class="style2">
-        <span class="image">
-            <img src="images/pic02.jpg" alt="110 Antago" />
-        </span>
-        <a href="https://yachtfleet.smugmug.com/110-Antago" target="_blank">
-            <h2>110' Antago</h2>
-            <div class="content">
-                <p>📍 Grove Harbour Marina</p>
-            </div>
-        </a>
-    </article>
+								<!-- YATE 2: 110 Antago -->
+								<article class="style2">
+									<span class="image">
+										<img src="images/pic02.jpg" alt="110 Antago" />
+									</span>
+									<a href="https://yachtfleet.smugmug.com/110-Antago" target="_blank">
+										<h2>110' Antago</h2>
+										<div class="content">
+											<p>📍 Grove Harbour Marina</p>
+										</div>
+									</a>
+								</article>
 
-    <!-- YATE 3: 105 Dominator -->
-    <article class="style3">
-        <span class="image">
-            <img src="images/pic03.jpg" alt="105 Dominator" />
-        </span>
-        <a href="https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link" target="_blank">
-            <h2>105' DOMINATOR (JACUZZI)</h2>
-            <div class="content">
-                <p>📍 Miami Beach Marina</p>
-            </div>
-        </a>
-    </article>
+								<!-- YATE 3: 105 Dominator -->
+								<article class="style3">
+									<span class="image">
+										<img src="images/pic03.jpg" alt="105 Dominator" />
+									</span>
+									<a href="https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link" target="_blank">
+										<h2>105' DOMINATOR (JACUZZI)</h2>
+										<div class="content">
+											<p>📍 Miami Beach Marina</p>
+										</div>
+									</a>
+								</article>
 
-    <!-- YATE 4: Azimut 90 -->
-    <article class="style4">
-        <span class="image">
-            <img src="images/pic04.jpg" alt="Azimut 90" />
-        </span>
-        <a href="https://jsrking.wixstudio.com/day-dreamin-miami" target="_blank">
-            <h2>Azimut 90' Day Dreamin'</h2>
-            <div class="content">
-                <p>📍 Miami Beach Marina</p>
-            </div>
-        </a>
-    </article>
+								<!-- YATE 4: Azimut 90 -->
+								<article class="style4">
+									<span class="image">
+										<img src="images/pic04.jpg" alt="Azimut 90" />
+									</span>
+									<a href="https://jsrking.wixstudio.com/day-dreamin-miami" target="_blank">
+										<h2>Azimut 90' Day Dreamin'</h2>
+										<div class="content">
+											<p>📍 Miami Beach Marina</p>
+										</div>
+									</a>
+								</article>
 
-</section>
+							</section>
 						</div>
 					</div>
 
