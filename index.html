@@ -15,7 +15,33 @@
 	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
+<style>
+        /* Coloca la imagen de fondo en toda la pantalla */
+        body {
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: #f4f7f6; /* Fondo de respaldo por si tarda en cargar la foto */
+        }
 
+        /* Crea una capa de lujo blanca semi-transparente sobre el contenido */
+        #wrapper {
+            background: rgba(255, 255, 255, 0.92); 
+            max-width: 76em;
+            margin: 0 auto;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.08); /* Sombra elegante en los bordes */
+            padding: 4em 3em 2em 3em;
+        }
+
+        /* Ajuste para pantallas de celulares */
+        @media screen and (max-width: 736px) {
+            #wrapper {
+                padding: 3em 1.5em 1em 1.5em;
+            }
+        }
+    </style>
 				<!-- Header -->
 					<header id="header">
     <div class="inner">
