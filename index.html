@@ -38,6 +38,22 @@
 					padding: 3em 1.5em 1em 1.5em;
 				}
 			}
+			/* Hace que las fotos de los botes sean las protagonistas */
+			.tiles article > .image {
+				opacity: 1 !important;
+				visibility: visible !important;
+			}
+			
+			/* Cambia los colores brillantes por un velo oscuro elegante para leer el texto */
+			.tiles article > a {
+				background-color: rgba(0, 0, 0, 0.4) !important; /* Capa oscura sutil */
+				transition: background-color 0.3s ease !important;
+			}
+			
+			/* Al pasar el cursor o tocar la foto, el velo se aclara para ver el yate al 100% */
+			.tiles article:hover > a {
+				background-color: rgba(0, 0, 0, 0.15) !important;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
