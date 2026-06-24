@@ -1,14 +1,17 @@
 <!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP (Adapted for Heart of the Sea)
+-->
 <html>
 	<head>
-		<title>Heart of the Sea</title>
+		<title>Heart of the Sea | Miami Yacht Rentals</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		
 		<style>
-			/* Coloca la imagen de fondo con prioridad absoluta */
+			/* Fondo con prioridad absoluta */
 			body {
 				background-image: url('images/bg.jpg') !important;
 				background-size: cover !important;
@@ -18,48 +21,87 @@
 				background-color: #f4f7f6 !important;
 			}
 
-			/* Capa elegante blanca semi-transparente sobre el contenido */
+			/* Capa elegante blanca semi-transparente */
 			#wrapper {
-				background: rgba(255, 255, 255, 0.92) !important; 
+				background: rgba(255, 255, 255, 0.95) !important; 
 				max-width: 76em;
 				margin: 0 auto;
-				box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+				box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 				padding: 4em 3em 2em 3em;
 			}
 
-			/* Ajuste de legibilidad para pantallas de celulares */
 			@media screen and (max-width: 736px) {
 				#wrapper {
 					padding: 3em 1.5em 1em 1.5em;
 				}
 			}
 			
-			/* Hace que las fotos de los botes sean las protagonistas */
+			/* Fotos de los botes protagonistas */
 			.tiles article > .image {
 				opacity: 1 !important;
 				visibility: visible !important;
 			}
 			
-			/* Cambia los colores brillantes por un velo oscuro elegante para leer el texto */
+			/* Velo oscuro elegante para leer el texto */
 			.tiles article > a {
-				background-color: rgba(0, 0, 0, 0.4) !important; /* Capa oscura sutil */
+				background-color: rgba(0, 0, 0, 0.5) !important; 
 				transition: background-color 0.3s ease !important;
 			}
 			
-			/* Al pasar el cursor o tocar la foto, el velo se aclara para ver el yate al 100% */
 			.tiles article:hover > a {
-				background-color: rgba(0, 0, 0, 0.15) !important;
+				background-color: rgba(0, 0, 0, 0.2) !important;
+			}
+
+			/* Estilos adicionales para imitar la estructura comercial de Odysea */
+			.amenities-list {
+				list-style: none;
+				padding: 0;
+				margin: 10px 0 0 0;
+				font-size: 0.85em;
+				color: #fff;
+			}
+			.amenities-list li {
+				display: inline-block;
+				margin-right: 15px;
+				font-weight: bold;
+			}
+			.info-section {
+				margin-top: 4em;
+				border-top: 2px solid #f2849e;
+				padding-top: 3em;
 			}
 		</style>
+		
+		<!-- Meta Pixel Code -->
+		<script>
+		  !function(f,b,e,v,n,t,s)
+		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		  n.queue=[];t=b.createElement(e);t.async=!0;
+		  t.src=v;s=b.getElementsByTagName(e)[0];
+		  s.parentNode.insertBefore(t,s)}(window, document,'script',
+		  'https://connect.facebook.net/en_US/fbevents.js');
+		  fbq('init', 'TU_ID_DE_PIXEL_AQUÍ');
+		  fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		  src="https://www.facebook.com/tr?id=TU_ID_DE_PIXEL_AQUÍ&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Meta Pixel Code -->
 	</head>
 	<body class="is-preload">
-		<div id="wrapper">
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-				<header id="header">
+				<!-- Header -->
+					<header id="header">
 						<div class="inner">
+							<!-- Logo -->
 							<a href="index.html" class="logo" style="display: flex; align-items: center; border: none;">
 								<img src="images/logo.jpg" alt="Heart of the Sea Logo" style="max-height: 85px; width: auto; display: block;" />
 							</a>
+							<!-- Nav -->
 							<nav>
 								<ul>
 									<li><a href="#menu">Menu</a></li>
@@ -68,42 +110,54 @@
 						</div>
 					</header>
 
-				<nav id="menu">
+				<!-- Menu -->
+					<nav id="menu">
 						<h2>Explore</h2>
 						<ul>
 							<li><a href="index.html">🏝️ Home</a></li>
 							<li><a href="#main">⚓ Our Fleet (Yachts)</a></li>
+							<li><a href="#experiences">🥂 Experiences</a></li>
 							<li><a href="http://wa.me/17867644608" target="_blank" style="color: #f2849e; font-weight: bold;">📩 Get a Quote (WhatsApp)</a></li>
 							<li><a href="https://linktr.ee/heartofthesea" target="_blank">🔗 Full Directory</a></li>
 						</ul>
 					</nav>
 
-				<div id="main">
+				<!-- Main -->
+					<div id="main">
 						<div class="inner">
 							<header>
-								<h1>Heart of the Sea</h1>
-								<p>Luxury yacht experiences in Miami — sunsets, celebrations, and unforgettable moments on the water 💫🌺🐬<br>
-								<strong>We offer 70+ yacht options</strong></p>
+								<h1 style="margin-bottom: 0.5em;">Miami Boat Rental & Yacht Charter</h1>
+								<p style="font-size: 1.2em;">Experience unparalleled luxury on the crystal blue waters of Miami. Perfect for family getaways, romantic cruises, or large group gatherings. <br>
+								<strong>All our charters include:</strong> 👨‍✈️ Private Captain & Crew | ⛽ Fuel | 🧊 Ice & Coolers | 🎵 Bluetooth Sound System</p>
 								
 								<ul class="actions" style="margin-top: 25px;">
-									<li><a href="http://wa.me/17867644608" target="_blank" class="button primary large">GET A QUOTE 📩 (Send us your inquiry)</a></li>
+									<li><a href="http://wa.me/17867644608" target="_blank" class="button primary large">GET A QUOTE 📩</a></li>
+									<li><a href="#main" class="button large">VIEW FLEET</a></li>
 								</ul>
 							</header>
 							
+							<!-- FLEET SECTION -->
+							<h2 style="margin-top: 2em;">Choose Your Vessel</h2>
 							<section class="tiles">
 
+								<!-- YATE 1: Barbie Pink Boat -->
 								<article class="style1">
 									<span class="image">
-										<img src="images/pinkbarbie.jpg" alt="Barbie Pink Boat" />
+										<img src="images/barbie.jpg" alt="Barbie Pink Boat" />
 									</span>
 									<a href="https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7" target="_blank">
 										<h2>42' Barbie Pink Boat</h2>
 										<div class="content">
 											<p>📍 Miami River</p>
+											<ul class="amenities-list">
+												<li>👥 Up to 12 Guests</li>
+												<li>🧊 Ice & Water</li>
+											</ul>
 										</div>
 									</a>
 								</article>
 
+								<!-- YATE 2: 110 Antago -->
 								<article class="style2">
 									<span class="image">
 										<img src="images/antago.jpg" alt="110 Antago" />
@@ -112,39 +166,85 @@
 										<h2>110' Antago</h2>
 										<div class="content">
 											<p>📍 Grove Harbour Marina</p>
+											<ul class="amenities-list">
+												<li>👥 Up to 13 Guests</li>
+												<li>🥂 VIP Crew</li>
+											</ul>
 										</div>
 									</a>
 								</article>
 
+								<!-- YATE 3: 105 Dominator -->
 								<article class="style3">
 									<span class="image">
 										<img src="images/dominator.jpg" alt="105 Dominator" />
 									</span>
 									<a href="https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link" target="_blank">
-										<h2>105' DOMINATOR (JACUZZI)</h2>
+										<h2>105' DOMINATOR</h2>
 										<div class="content">
 											<p>📍 Miami Beach Marina</p>
+											<ul class="amenities-list">
+												<li>🛁 Onboard Jacuzzi</li>
+												<li>👨‍🍳 Chef Optional</li>
+											</ul>
 										</div>
 									</a>
 								</article>
 
+								<!-- YATE 4: Azimut 90 -->
 								<article class="style4">
 									<span class="image">
 										<img src="images/azimut.jpg" alt="Azimut 90" />
 									</span>
 									<a href="https://jsrking.wixstudio.com/day-dreamin-miami" target="_blank">
-										<h2>Azimut 90' Day Dreamin'</h2>
+										<h2>90' Azimut Day Dreamin'</h2>
 										<div class="content">
 											<p>📍 Miami Beach Marina</p>
+											<ul class="amenities-list">
+												<li>👥 Up to 13 Guests</li>
+												<li>🐬 Water Toys</li>
+											</ul>
 										</div>
 									</a>
 								</article>
-
 							</section>
+
+							<!-- NEW: EXPERIENCES SECTION -->
+							<div id="experiences" class="info-section">
+								<h2>Special Events & Experiences 🥂</h2>
+								<p>We don't just rent boats; we curate unforgettable moments. Let our team handle the details so you can focus on enjoying the breathtaking views of the Miami skyline, Star Island, and Nixon Sandbar.</p>
+								<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+									<div style="flex: 1; min-width: 250px;">
+										<h3>🎂 Birthdays & Bachelorettes</h3>
+										<p>Celebrate your last sail before the veil or ring in your new year with world-class amenities, stunning photos, and the ultimate boat party vibe.</p>
+									</div>
+									<div style="flex: 1; min-width: 250px;">
+										<h3>💍 Romantic Getaways</h3>
+										<p>Invite your significant other to a romantic sunset cruise. Experience peaceful bays and the Miami city lights coming alive at night.</p>
+									</div>
+									<div style="flex: 1; min-width: 250px;">
+										<h3>🤝 Corporate Events</h3>
+										<p>Impress your clients or reward your team. Yachts are the new hot spots for networking with catering options and an unforgettable backdrop.</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- NEW: HOW TO RENT SECTION -->
+							<div class="info-section" style="border-top: none; padding-top: 1em;">
+								<h2>How to Rent with Us (3 Easy Steps)</h2>
+								<ol>
+									<li><strong>Find Your Dream Yacht:</strong> Browse our fleet above and choose the vessel that suits your group size and style.</li>
+									<li><strong>Send an Inquiry:</strong> Click the WhatsApp button to chat directly with our booking agents to confirm availability and hourly rates.</li>
+									<li><strong>Secure & Sail:</strong> We'll send you a secure link for your deposit. Step on board, grab a welcome drink, and enjoy the ride!</li>
+								</ol>
+								<a href="http://wa.me/17867644608" target="_blank" class="button primary">CHECK AVAILABILITY NOW</a>
+							</div>
+
 						</div>
 					</div>
 
-				<footer id="footer">
+				<!-- Footer -->
+					<footer id="footer">
 						<div class="inner">
 							<section>
 								<h2>Get in touch</h2>
@@ -161,7 +261,7 @@
 										</div>
 									</div>
 									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
+										<li><input type="submit" value="Send Request" class="primary" /></li>
 									</ul>
 								</form>
 							</section>
@@ -169,28 +269,25 @@
 								<h2>Follow</h2>
 								<ul class="icons">
 									<li><a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									
 									<li><a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									
 									<li><a href="tel:+17867644608" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									
 									<li><a href="mailto:tu-correo@heartofthesea.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
 								</ul>
 							</section>
 							<ul class="copyright">
-								<li>&copy; Heart of the Sea. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								<li>&copy; Heart of the Sea. All rights reserved.</li><li>Miami Yacht Rentals</li>
 							</ul>
 						</div>
 					</footer>
 
 			</div>
 
-		<script src="assets/js/jquery.min.js"></script>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
 	</body>
-</html>
 </html>
