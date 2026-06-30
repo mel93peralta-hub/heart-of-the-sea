@@ -18,54 +18,114 @@
 				background-color: #f4f7f6 !important;
 			}
 
-			/* Capa elegante blanca semi-transparente */
+			/* Capa elegante estilo Odysea (Más amplia y limpia) */
 			#wrapper {
-				background: rgba(255, 255, 255, 0.95) !important; 
-				max-width: 76em;
+				background: rgba(255, 255, 255, 0.97) !important; 
+				max-width: 85em; /* Ligeramente más ancho para imitar webs premium */
 				margin: 0 auto;
-				box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
-				padding: 4em 3em 2em 3em;
+				box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+				padding: 4em 4em 2em 4em;
+				border-radius: 8px; /* Bordes sutilmente redondeados */
 			}
 
 			@media screen and (max-width: 736px) {
 				#wrapper {
 					padding: 3em 1.5em 1em 1.5em;
+					border-radius: 0;
 				}
 			}
 			
-			/* Fotos de los botes protagonistas */
+			/* =========================================
+			   EFECTOS PREMIUM PARA LAS TARJETAS DE YATES
+			   ========================================= */
+			.tiles article {
+				border-radius: 12px !important; /* Bordes modernos */
+				overflow: hidden;
+				box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+			}
+			
 			.tiles article > .image {
 				opacity: 1 !important;
 				visibility: visible !important;
 			}
 			
-			/* Velo oscuro elegante para leer el texto */
+			/* Efecto Zoom Suave al pasar el ratón */
+			.tiles article > .image img {
+				transition: transform 0.6s ease !important;
+			}
+			.tiles article:hover > .image img {
+				transform: scale(1.08) !important;
+			}
+			
+			/* Degradado estilo Odysea: Oscuro abajo para leer, transparente arriba para ver la foto */
 			.tiles article > a {
-				background-color: rgba(0, 0, 0, 0.5) !important; 
-				transition: background-color 0.3s ease !important;
+				background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%) !important; 
+				display: flex !important;
+				flex-direction: column;
+				justify-content: flex-end;
+				padding: 2em 1.5em !important;
+				transition: background 0.3s ease !important;
 			}
 			
 			.tiles article:hover > a {
-				background-color: rgba(0, 0, 0, 0.2) !important;
+				background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%) !important;
 			}
 
-			/* Estilos adicionales para imitar la estructura comercial de Odysea */
+			/* =========================================
+			   BOTONES Y COLORES NÁUTICOS
+			   ========================================= */
+			input[type="submit"].primary,
+			input[type="reset"].primary,
+			input[type="button"].primary,
+			button.primary,
+			.button.primary {
+				background-color: #005b96 !important; /* Azul Náutico Premium */
+				box-shadow: inset 0 0 0 2px #005b96 !important;
+				color: #ffffff !important;
+				border-radius: 30px !important; /* Botón redondeado que invita al clic */
+				font-weight: bold !important;
+				letter-spacing: 1px;
+			}
+			.button.primary:hover {
+				background-color: #03396c !important;
+				box-shadow: inset 0 0 0 2px #03396c !important;
+			}
+
+			/* Tipografía de las amenidades */
 			.amenities-list {
 				list-style: none;
 				padding: 0;
 				margin: 10px 0 0 0;
-				font-size: 0.85em;
-				color: #fff;
+				font-size: 0.9em;
+				color: #f1f1f1;
 			}
 			.amenities-list li {
 				display: inline-block;
 				margin-right: 15px;
-				font-weight: bold;
+				font-weight: 500;
 			}
+			
 			.info-section {
 				margin-top: 4em;
-				border-top: 2px solid #f2849e;
+				border-top: 2px solid #eaeaea;
 				padding-top: 3em;
+			}
+
+			/* Trust Badges */
+			.trust-badges {
+				display: flex; 
+				gap: 15px; 
+				margin-top: 20px; 
+				flex-wrap: wrap;
+			}
+			.trust-badge {
+				background: #f4f7f6; 
+				color: #333; 
+				padding: 8px 15px; 
+				border-radius: 20px; 
+				font-size: 0.85em; 
+				font-weight: bold;
+				border: 1px solid #ddd;
 			}
 		</style>
 		
@@ -107,25 +167,32 @@
 							<li><a href="index.html">🏝️ Home</a></li>
 							<li><a href="#main">⚓ Our Fleet (Yachts)</a></li>
 							<li><a href="#experiences">🥂 Experiences</a></li>
-							<li><a href="http://wa.me/17867644608" target="_blank" style="color: #f2849e; font-weight: bold;">📩 Get a Quote (WhatsApp)</a></li>
+							<li><a href="http://wa.me/17867644608" target="_blank" style="color: #005b96; font-weight: bold;">📩 Get a Quote (WhatsApp)</a></li>
 							<li><a href="https://linktr.ee/heartofthesea" target="_blank">🔗 Full Directory</a></li>
 						</ul>
 					</nav>
 
 				<div id="main">
 						<div class="inner">
-							<header>
-								<h1 style="margin-bottom: 0.5em;">Miami Boat Rental & Yacht Charter</h1>
-								<p style="font-size: 1.2em;">Experience unparalleled luxury on the crystal blue waters of Miami. Perfect for family getaways, romantic cruises, or large group gatherings. <br>
-								<strong>All our charters include:</strong> 👨‍✈️ Private Captain & Crew | ⛽ Fuel | 🧊 Ice & Coolers | 🎵 Bluetooth Sound System</p>
+							<header style="text-align: left; padding-bottom: 2em;">
+								<h1 style="margin-bottom: 0.2em; font-size: 3em;">Miami Yacht Charter & Rentals</h1>
+								<p style="font-size: 1.25em; color: #555; max-width: 800px;">Experience unparalleled luxury on the crystal blue waters of Miami. Perfect for family getaways, romantic cruises, or large group gatherings. <br>
+								<strong>All our charters include:</strong> 👨‍✈️ Private Captain & Crew | ⛽ Fuel | 🧊 Ice & Coolers | 🎵 Premium Sound</p>
 								
-								<ul class="actions" style="margin-top: 25px;">
+								<!-- Trust Badges incorporadas -->
+								<div class="trust-badges">
+									<span class="trust-badge">⭐ 5.0 Customer Rating</span>
+									<span class="trust-badge">🛡️ Certified Captains</span>
+									<span class="trust-badge">🥂 VIP Service</span>
+								</div>
+								
+								<ul class="actions" style="margin-top: 35px;">
 									<li><a href="http://wa.me/17867644608" target="_blank" class="button primary large">GET A QUOTE 📩</a></li>
-									<li><a href="#main" class="button large">VIEW FLEET</a></li>
+									<li><a href="#fleet" class="button large">VIEW FLEET</a></li>
 								</ul>
 							</header>
 							
-							<h2 style="margin-top: 2em;">Choose Your Vessel (70+ Options Available)</h2>
+							<h2 id="fleet" style="margin-top: 1em;">Featured Vessels (70+ Options Available)</h2>
 							<section class="tiles">
 
 								<article class="style1">
@@ -364,7 +431,7 @@
 									<li><strong>Send an Inquiry:</strong> Click the WhatsApp button to chat directly with our booking agents to confirm availability and hourly rates.</li>
 									<li><strong>Secure & Sail:</strong> We'll send you a secure link for your deposit. Step on board, grab a welcome drink, and enjoy the ride!</li>
 								</ol>
-								<a href="http://wa.me/17867644608" target="_blank" class="button primary">CHECK AVAILABILITY NOW</a>
+								<a href="http://wa.me/17867644608" target="_blank" class="button primary large" style="margin-top: 15px;">CHECK AVAILABILITY NOW</a>
 							</div>
 
 						</div>
@@ -395,9 +462,9 @@
 								<h2>Follow</h2>
 								<ul class="icons">
 									<li><a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="https://<li><a href="https://www.facebook.com/profile.php?id=1234567890" target="_blank" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
 									<li><a href="tel:+17867644608" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="mailto:heartoftheseasales@gmail.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="mailto:tu-correo@heartofthesea.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
 								</ul>
 							</section>
 							<ul class="copyright">
@@ -415,4 +482,5 @@
 			<script src="assets/js/main.js"></script>
 
 	</body>
+</html>
 </html>
