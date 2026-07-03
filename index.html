@@ -675,19 +675,28 @@
     ================================================================ */
     .y-img-book {
       position: absolute; inset: 0;
-      background: rgba(7,26,46,.58);
+      background: rgba(7,26,46,.0);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 10px;
       opacity: 0; cursor: pointer;
-      transition: opacity var(--dur) var(--ease);
+      transition: opacity var(--dur) var(--ease), background var(--dur) var(--ease);
     }
-    .y-card:hover .y-img-book { opacity: 1; }
+    .y-img-wrap:hover .y-img-book,
+    .y-card:hover .y-img-book { opacity: 1; background: rgba(7,26,46,.58); }
     .y-img-book-ico { font-size: 2rem; }
     .y-img-book-lbl {
       font-size: .72rem; font-weight: 700; letter-spacing: .14em;
       text-transform: uppercase; color: var(--white);
       background: var(--coral); padding: 7px 18px;
       border-radius: 30px;
+    }
+
+    /* Mobile tap hint on image */
+    @media (hover: none) {
+      .y-img-book {
+        opacity: 1 !important;
+        background: rgba(7,26,46,.45) !important;
+      }
     }
 
     /* ================================================================
