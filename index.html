@@ -1,486 +1,1210 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Heart of the Sea | Miami Yacht Rentals</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		
-		<style>
-			/* Fondo con prioridad absoluta */
-			body {
-				background-image: url('images/bg.jpg') !important;
-				background-size: cover !important;
-				background-position: center !important;
-				background-attachment: fixed !important;
-				background-repeat: no-repeat !important;
-				background-color: #f4f7f6 !important;
-			}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heart of the Sea | Miami Yacht Rentals & Boat Charters</title>
+  <meta name="description" content="Luxury yacht rentals in Miami. 70+ vessels, all-inclusive charters with private captain & crew. Perfect for parties, sunset cruises & corporate events." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-			/* Capa elegante estilo Odysea (Más amplia y limpia) */
-			#wrapper {
-				background: rgba(255, 255, 255, 0.97) !important; 
-				max-width: 85em; /* Ligeramente más ancho para imitar webs premium */
-				margin: 0 auto;
-				box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-				padding: 4em 4em 2em 4em;
-				border-radius: 8px; /* Bordes sutilmente redondeados */
-			}
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','TU_ID_DE_PIXEL_AQUÍ');fbq('track','PageView');
+  </script>
 
-			@media screen and (max-width: 736px) {
-				#wrapper {
-					padding: 3em 1.5em 1em 1.5em;
-					border-radius: 0;
-				}
-			}
-			
-			/* =========================================
-			   EFECTOS PREMIUM PARA LAS TARJETAS DE YATES
-			   ========================================= */
-			.tiles article {
-				border-radius: 12px !important; /* Bordes modernos */
-				overflow: hidden;
-				box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
-			}
-			
-			.tiles article > .image {
-				opacity: 1 !important;
-				visibility: visible !important;
-			}
-			
-			/* Efecto Zoom Suave al pasar el ratón */
-			.tiles article > .image img {
-				transition: transform 0.6s ease !important;
-			}
-			.tiles article:hover > .image img {
-				transform: scale(1.08) !important;
-			}
-			
-			/* Degradado estilo Odysea: Oscuro abajo para leer, transparente arriba para ver la foto */
-			.tiles article > a {
-				background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%) !important; 
-				display: flex !important;
-				flex-direction: column;
-				justify-content: flex-end;
-				padding: 2em 1.5em !important;
-				transition: background 0.3s ease !important;
-			}
-			
-			.tiles article:hover > a {
-				background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%) !important;
-			}
+  <style>
+    /* ================================================================
+       DESIGN TOKENS
+    ================================================================ */
+    :root {
+      --navy:       #071a2e;
+      --navy-mid:   #0d2a47;
+      --coral:      #0cbfaa;
+      --coral-dark: #09998c;
+      --gold:       #c9a96e;
+      --white:      #ffffff;
+      --off-white:  #f7f6f4;
+      --border:     #e8e6e2;
+      --text:       #1a1f2e;
+      --text-mid:   #4a5060;
+      --text-light: #7a8090;
+      --green-wa:   #25d366;
 
-			/* =========================================
-			   BOTONES Y COLORES NÁUTICOS
-			   ========================================= */
-			input[type="submit"].primary,
-			input[type="reset"].primary,
-			input[type="button"].primary,
-			button.primary,
-			.button.primary {
-				background-color: #005b96 !important; /* Azul Náutico Premium */
-				box-shadow: inset 0 0 0 2px #005b96 !important;
-				color: #ffffff !important;
-				border-radius: 30px !important; /* Botón redondeado que invita al clic */
-				font-weight: bold !important;
-				letter-spacing: 1px;
-			}
-			.button.primary:hover {
-				background-color: #03396c !important;
-				box-shadow: inset 0 0 0 2px #03396c !important;
-			}
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
 
-			/* Tipografía de las amenidades */
-			.amenities-list {
-				list-style: none;
-				padding: 0;
-				margin: 10px 0 0 0;
-				font-size: 0.9em;
-				color: #f1f1f1;
-			}
-			.amenities-list li {
-				display: inline-block;
-				margin-right: 15px;
-				font-weight: 500;
-			}
-			
-			.info-section {
-				margin-top: 4em;
-				border-top: 2px solid #eaeaea;
-				padding-top: 3em;
-			}
+      --r-sm:  6px;
+      --r-md:  12px;
+      --r-lg:  18px;
+      --r-xl:  28px;
 
-			/* Trust Badges */
-			.trust-badges {
-				display: flex; 
-				gap: 15px; 
-				margin-top: 20px; 
-				flex-wrap: wrap;
-			}
-			.trust-badge {
-				background: #f4f7f6; 
-				color: #333; 
-				padding: 8px 15px; 
-				border-radius: 20px; 
-				font-size: 0.85em; 
-				font-weight: bold;
-				border: 1px solid #ddd;
-			}
-		</style>
-		
-		<script>
-		  !function(f,b,e,v,n,t,s)
-		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-		  n.queue=[];t=b.createElement(e);t.async=!0;
-		  t.src=v;s=b.getElementsByTagName(e)[0];
-		  s.parentNode.insertBefore(t,s)}(window, document,'script',
-		  'https://connect.facebook.net/en_US/fbevents.js');
-		  fbq('init', 'TU_ID_DE_PIXEL_AQUÍ');
-		  fbq('track', 'PageView');
-		</script>
-		<noscript><img height="1" width="1" style="display:none"
-		  src="https://www.facebook.com/tr?id=TU_ID_DE_PIXEL_AQUÍ&ev=PageView&noscript=1"
-		/></noscript>
-		</head>
-	<body class="is-preload">
-		<div id="wrapper">
+      --sh-sm: 0 2px 12px rgba(7,26,46,.07);
+      --sh-md: 0 6px 28px rgba(7,26,46,.11);
+      --sh-lg: 0 16px 56px rgba(7,26,46,.16);
 
-				<header id="header">
-						<div class="inner">
-							<a href="index.html" class="logo" style="display: flex; align-items: center; border: none;">
-								<img src="images/logo.jpg" alt="Heart of the Sea Logo" style="max-height: 85px; width: auto; display: block;" />
-							</a>
-							<nav>
-								<ul>
-									<li><a href="#menu">Menu</a></li>
-								</ul>
-							</nav>
-						</div>
-					</header>
+      --ease: cubic-bezier(.4,0,.2,1);
+      --dur:  .28s;
+    }
 
-				<nav id="menu">
-						<h2>Explore</h2>
-						<ul>
-							<li><a href="index.html">🏝️ Home</a></li>
-							<li><a href="#main">⚓ Our Fleet (Yachts)</a></li>
-							<li><a href="#experiences">🥂 Experiences</a></li>
-							<li><a href="http://wa.me/17867644608" target="_blank" style="color: #005b96; font-weight: bold;">📩 Get a Quote (WhatsApp)</a></li>
-							<li><a href="https://linktr.ee/heartofthesea" target="_blank">🔗 Full Directory</a></li>
-						</ul>
-					</nav>
+    /* ================================================================
+       RESET
+    ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-				<div id="main">
-						<div class="inner">
-							<header style="text-align: left; padding-bottom: 2em;">
-								<h1 style="margin-bottom: 0.2em; font-size: 3em;">Miami Yacht Charter & Rentals</h1>
-								<p style="font-size: 1.25em; color: #555; max-width: 800px;">Experience unparalleled luxury on the crystal blue waters of Miami. Perfect for family getaways, romantic cruises, or large group gatherings. <br>
-								<strong>All our charters include:</strong> 👨‍✈️ Private Captain & Crew | ⛽ Fuel | 🧊 Ice & Coolers | 🎵 Premium Sound</p>
-								
-								<!-- Trust Badges incorporadas -->
-								<div class="trust-badges">
-									<span class="trust-badge">⭐ 5.0 Customer Rating</span>
-									<span class="trust-badge">🛡️ Certified Captains</span>
-									<span class="trust-badge">🥂 VIP Service</span>
-								</div>
-								
-								<ul class="actions" style="margin-top: 35px;">
-									<li><a href="http://wa.me/17867644608" target="_blank" class="button primary large">GET A QUOTE 📩</a></li>
-									<li><a href="#fleet" class="button large">VIEW FLEET</a></li>
-								</ul>
-							</header>
-							
-							<h2 id="fleet" style="margin-top: 1em;">Featured Vessels (70+ Options Available)</h2>
-							<section class="tiles">
+    /* ================================================================
+       SHARED BUTTONS
+    ================================================================ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .82rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; border-radius: 40px;
+      transition: transform var(--dur) var(--ease),
+                  box-shadow var(--dur) var(--ease),
+                  background var(--dur) var(--ease);
+    }
+    .btn-coral {
+      background: var(--coral); color: var(--white);
+      padding: 14px 32px;
+    }
+    .btn-coral:hover {
+      background: var(--coral-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(12,191,170,.4);
+    }
+    .btn-coral-lg { padding: 18px 44px; font-size: .88rem; }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      padding: 14px 32px;
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .btn-navy {
+      background: var(--navy); color: var(--white);
+      padding: 12px 28px;
+    }
+    .btn-navy:hover { background: var(--navy-mid); transform: translateY(-1px); }
 
-								<article class="style1">
-									<span class="image"><img src="images/yate1.jpg" alt="42 Barbie Pink Boat" /></span>
-									<a href="https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0" target="_blank">
-										<h2>42' Barbie Pink Boat</h2>
-										<div class="content"><p>📍 Miami River</p><ul class="amenities-list"><li>👥 Up to 12 Guests</li><li>🧊 Ice & Water</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       SECTION SCAFFOLD
+    ================================================================ */
+    .sec { padding: 88px 24px; }
+    .sec-inner { max-width: 1220px; margin: 0 auto; }
+    .sec-alt { background: var(--off-white); }
+    .sec-dark { background: var(--navy); }
 
-								<article class="style2">
-									<span class="image"><img src="images/yate2.jpg" alt="110 Antago" /></span>
-									<a href="https://yachtfleet.smugmug.com/110-Antago" target="_blank">
-										<h2>110' Antago</h2>
-										<div class="content"><p>📍 Grove Harbour Marina</p><ul class="amenities-list"><li>👥 Up to 13 Guests</li><li>🥂 VIP Crew</li></ul></div>
-									</a>
-								</article>
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .62rem; font-weight: 700; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 14px;
+    }
+    .sec-label::after { content: ''; width: 32px; height: 1px; background: var(--coral); }
+    .sec-dark .sec-label { color: var(--gold); }
+    .sec-dark .sec-label::after { background: var(--gold); }
 
-								<article class="style3">
-									<span class="image"><img src="images/yate3.jpg" alt="105 DOMINATOR" /></span>
-									<a href="https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link" target="_blank">
-										<h2>105' DOMINATOR</h2>
-										<div class="content"><p>📍 Miami Beach Marina</p><ul class="amenities-list"><li>🛁 Onboard Jacuzzi</li><li>👨‍🍳 Chef Optional</li></ul></div>
-									</a>
-								</article>
+    .sec-h {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      font-weight: 300; line-height: 1.08;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .sec-h em { font-style: italic; color: var(--coral); }
+    .sec-dark .sec-h { color: var(--white); }
+    .sec-dark .sec-h em { color: var(--gold); }
 
-								<article class="style4">
-									<span class="image"><img src="images/yate4.jpg" alt="Azimut 90" /></span>
-									<a href="https://jsrking.wixstudio.com/day-dreamin-miami" target="_blank">
-										<h2>Azimut 90' Day Dreamin'</h2>
-										<div class="content"><p>📍 Miami Beach Marina</p><ul class="amenities-list"><li>🛁 Onboard Jacuzzi</li><li>🐬 Water Toys</li></ul></div>
-									</a>
-								</article>
+    .sec-sub {
+      font-size: .95rem; color: var(--text-mid); line-height: 1.75;
+      max-width: 560px; margin-bottom: 52px;
+    }
+    .sec-dark .sec-sub { color: rgba(255,255,255,.5); }
 
-								<article class="style5">
-									<span class="image"><img src="images/yate5.jpg" alt="Pershing 90" /></span>
-									<a href="https://rym.smugmug.com/90-Pershing-" target="_blank">
-										<h2>Pershing 90'</h2>
-										<div class="content"><p>📍 Miami River</p><ul class="amenities-list"><li>👨‍✈️ Captain & Crew</li><li>🎵 Premium Sound</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       HEADER
+    ================================================================ */
+    #hdr {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(7,26,46,.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      transition: box-shadow var(--dur) var(--ease);
+    }
+    #hdr.shadow { box-shadow: var(--sh-lg); }
 
-								<article class="style6">
-									<span class="image"><img src="images/yate6.jpg" alt="BAIA Panther 85" /></span>
-									<a href="https://baiapanther85.jsrking.com" target="_blank">
-										<h2>BAIA Panther 85'</h2>
-										<div class="content"><p>📍 Regal Marina</p><ul class="amenities-list"><li>🛁 Onboard Jacuzzi</li><li>🥂 VIP Experience</li></ul></div>
-									</a>
-								</article>
+    .hdr-inner {
+      max-width: 1220px; margin: 0 auto; padding: 0 24px;
+      height: 70px; display: flex; align-items: center; gap: 28px;
+    }
+    .hdr-logo { display: flex; align-items: center; flex-shrink: 0; }
+    .hdr-logo img { height: 50px; width: auto; }
 
-								<article class="style1">
-									<span class="image"><img src="images/yate7.jpg" alt="80 Aicon" /></span>
-									<a href="https://photos.app.goo.gl/q3hSua7Ut2ySLARJ9" target="_blank">
-										<h2>80’ Aicon</h2>
-										<div class="content"><p>📍 Epic Hotel</p><ul class="amenities-list"><li>🧊 Ice & Water</li><li>🎵 Bluetooth Audio</li></ul></div>
-									</a>
-								</article>
+    .hdr-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .hdr-nav a {
+      font-size: .76rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: rgba(255,255,255,.65);
+      padding: 8px 14px; border-radius: var(--r-sm);
+      transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+    }
+    .hdr-nav a:hover { color: var(--white); background: rgba(255,255,255,.07); }
+    .hdr-nav .btn-cta {
+      margin-left: 10px;
+      background: var(--coral); color: var(--white) !important;
+      padding: 9px 22px !important; border-radius: 40px !important;
+    }
+    .hdr-nav .btn-cta:hover { background: var(--coral-dark) !important; }
 
-								<article class="style2">
-									<span class="image"><img src="images/yate8.jpg" alt="70 Azimut" /></span>
-									<a href="https://photos.app.goo.gl/Z9sVkrrUQystsVVG8" target="_blank">
-										<h2>70’ Azimut Le Grand Bleu</h2>
-										<div class="content"><p>📍 Haulover</p><ul class="amenities-list"><li>👨‍✈️ Captain & Crew</li><li>🐬 Water Toys</li></ul></div>
-									</a>
-								</article>
+    /* Mobile toggle */
+    .hdr-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      padding: 8px; margin-left: auto;
+    }
+    .hdr-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); }
 
-								<article class="style3">
-									<span class="image"><img src="images/yate9.jpg" alt="Pershing 64" /></span>
-									<a href="https://drive.google.com/drive/mobile/folders/1gFbNJ1VIiVMWNR3ercuUwtbmZxjyzobU" target="_blank">
-										<h2>Pershing 64"</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>🧊 Ice & Coolers</li><li>🎵 Premium Sound</li></ul></div>
-									</a>
-								</article>
+    /* Mobile overlay */
+    #mob-nav {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: var(--navy); flex-direction: column;
+      align-items: center; justify-content: center; gap: 28px;
+    }
+    #mob-nav.open { display: flex; }
+    #mob-nav a {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--white); font-weight: 400;
+    }
+    #mob-close {
+      position: absolute; top: 22px; right: 26px;
+      font-size: 1.6rem; color: var(--white); padding: 6px;
+    }
 
-								<article class="style4">
-									<span class="image"><img src="images/yate10.jpg" alt="Absolute 60" /></span>
-									<a href="https://www.dropbox.com/scl/fo/fegj08id412p43of8d96f/AOT6ZQPxxeW0wi4vi6ulRwc?rlkey=0for94u51wfy5t8qifp349str&st=n8nho6a2&dl=0" target="_blank">
-										<h2>Absolute 60'</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>👨‍✈️ Crew Included</li><li>🥂 Luxury Charter</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       HERO
+    ================================================================ */
+    #hero {
+      position: relative; height: 100vh; min-height: 640px;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/bg.jpg') center / cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(125deg,
+        rgba(7,26,46,.88) 0%,
+        rgba(7,26,46,.60) 55%,
+        rgba(7,26,46,.30) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 1220px; margin: 0 auto; padding: 0 24px; width: 100%;
+    }
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: .65rem; font-weight: 700; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 22px;
+    }
+    .hero-kicker::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6.5vw, 5.8rem);
+      font-weight: 300; line-height: 1.02;
+      color: var(--white); margin-bottom: 22px;
+      max-width: 700px;
+    }
+    .hero-h1 em { font-style: italic; color: var(--coral); }
+    .hero-p {
+      font-size: 1.05rem; color: rgba(255,255,255,.78);
+      line-height: 1.72; max-width: 500px; margin-bottom: 40px;
+      font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
-								<article class="style5">
-									<span class="image"><img src="images/yate11.jpg" alt="Azimuth 60 Freedom" /></span>
-									<a href="https://azimuth60.jsrking.com" target="_blank">
-										<h2>Azimuth 60' Freedom</h2>
-										<div class="content"><p>📍 Miami Beach Marina</p><ul class="amenities-list"><li>🧊 Ice & Water</li><li>🎵 Bluetooth Audio</li></ul></div>
-									</a>
-								</article>
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
+      animation: scrollBob 2.2s ease-in-out infinite;
+    }
+    @keyframes scrollBob { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
 
-								<article class="style6">
-									<span class="image"><img src="images/yate12.jpg" alt="Vandutch 55" /></span>
-									<a href="https://www.dropbox.com/scl/fo/bgotdukd1mm4orrlbyrgq/AOoVH3Cmgd-DhO3qVnK_fD0?rlkey=jnsrn4t0ii7xjz0aa0lla9g1a&st=er41f7qw&" target="_blank">
-										<h2>Vandutch 55'- The Godfather</h2>
-										<div class="content"><p>📍 Miami Beach Marina</p><ul class="amenities-list"><li>👨‍✈️ Captain Included</li><li>🥂 VIP Experience</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       INCLUDES STRIP
+    ================================================================ */
+    #includes {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+    }
+    .inc-inner {
+      max-width: 1220px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .inc-label {
+      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--navy); margin-right: 4px;
+      flex-shrink: 0;
+    }
+    .inc-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 13px;
+      font-size: .72rem; font-weight: 500; color: var(--text-mid);
+    }
 
-								<article class="style1">
-									<span class="image"><img src="images/yate13.jpg" alt="Viking Princess 55" /></span>
-									<a href="https://photos.app.goo.gl/NLMt7BmyCMFP6MwY9" target="_blank">
-										<h2>Viking Princess 55’ Takeella</h2>
-										<div class="content"><p>📍 Regal Marina</p><ul class="amenities-list"><li>🧊 Ice & Coolers</li><li>🎵 Premium Sound</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       STATS BAR
+    ================================================================ */
+    #stats { background: var(--navy); padding: 32px 24px; }
+    .stats-inner {
+      max-width: 1220px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr);
+    }
+    .stat-item { text-align: center; padding: 0 16px; }
+    .stat-item + .stat-item { border-left: 1px solid rgba(255,255,255,.08); }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem; font-weight: 300;
+      color: var(--white); line-height: 1;
+    }
+    .stat-num sup { font-size: 1rem; color: var(--coral); vertical-align: super; }
+    .stat-lbl {
+      font-size: .62rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(255,255,255,.38);
+      margin-top: 7px;
+    }
 
-								<article class="style2">
-									<span class="image"><img src="images/yate14.jpg" alt="58 Sea Ray" /></span>
-									<a href="https://drive.google.com/drive/u/0/mobile/folders/1-HSnIPAlI8VcyZteT7zHrMcxe-QTpFVE" target="_blank">
-										<h2>58’ Sea Ray Serenity</h2>
-										<div class="content"><p>📍 Miami Beach Marina</p><ul class="amenities-list"><li>👨‍✈️ Crew Included</li><li>🐬 Water Toys</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       FLEET SECTION
+    ================================================================ */
+    .fleet-filters {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .f-btn {
+      padding: 8px 20px; border-radius: 30px;
+      border: 1.5px solid var(--border);
+      font-size: .74rem; font-weight: 600; letter-spacing: .04em;
+      color: var(--text-mid); background: var(--white);
+      transition: all var(--dur) var(--ease);
+    }
+    .f-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .f-btn.on { background: var(--navy); border-color: var(--navy); color: var(--white); }
 
-								<article class="style3">
-									<span class="image"><img src="images/yate15.jpg" alt="Azimut 55 Flybridge" /></span>
-									<a href="https://drive.google.com/drive/folders/1bH6b-6qGJ27o6ABXputjTLEmlNCp5dCY?usp=share_link" target="_blank">
-										<h2>Azimut 55’ Flybridge</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>🧊 Ice & Water</li><li>🥂 Luxury Charter</li></ul></div>
-									</a>
-								</article>
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+      gap: 24px;
+    }
 
-								<article class="style4">
-									<span class="image"><img src="images/yate16.jpg" alt="Cruiser Sport 55" /></span>
-									<a href="https://drive.google.com/drive/folders/1yRTLnai8kPA3aCbEoR927QD-QswRjzEU" target="_blank">
-										<h2>Cruiser Sport 55'</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>👨‍✈️ Captain Included</li><li>🎵 Bluetooth Audio</li></ul></div>
-									</a>
-								</article>
+    /* Yacht Card */
+    .y-card {
+      background: var(--white);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: var(--sh-sm);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+      display: flex; flex-direction: column;
+    }
+    .y-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sh-lg);
+    }
 
-								<article class="style5">
-									<span class="image"><img src="images/yate17.jpg" alt="Beneteau Flybridge 52" /></span>
-									<a href="https://drive.google.com/drive/folders/1zAScbzWszWbsJEJWq0iFi72azoQhdd3t?usp=share_link" target="_blank">
-										<h2>Beneteau Flybridge 52'</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>🧊 Ice & Coolers</li><li>🥂 VIP Experience</li></ul></div>
-									</a>
-								</article>
+    .y-img-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--off-white);
+    }
+    .y-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .55s var(--ease);
+    }
+    .y-card:hover .y-img-wrap img { transform: scale(1.07); }
 
-								<article class="style6">
-									<span class="image"><img src="images/yate18.jpg" alt="52 FAIRLINE" /></span>
-									<a href="https://drive.google.com/drive/mobile/folders/1rfDq-nFbhImoEFYWQliPsizjRW7EGH_H?usp=sharing" target="_blank">
-										<h2>52' FAIRLINE</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>👨‍✈️ Captain & Crew</li><li>🎵 Premium Sound</li></ul></div>
-									</a>
-								</article>
+    .y-badge-feat {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--coral); color: var(--white);
+      font-size: .58rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 20px;
+    }
+    .y-badge-size {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(7,26,46,.82); color: var(--white);
+      font-family: var(--font-display); font-size: 1rem; font-weight: 400;
+      padding: 3px 12px; border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
 
-								<article class="style1">
-									<span class="image"><img src="images/yate19.jpg" alt="SeaRay 50" /></span>
-									<a href="https://drive.google.com/drive/mobile/folders/17WFNEiWfx0-KuuYsmupYmEg2HK4oAYkX?usp=share_link" target="_blank">
-										<h2>SeaRay 50'</h2>
-										<div class="content"><p>📍 JONES BOAT YARD</p><ul class="amenities-list"><li>🧊 Ice & Water</li><li>🐬 Water Toys</li></ul></div>
-									</a>
-								</article>
+    .y-body {
+      padding: 20px; flex: 1;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .y-loc {
+      font-size: .66rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-light);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .y-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--navy); line-height: 1.15;
+    }
+    .y-tags {
+      display: flex; flex-wrap: wrap; gap: 5px;
+    }
+    .y-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: .68rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 20px;
+      background: var(--off-white); color: var(--text-mid);
+    }
+    .y-footer {
+      margin-top: auto; padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .y-cap {
+      font-size: .76rem; color: var(--text-light);
+    }
+    .y-cap strong { color: var(--text); font-weight: 600; }
+    .y-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .72rem; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--coral);
+      transition: gap var(--dur) var(--ease);
+    }
+    .y-link:hover { gap: 9px; }
 
-								<article class="style2">
-									<span class="image"><img src="images/yate20.jpg" alt="Cruiser Sport Fly 50" /></span>
-									<a href="https://drive.google.com/drive/mobile/folders/1SJ9aN7D4WwWcw-UPlrtETIqwHOiE-ozO?usp=share_link" target="_blank">
-										<h2>Cruiser Sport Fly 50' Remedy</h2>
-										<div class="content"><p>📍 Miami Beach Marina</p><ul class="amenities-list"><li>👨‍✈️ Crew Included</li><li>🥂 Luxury Charter</li></ul></div>
-									</a>
-								</article>
+    .fleet-more { text-align: center; margin-top: 52px; }
 
-								<article class="style3">
-									<span class="image"><img src="images/yate21.jpg" alt="Pershing 50" /></span>
-									<a href="https://drive.google.com/drive/mobile/folders/1r-9NnmQJtXQjJhF7FAT0nrjTaXJNMsRf?usp=share_link" target="_blank">
-										<h2>Pershing 50'</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>🧊 Ice & Coolers</li><li>🎵 Bluetooth Audio</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       EXPERIENCES
+    ================================================================ */
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+      gap: 16px;
+    }
+    .exp-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r-md); padding: 30px 26px;
+      transition: all var(--dur) var(--ease);
+    }
+    .exp-card:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(12,191,170,.3);
+      transform: translateY(-4px);
+    }
+    .exp-icon { font-size: 2.1rem; margin-bottom: 18px; }
+    .exp-title {
+      font-family: var(--font-display);
+      font-size: 1.18rem; font-weight: 400;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .exp-desc {
+      font-size: .82rem; color: rgba(255,255,255,.48); line-height: 1.68;
+    }
 
-								<article class="style4">
-									<span class="image"><img src="images/yate22.jpg" alt="SeaRay 48" /></span>
-									<a href="https://drive.google.com/drive/folders/1Fs6zGEB8OMJrKSja3W2u1eZAyAsFoe1o" target="_blank">
-										<h2>SeaRay 48'</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>👨‍✈️ Captain Included</li><li>🥂 VIP Experience</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       WHY US
+    ================================================================ */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .why-img-col { position: relative; }
+    .why-img-wrap {
+      border-radius: var(--r-lg); overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .why-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .why-float-badge {
+      position: absolute; bottom: 32px; right: -24px;
+      background: var(--coral); color: var(--white);
+      padding: 22px 26px; border-radius: var(--r-md);
+      text-align: center; box-shadow: var(--sh-lg);
+    }
+    .why-float-badge .wfb-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem; font-weight: 300; line-height: 1;
+    }
+    .why-float-badge .wfb-lbl {
+      font-size: .6rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      opacity: .85; margin-top: 4px;
+    }
 
-								<article class="style5">
-									<span class="image"><img src="images/yate23.jpg" alt="45 Maxum" /></span>
-									<a href="https://photos.app.goo.gl/RYnku97FCFvqxTZw9" target="_blank">
-										<h2>45’ Maxum</h2>
-										<div class="content"><p>📍 Venetian Marina</p><ul class="amenities-list"><li>🧊 Ice & Water</li><li>🎵 Premium Sound</li></ul></div>
-									</a>
-								</article>
+    .why-items { display: flex; flex-direction: column; gap: 22px; margin-bottom: 38px; }
+    .why-item { display: flex; gap: 16px; align-items: flex-start; }
+    .wi-icon {
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(12,191,170,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .wi-h { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .wi-p { font-size: .82rem; color: var(--text-mid); line-height: 1.65; }
 
-								<article class="style6">
-									<span class="image"><img src="images/yate24.jpg" alt="44 SeaRay Harmony" /></span>
-									<a href="https://drive.google.com/drive/mobile/folders/1v3WsCIbACu8JJG5mBkz65Tt2UdWWHJxG" target="_blank">
-										<h2>44' SeaRay Harmony</h2>
-										<div class="content"><p>📍 Jones Boat Yard</p><ul class="amenities-list"><li>👨‍✈️ Captain & Crew</li><li>🐬 Water Toys</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       STEPS
+    ================================================================ */
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+    }
+    .step-card {
+      background: var(--white); border-radius: var(--r-md);
+      padding: 36px 28px; position: relative;
+      box-shadow: var(--sh-sm);
+    }
+    .step-num {
+      position: absolute; top: 18px; right: 20px;
+      font-family: var(--font-display); font-size: 4.5rem;
+      font-weight: 300; color: var(--off-white); line-height: 1;
+      user-select: none; pointer-events: none;
+    }
+    .step-ico { font-size: 2rem; margin-bottom: 20px; }
+    .step-h { font-size: .92rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step-p { font-size: .82rem; color: var(--text-mid); line-height: 1.65; }
 
-								<article class="style1">
-									<span class="image"><img src="images/yate25.jpg" alt="LADY G PINK" /></span>
-									<a href="https://drive.google.com/drive/folders/1OpjJ38ucbu5AzoefYPwwbo0kCAeMomcz" target="_blank">
-										<h2>LADY G (PINK)</h2>
-										<div class="content"><p>📍 Jones Boat Yard</p><ul class="amenities-list"><li>🧊 Ice & Coolers</li><li>🥂 Party Ready</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       REVIEWS
+    ================================================================ */
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
+      gap: 20px;
+    }
+    .rv-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r-md); padding: 26px;
+    }
+    .rv-stars { color: #f4a623; letter-spacing: 2px; font-size: .85rem; margin-bottom: 14px; }
+    .rv-text {
+      font-size: .86rem; color: var(--text-mid); line-height: 1.72;
+      margin-bottom: 20px; font-style: italic;
+    }
+    .rv-author { display: flex; align-items: center; gap: 12px; }
+    .rv-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--off-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .rv-name { font-size: .82rem; font-weight: 700; color: var(--navy); }
+    .rv-meta { font-size: .7rem; color: var(--text-light); }
 
-								<article class="style2">
-									<span class="image"><img src="images/yate26.jpg" alt="Azimut 53" /></span>
-									<a href="https://www.dropbox.com/scl/fo/ank1joy2v6hkvl1msf2q5/AIxkcKe6Hb3aioehb5ImyfU?rlkey=cczgkqinwf6m68scwpp8xp42u&st=nd7b7vrd&dl=0" target="_blank">
-										<h2>Azimut'53</h2>
-										<div class="content"><p>📍 Regal Marina</p><ul class="amenities-list"><li>👨‍✈️ Crew Included</li><li>🎵 Bluetooth Audio</li></ul></div>
-									</a>
-								</article>
+    /* ================================================================
+       FAQ
+    ================================================================ */
+    .faq-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start;
+    }
+    .faq-intro { position: sticky; top: 96px; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; padding: 20px 0; cursor: pointer;
+      font-size: .9rem; font-weight: 600; color: var(--navy);
+    }
+    .faq-toggle {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); font-size: 1.1rem; line-height: 1;
+      transition: all var(--dur) var(--ease);
+    }
+    .faq-item.open .faq-toggle {
+      background: var(--coral); border-color: var(--coral);
+      color: var(--white); transform: rotate(45deg);
+    }
+    .faq-a {
+      font-size: .85rem; color: var(--text-mid); line-height: 1.75;
+      max-height: 0; overflow: hidden;
+      transition: max-height .38s var(--ease), padding .2s var(--ease);
+    }
+    .faq-item.open .faq-a { max-height: 280px; padding-bottom: 20px; }
 
-							</section>
+    /* ================================================================
+       CTA BAND
+    ================================================================ */
+    #cta-band {
+      background: var(--navy);
+      padding: 96px 24px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #cta-band::before {
+      content: '';
+      position: absolute; top: -40%; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(12,191,170,.16) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .ctab-inner { position: relative; z-index: 1; }
+    .ctab-kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .62rem; font-weight: 700; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .ctab-kicker::before,
+    .ctab-kicker::after { content: ''; width: 28px; height: 1px; background: var(--gold); }
+    .ctab-h {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 300; color: var(--white); line-height: 1.06;
+      margin-bottom: 18px;
+    }
+    .ctab-h em { font-style: italic; color: var(--gold); }
+    .ctab-p {
+      font-size: .95rem; color: rgba(255,255,255,.52);
+      max-width: 460px; margin: 0 auto 42px; line-height: 1.72;
+    }
 
-							<div id="experiences" class="info-section">
-								<h2>Special Events & Experiences 🥂</h2>
-								<p>We don't just rent boats; we curate unforgettable moments. Let our team handle the details so you can focus on enjoying the breathtaking views of the Miami skyline, Star Island, and Nixon Sandbar.</p>
-								<div style="display: flex; flex-wrap: wrap; gap: 20px;">
-									<div style="flex: 1; min-width: 250px;">
-										<h3>🎂 Birthdays & Bachelorettes</h3>
-										<p>Celebrate your last sail before the veil or ring in your new year with world-class amenities, stunning photos, and the ultimate boat party vibe.</p>
-									</div>
-									<div style="flex: 1; min-width: 250px;">
-										<h3>💍 Romantic Getaways</h3>
-										<p>Invite your significant other to a romantic sunset cruise. Experience peaceful bays and the Miami city lights coming alive at night.</p>
-									</div>
-									<div style="flex: 1; min-width: 250px;">
-										<h3>🤝 Corporate Events</h3>
-										<p>Impress your clients or reward your team. Yachts are the new hot spots for networking with catering options and an unforgettable backdrop.</p>
-									</div>
-								</div>
-							</div>
+    /* ================================================================
+       FOOTER
+    ================================================================ */
+    #footer {
+      background: #040d1a; color: rgba(255,255,255,.42);
+      padding: 72px 24px 32px;
+    }
+    .foot-grid {
+      max-width: 1220px; margin: 0 auto;
+      display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 48px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .foot-brand-logo { height: 46px; margin-bottom: 16px; }
+    .foot-brand-desc { font-size: .8rem; line-height: 1.72; margin-bottom: 24px; }
+    .foot-social { display: flex; gap: 9px; }
+    .foot-soc-link {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; color: rgba(255,255,255,.5);
+      transition: all var(--dur) var(--ease);
+    }
+    .foot-soc-link:hover { border-color: var(--coral); color: var(--coral); }
+    .foot-col-h {
+      font-size: .64rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--white); margin-bottom: 20px;
+    }
+    .foot-col ul li { margin-bottom: 10px; }
+    .foot-col ul li a {
+      font-size: .8rem; color: rgba(255,255,255,.38);
+      transition: color var(--dur) var(--ease);
+    }
+    .foot-col ul li a:hover { color: var(--white); }
+    .foot-bottom {
+      max-width: 1220px; margin: 28px auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .72rem; flex-wrap: wrap; gap: 10px;
+    }
+    .foot-legal { display: flex; gap: 18px; }
+    .foot-legal a { font-size: .72rem; color: rgba(255,255,255,.28); transition: color var(--dur) var(--ease); }
+    .foot-legal a:hover { color: rgba(255,255,255,.6); }
 
-							<div class="info-section" style="border-top: none; padding-top: 1em;">
-								<h2>How to Rent with Us (3 Easy Steps)</h2>
-								<ol>
-									<li><strong>Find Your Dream Yacht:</strong> Browse our fleet above and choose the vessel that suits your group size and style.</li>
-									<li><strong>Send an Inquiry:</strong> Click the WhatsApp button to chat directly with our booking agents to confirm availability and hourly rates.</li>
-									<li><strong>Secure & Sail:</strong> We'll send you a secure link for your deposit. Step on board, grab a welcome drink, and enjoy the ride!</li>
-								</ol>
-								<a href="http://wa.me/17867644608" target="_blank" class="button primary large" style="margin-top: 15px;">CHECK AVAILABILITY NOW</a>
-							</div>
+    /* ================================================================
+       WHATSAPP FLOAT
+    ================================================================ */
+    #wa-float {
+      position: fixed; bottom: 26px; right: 26px; z-index: 900;
+    }
+    .wa-wrap { position: relative; }
+    .wa-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: rgba(37,211,102,.28);
+      animation: waPulse 2.2s ease-out infinite;
+    }
+    @keyframes waPulse {
+      0% { transform: scale(1); opacity: .8; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+    .wa-btn {
+      position: relative; z-index: 1;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,.55); }
+    .wa-btn svg { width: 30px; height: 30px; fill: white; }
 
-						</div>
-					</div>
+    /* ================================================================
+       RESPONSIVE
+    ================================================================ */
+    @media (max-width: 980px) {
+      .stats-inner { grid-template-columns: repeat(2,1fr); gap: 1px; }
+      .stats-inner .stat-item:nth-child(2) { border-left: 1px solid rgba(255,255,255,.08); }
+      .stats-inner .stat-item:nth-child(3) { border-left: none; border-top: 1px solid rgba(255,255,255,.08); }
+      .stats-inner .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.08); }
+      .why-grid { grid-template-columns: 1fr; gap: 44px; }
+      .why-img-wrap { aspect-ratio: 16/9; }
+      .why-float-badge { right: 16px; bottom: 20px; }
+      .steps-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+      .faq-intro { position: static; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+    }
 
-				<footer id="footer">
-						<div class="inner">
-							<section>
-								<h2>Get in touch</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Request" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-							<section>
-								<h2>Follow</h2>
-								<ul class="icons">
-									<li><a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="tel:+17867644608" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="mailto:tu-correo@heartofthesea.com" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Heart of the Sea. All rights reserved.</li><li>Miami Yacht Rentals</li>
-							</ul>
-						</div>
-					</footer>
+    @media (max-width: 680px) {
+      .hdr-nav { display: none; }
+      .hdr-hamburger { display: flex; }
+      .sec { padding: 64px 20px; }
+      .hero-h1 { font-size: 2.8rem; }
+      .fleet-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .foot-grid { grid-template-columns: 1fr; gap: 36px; }
+      .foot-bottom { flex-direction: column; text-align: center; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
 
-			</div>
+<!-- ================================================================
+     HEADER
+================================================================ -->
+<header id="hdr">
+  <div class="hdr-inner">
+    <a href="#" class="hdr-logo">
+      <img src="images/logo.jpg" alt="Heart of the Sea" />
+    </a>
+    <nav class="hdr-nav">
+      <a href="#fleet">Our Fleet</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#why-us">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="http://wa.me/17867644608" target="_blank" class="btn-cta">📩 Get a Quote</a>
+    </nav>
+    <button class="hdr-hamburger" id="hdr-ham" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
 
-		<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+<!-- Mobile nav -->
+<div id="mob-nav" role="dialog" aria-label="Mobile navigation">
+  <button id="mob-close" aria-label="Close menu">✕</button>
+  <a href="#fleet">Our Fleet</a>
+  <a href="#experiences">Experiences</a>
+  <a href="#why-us">About</a>
+  <a href="#faq">FAQ</a>
+  <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">📩 Get a Quote</a>
+</div>
 
-	</body>
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-kicker">Miami Luxury Yacht Rentals</div>
+    <h1 class="hero-h1">Set Sail on the<br><em>Heart of Miami</em></h1>
+    <p class="hero-p">Over 70 private yachts and boats available for charter. Every trip includes a licensed captain, crew, fuel, and ice — you just bring the good vibes.</p>
+    <div class="hero-actions">
+      <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
+      <a href="#fleet" class="btn btn-ghost">Browse Our Fleet</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div> Scroll</div>
+</section>
+
+<!-- ================================================================
+     INCLUDES STRIP
+================================================================ -->
+<div id="includes">
+  <div class="inc-inner">
+    <span class="inc-label">Every charter includes:</span>
+    <span class="inc-pill">👨‍✈️ Private Captain & Crew</span>
+    <span class="inc-pill">⛽ Fuel</span>
+    <span class="inc-pill">🧊 Ice & Coolers</span>
+    <span class="inc-pill">🎵 Bluetooth Sound System</span>
+    <span class="inc-pill">📍 Multiple Miami Marinas</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     STATS
+================================================================ -->
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">5,000<sup>+</sup></div>
+      <div class="stat-lbl">Happy Guests</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">70<sup>+</sup></div>
+      <div class="stat-lbl">Vessels Available</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">42<sup>′–110′</sup></div>
+      <div class="stat-lbl">Fleet Range</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5<sup>★</sup></div>
+      <div class="stat-lbl">Rated Experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     FLEET
+================================================================ -->
+<section class="sec" id="fleet">
+  <div class="sec-inner">
+    <div class="sec-label">Choose Your Vessel</div>
+    <h2 class="sec-h">Our Featured <em>Fleet</em></h2>
+    <p class="sec-sub">From intimate sunset cruises to grand celebrations, we have the perfect yacht for every occasion. Browse our most popular vessels below, or ask us about our full 70+ selection.</p>
+
+    <div class="fleet-filters">
+      <button class="f-btn on" onclick="filterFleet('all',this)">All Yachts</button>
+      <button class="f-btn" onclick="filterFleet('mega',this)">Mega Yachts 80′+</button>
+      <button class="f-btn" onclick="filterFleet('super',this)">60′ – 79′</button>
+      <button class="f-btn" onclick="filterFleet('mid',this)">45′ – 59′</button>
+      <button class="f-btn" onclick="filterFleet('sport',this)">Under 45′</button>
+    </div>
+
+    <div class="fleet-grid" id="fleet-grid"></div>
+
+    <div class="fleet-more">
+      <a href="http://wa.me/17867644608" target="_blank" class="btn btn-navy">See All 70+ Vessels on WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     EXPERIENCES
+================================================================ -->
+<section class="sec sec-dark" id="experiences">
+  <div class="sec-inner">
+    <div class="sec-label">Special Events</div>
+    <h2 class="sec-h">We Make <em>Every Occasion</em> Unforgettable</h2>
+    <p class="sec-sub">From bachelorette parties to corporate buyouts — our team handles every detail so you can focus on the moment.</p>
+
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-icon">🎂</div>
+        <h3 class="exp-title">Birthday Parties</h3>
+        <p class="exp-desc">Ring in your new year on the water with world-class amenities, stunning sunset views, and the ultimate party vibe.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">💍</div>
+        <h3 class="exp-title">Bachelorette & Weddings</h3>
+        <p class="exp-desc">Celebrate your last sail before the veil. We'll set the scene so your whole crew has a story to tell for years.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🌅</div>
+        <h3 class="exp-title">Romantic Sunset Cruises</h3>
+        <p class="exp-desc">Peaceful bays and the Miami skyline coming alive at golden hour — the most romantic backdrop in South Florida.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🤝</div>
+        <h3 class="exp-title">Corporate Events</h3>
+        <p class="exp-desc">Impress clients and reward your team. Yachts are the new standard for networking that people actually remember.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">👨‍👩‍👧‍👦</div>
+        <h3 class="exp-title">Family Charters</h3>
+        <p class="exp-desc">A full day of snorkeling, exploring Nixon Sandbar, and making memories — the whole family will be talking about it for years.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🍾</div>
+        <h3 class="exp-title">Custom Celebrations</h3>
+        <p class="exp-desc">Anniversary, proposal, graduation — whatever the milestone, we'll help you create something truly unforgettable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     WHY CHOOSE US
+================================================================ -->
+<section class="sec" id="why-us">
+  <div class="sec-inner">
+    <div class="why-grid">
+      <div class="why-img-col">
+        <div class="why-img-wrap">
+          <img src="images/yate4.jpg" alt="Azimut 90 luxury yacht Miami" loading="lazy" />
+        </div>
+        <div class="why-float-badge">
+          <div class="wfb-num">70<sup style="font-size:1rem">+</sup></div>
+          <div class="wfb-lbl">Vessels<br>Available</div>
+        </div>
+      </div>
+      <div class="why-text">
+        <div class="sec-label">Why Heart of the Sea</div>
+        <h2 class="sec-h">Miami's Most <em>Trusted</em> Charter</h2>
+        <p class="sec-sub">We've built our reputation on one thing: making your time on the water completely effortless.</p>
+        <div class="why-items">
+          <div class="why-item">
+            <div class="wi-icon">👨‍✈️</div>
+            <div>
+              <div class="wi-h">Licensed Captain & Crew on Every Charter</div>
+              <p class="wi-p">All captains are Coast Guard-certified and experienced navigating Miami's waters, so you can relax from the moment you step aboard.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="wi-icon">✅</div>
+            <div>
+              <div class="wi-h">All-Inclusive — No Hidden Fees</div>
+              <p class="wi-p">Fuel, ice, coolers, and a premium Bluetooth sound system are included on every single charter. What you see is what you pay.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="wi-icon">📍</div>
+            <div>
+              <div class="wi-h">Multiple Miami Marina Locations</div>
+              <p class="wi-p">Departing from Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, and more — always convenient.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="wi-icon">⚡</div>
+            <div>
+              <div class="wi-h">Instant WhatsApp Booking</div>
+              <p class="wi-p">Skip the forms. Chat directly with our team, get a real quote in minutes, and lock in your date before someone else does.</p>
+            </div>
+          </div>
+        </div>
+        <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Book via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     HOW IT WORKS
+================================================================ -->
+<section class="sec sec-alt">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:52px">
+      <div class="sec-label" style="justify-content:center">Simple Process</div>
+      <h2 class="sec-h" style="margin-bottom:0">Ready to Sail in <em>3 Easy Steps</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-ico">🛥️</div>
+        <h3 class="step-h">Choose Your Yacht</h3>
+        <p class="step-p">Browse our fleet above and pick the vessel that matches your group size, occasion, and style.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-ico">💬</div>
+        <h3 class="step-h">Send an Inquiry</h3>
+        <p class="step-p">Message us on WhatsApp. Our booking agents confirm availability, answer every question, and send your personalized quote.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-ico">⛵</div>
+        <h3 class="step-h">Secure & Sail</h3>
+        <p class="step-p">We'll send a secure link for your deposit. Step aboard, grab a welcome drink, and enjoy every minute on the water.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     REVIEWS
+================================================================ -->
+<section class="sec" id="reviews">
+  <div class="sec-inner">
+    <div class="sec-label">What Our Guests Say</div>
+    <h2 class="sec-h">Real Experiences, <em>Real Smiles</em></h2>
+    <p class="sec-sub">Thousands of guests have sailed with us. Here's what a few of them had to say.</p>
+
+    <div class="reviews-grid">
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">"Absolutely the best birthday I've ever had. The captain knew all the best spots, the crew was incredible, and the boat was stunning. Will 100% be back next year!"</p>
+        <div class="rv-author">
+          <div class="rv-avatar">👩</div>
+          <div>
+            <div class="rv-name">Maria L.</div>
+            <div class="rv-meta">Birthday Charter · Miami Beach Marina</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">"We did our bachelorette on the Vandutch 55 and it was PERFECT. They set everything up beautifully, the music was incredible, and the vibes were immaculate all day long."</p>
+        <div class="rv-author">
+          <div class="rv-avatar">🥂</div>
+          <div>
+            <div class="rv-name">Jessica R.</div>
+            <div class="rv-meta">Bachelorette Party · Venetian Marina</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">"From booking to drop-off, Heart of the Sea handled absolutely everything. Our corporate team of 20 had an unforgettable afternoon on the 110' Antago. Can't recommend them enough."</p>
+        <div class="rv-author">
+          <div class="rv-avatar">💼</div>
+          <div>
+            <div class="rv-name">David K.</div>
+            <div class="rv-meta">Corporate Event · Grove Harbour Marina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FAQ
+================================================================ -->
+<section class="sec sec-alt" id="faq">
+  <div class="sec-inner">
+    <div class="faq-layout">
+      <div class="faq-intro">
+        <div class="sec-label">FAQs</div>
+        <h2 class="sec-h">Everything You <em>Need to Know</em></h2>
+        <p class="sec-sub" style="margin-bottom:32px">Can't find the answer you're looking for? Chat with us directly — we reply fast.</p>
+        <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Ask Us Anything</a>
+      </div>
+      <div class="faq-list" id="faq-list">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CTA BAND
+================================================================ -->
+<div id="cta-band">
+  <div class="ctab-inner">
+    <div class="ctab-kicker">Start Your Journey</div>
+    <h2 class="ctab-h">Ready to <em>Cast Off?</em></h2>
+    <p class="ctab-p">Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.</p>
+    <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
+  </div>
+</div>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer id="footer">
+  <div class="foot-grid">
+    <div>
+      <img src="images/logo.jpg" alt="Heart of the Sea" class="foot-brand-logo" />
+      <p class="foot-brand-desc">Miami's premier yacht charter company. Luxury made effortless — memories made for a lifetime.</p>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="foot-soc-link" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
+        <a href="http://wa.me/17867644608" target="_blank" class="foot-soc-link" aria-label="WhatsApp">WA</a>
+        <a href="https://linktr.ee/heartofthesea" target="_blank" class="foot-soc-link" aria-label="Linktree">🔗</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-h">Explore</div>
+      <ul>
+        <li><a href="#fleet">Our Fleet</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#why-us">About Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://linktr.ee/heartofthesea" target="_blank">Full Directory</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-h">Experiences</div>
+      <ul>
+        <li><a href="#experiences">Birthday Parties</a></li>
+        <li><a href="#experiences">Bachelorettes</a></li>
+        <li><a href="#experiences">Sunset Cruises</a></li>
+        <li><a href="#experiences">Corporate Events</a></li>
+        <li><a href="#experiences">Family Charters</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-h">Contact</div>
+      <ul>
+        <li><a href="tel:+17867644608">📞 (786) 764-4608</a></li>
+        <li><a href="http://wa.me/17867644608" target="_blank">💬 WhatsApp Us</a></li>
+        <li><a href="mailto:info@heartofthesea.com">✉️ Email Us</a></li>
+        <li><a href="#fleet">📍 Miami, FL</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Heart of the Sea · Miami Yacht Rentals. All rights reserved.</span>
+    <div class="foot-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ================================================================
+     WHATSAPP BUTTON
+================================================================ -->
+<div id="wa-float">
+  <a href="http://wa.me/17867644608" target="_blank" class="wa-wrap" aria-label="Contact on WhatsApp">
+    <div class="wa-ring"></div>
+    <div class="wa-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </div>
+  </a>
+</div>
+
+<!-- ================================================================
+     SCRIPTS
+================================================================ -->
+<script>
+/* ---- YACHT DATA ---- */
+const YACHTS = [
+  { name:"42' Barbie Pink Boat",        img:"images/yate1.jpg",  loc:"Miami River",         cap:12, ft:42,  tags:["Unique Style","Ice & Water"],        link:"https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0", feat:true },
+  { name:"110' Antago",                  img:"images/yate2.jpg",  loc:"Grove Harbour Marina", cap:13, ft:110, tags:["VIP Crew","Mega Yacht"],              link:"https://yachtfleet.smugmug.com/110-Antago", feat:true },
+  { name:"105' DOMINATOR",              img:"images/yate3.jpg",  loc:"Miami Beach Marina",   cap:13, ft:105, tags:["Onboard Jacuzzi","Chef Optional"],    link:"https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link", feat:true },
+  { name:"Azimut 90' Day Dreamin'",     img:"images/yate4.jpg",  loc:"Miami Beach Marina",   cap:13, ft:90,  tags:["Onboard Jacuzzi","Water Toys"],       link:"https://jsrking.wixstudio.com/day-dreamin-miami", feat:true },
+  { name:"Pershing 90'",                img:"images/yate5.jpg",  loc:"Miami River",          cap:13, ft:90,  tags:["Captain & Crew","Premium Sound"],     link:"https://rym.smugmug.com/90-Pershing-", feat:false },
+  { name:"BAIA Panther 85'",            img:"images/yate6.jpg",  loc:"Regal Marina",         cap:13, ft:85,  tags:["Onboard Jacuzzi","VIP Experience"],   link:"https://baiapanther85.jsrking.com", feat:true },
+  { name:"80' Aicon",                   img:"images/yate7.jpg",  loc:"Epic Hotel",           cap:12, ft:80,  tags:["Ice & Water","Bluetooth Audio"],      link:"https://photos.app.goo.gl/q3hSua7Ut2ySLARJ9", feat:false },
+  { name:"70' Azimut Le Grand Bleu",    img:"images/yate8.jpg",  loc:"Haulover",             cap:13, ft:70,  tags:["Captain & Crew","Water Toys"],        link:"https://photos.app.goo.gl/Z9sVkrrUQystsVVG8", feat:true },
+  { name:"Pershing 64'",                img:"images/yate9.jpg",  loc:"Venetian Marina",      cap:12, ft:64,  tags:["Ice & Coolers","Premium Sound"],      link:"https://drive.google.com/drive/mobile/folders/1gFbNJ1VIiVMWNR3ercuUwtbmZxjyzobU", feat:false },
+  { name:"Absolute 60'",                img:"images/yate10.jpg", loc:"Venetian Marina",      cap:12, ft:60,  tags:["Crew Included","Luxury Charter"],     link:"https://www.dropbox.com/scl/fo/fegj08id412p43of8d96f/AOT6ZQPxxeW0wi4vi6ulRwc?rlkey=0for94u51wfy5t8qifp349str&st=n8nho6a2&dl=0", feat:false },
+  { name:"Azimuth 60' Freedom",         img:"images/yate11.jpg", loc:"Miami Beach Marina",   cap:12, ft:60,  tags:["Ice & Water","Bluetooth Audio"],      link:"https://azimuth60.jsrking.com", feat:false },
+  { name:"Vandutch 55' – The Godfather",img:"images/yate12.jpg", loc:"Miami Beach Marina",   cap:12, ft:55,  tags:["Captain Included","VIP Experience"],  link:"https://www.dropbox.com/scl/fo/bgotdukd1mm4orrlbyrgq/AOoVH3Cmgd-DhO3qVnK_fD0?rlkey=jnsrn4t0ii7xjz0aa0lla9g1a&st=er41f7qw&", feat:true },
+  { name:"Viking Princess 55' Takeella",img:"images/yate13.jpg", loc:"Regal Marina",         cap:12, ft:55,  tags:["Ice & Coolers","Premium Sound"],      link:"https://photos.app.goo.gl/NLMt7BmyCMFP6MwY9", feat:false },
+  { name:"58' Sea Ray Serenity",        img:"images/yate14.jpg", loc:"Miami Beach Marina",   cap:12, ft:58,  tags:["Crew Included","Water Toys"],         link:"https://drive.google.com/drive/u/0/mobile/folders/1-HSnIPAlI8VcyZteT7zHrMcxe-QTpFVE", feat:false },
+  { name:"Azimut 55' Flybridge",        img:"images/yate15.jpg", loc:"Venetian Marina",      cap:12, ft:55,  tags:["Ice & Water","Luxury Charter"],       link:"https://drive.google.com/drive/folders/1bH6b-6qGJ27o6ABXputjTLEmlNCp5dCY?usp=share_link", feat:false },
+  { name:"Cruiser Sport 55'",           img:"images/yate16.jpg", loc:"Venetian Marina",      cap:12, ft:55,  tags:["Captain Included","Bluetooth Audio"], link:"https://drive.google.com/drive/folders/1yRTLnai8kPA3aCbEoR927QD-QswRjzEU", feat:false },
+  { name:"Beneteau Flybridge 52'",      img:"images/yate17.jpg", loc:"Venetian Marina",      cap:12, ft:52,  tags:["Ice & Coolers","VIP Experience"],     link:"https://drive.google.com/drive/folders/1zAScbzWszWbsJEJWq0iFi72azoQhdd3t?usp=share_link", feat:false },
+  { name:"52' FAIRLINE",                img:"images/yate18.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Captain & Crew","Premium Sound"],     link:"https://drive.google.com/drive/mobile/folders/1rfDq-nFbhImoEFYWQliPsizjRW7EGH_H?usp=sharing", feat:false },
+  { name:"SeaRay 50'",                  img:"images/yate19.jpg", loc:"Jones Boat Yard",      cap:12, ft:50,  tags:["Ice & Water","Water Toys"],           link:"https://drive.google.com/drive/mobile/folders/17WFNEiWfx0-KuuYsmupYmEg2HK4oAYkX?usp=share_link", feat:false },
+  { name:"Cruiser Sport Fly 50' Remedy",img:"images/yate20.jpg", loc:"Miami Beach Marina",   cap:12, ft:50,  tags:["Crew Included","Luxury Charter"],     link:"https://drive.google.com/drive/mobile/folders/1SJ9aN7D4WwWcw-UPlrtETIqwHOiE-ozO?usp=share_link", feat:false },
+  { name:"Pershing 50'",                img:"images/yate21.jpg", loc:"Venetian Marina",      cap:12, ft:50,  tags:["Ice & Coolers","Bluetooth Audio"],     link:"https://drive.google.com/drive/mobile/folders/1r-9NnmQJtXQjJhF7FAT0nrjTaXJNMsRf?usp=share_link", feat:false },
+  { name:"SeaRay 48'",                  img:"images/yate22.jpg", loc:"Venetian Marina",      cap:12, ft:48,  tags:["Captain Included","VIP Experience"],  link:"https://drive.google.com/drive/folders/1Fs6zGEB8OMJrKSja3W2u1eZAyAsFoe1o", feat:false },
+  { name:"45' Maxum",                   img:"images/yate23.jpg", loc:"Venetian Marina",      cap:12, ft:45,  tags:["Ice & Water","Premium Sound"],        link:"https://photos.app.goo.gl/RYnku97FCFvqxTZw9", feat:false },
+  { name:"44' SeaRay Harmony",          img:"images/yate24.jpg", loc:"Jones Boat Yard",      cap:12, ft:44,  tags:["Captain & Crew","Water Toys"],        link:"https://drive.google.com/drive/mobile/folders/1v3WsCIbACu8JJG5mBkz65Tt2UdWWHJxG", feat:false },
+  { name:"LADY G (PINK)",               img:"images/yate25.jpg", loc:"Jones Boat Yard",      cap:12, ft:42,  tags:["Ice & Coolers","Party Ready"],        link:"https://drive.google.com/drive/folders/1OpjJ38ucbu5AzoefYPwwbo0kCAeMomcz", feat:true },
+  { name:"Azimut 53'",                  img:"images/yate26.jpg", loc:"Regal Marina",         cap:12, ft:53,  tags:["Crew Included","Bluetooth Audio"],    link:"https://www.dropbox.com/scl/fo/ank1joy2v6hkvl1msf2q5/AIxkcKe6Hb3aioehb5ImyfU?rlkey=cczgkqinwf6m68scwpp8xp42u&st=nd7b7vrd&dl=0", feat:false },
+];
+
+/* ---- CATEGORY ---- */
+function cat(ft) {
+  if (ft >= 80) return 'mega';
+  if (ft >= 60) return 'super';
+  if (ft >= 45) return 'mid';
+  return 'sport';
+}
+
+/* ---- RENDER FLEET ---- */
+function renderFleet(filter) {
+  const list = filter === 'all' ? YACHTS : YACHTS.filter(y => cat(y.ft) === filter);
+  document.getElementById('fleet-grid').innerHTML = list.map(y => `
+    <div class="y-card">
+      <div class="y-img-wrap">
+        <img src="${y.img}" alt="${y.name}" loading="lazy" />
+        ${y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : ''}
+        <span class="y-badge-size">${y.ft}′</span>
+      </div>
+      <div class="y-body">
+        <div class="y-loc">📍 ${y.loc}</div>
+        <h3 class="y-name">${y.name}</h3>
+        <div class="y-tags">
+          ${y.tags.map(t => `<span class="y-tag">${t}</span>`).join('')}
+          <span class="y-tag">✅ Captain incl.</span>
+        </div>
+        <div class="y-footer">
+          <div class="y-cap">👥 Up to <strong>${y.cap} guests</strong></div>
+          <a href="${y.link}" target="_blank" class="y-link">
+            View Photos <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterFleet(filter, btn) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderFleet(filter);
+}
+
+/* ---- FAQ ---- */
+const FAQS = [
+  { q: "What's included in the charter price?",
+    a: "All our charters include a licensed private captain and crew, fuel, ice, coolers, and a premium Bluetooth sound system. Food, beverages, and additional extras can be arranged for an additional cost." },
+  { q: "How many guests can we bring?",
+    a: "USCG regulations allow up to 12 passengers on most vessels. Some larger yachts accommodate up to 13. For bigger groups, ask us about our larger fleet options — we have vessels that can host more." },
+  { q: "How much does a yacht charter cost?",
+    a: "Pricing depends on the vessel and duration. Smaller boats start around $800 for a half day. Luxury yachts range from $2,500 to $10,000+ per outing. Message us for a personalized quote — it's free and fast." },
+  { q: "Can we bring our own food and drinks?",
+    a: "Absolutely. You're welcome to bring your own food and beverages. We provide ice and coolers to keep everything fresh. We also offer optional catering and bar packages on request." },
+  { q: "Where do we depart from?",
+    a: "We have vessels at Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, Grove Harbour, Jones Boat Yard, and the Epic Hotel. Your booking agent will confirm the exact marina when you book." },
+  { q: "How do I confirm my booking?",
+    a: "Message us on WhatsApp to check availability and get your personalized quote. Once confirmed, we'll send a secure link to submit your deposit. Fast, safe, and simple — no lengthy forms." },
+];
+
+function buildFaq() {
+  document.getElementById('faq-list').innerHTML = FAQS.map((f, i) => `
+    <div class="faq-item" id="faq-${i}">
+      <div class="faq-q" onclick="toggleFaq(${i})">
+        ${f.q}
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a">${f.a}</div>
+    </div>
+  `).join('');
+}
+
+function toggleFaq(i) {
+  const item = document.getElementById('faq-' + i);
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+/* ---- HEADER SCROLL ---- */
+window.addEventListener('scroll', () => {
+  document.getElementById('hdr').classList.toggle('shadow', window.scrollY > 50);
+}, { passive: true });
+
+/* ---- MOBILE NAV ---- */
+document.getElementById('hdr-ham').addEventListener('click', () => {
+  document.getElementById('mob-nav').classList.add('open');
+});
+document.getElementById('mob-close').addEventListener('click', () => {
+  document.getElementById('mob-nav').classList.remove('open');
+});
+document.querySelectorAll('#mob-nav a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mob-nav').classList.remove('open'));
+});
+
+/* ---- INIT ---- */
+renderFleet('all');
+buildFaq();
+</script>
+
+</body>
 </html>
 </html>
