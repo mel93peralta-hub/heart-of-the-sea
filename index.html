@@ -147,8 +147,25 @@
       max-width: 1220px; margin: 0 auto; padding: 0 24px;
       height: 70px; display: flex; align-items: center; gap: 28px;
     }
-    .hdr-logo { display: flex; align-items: center; flex-shrink: 0; }
+    .hdr-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .hdr-logo img { height: 50px; width: auto; }
+    .hdr-brand {
+      display: flex; flex-direction: column; line-height: 1.1;
+      border-left: 1px solid rgba(255,255,255,.12);
+      padding-left: 14px;
+    }
+    .hdr-brand-name {
+      font-family: var(--font-display);
+      font-size: 1.45rem; font-weight: 300;
+      color: var(--white); letter-spacing: .01em;
+    }
+    .hdr-brand-name em { font-style: italic; color: var(--coral); }
+    .hdr-brand-sub {
+      font-size: .56rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); margin-top: 1px;
+    }
+    @media (max-width: 480px) { .hdr-brand { display: none; } }
 
     .hdr-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
     .hdr-nav a {
@@ -692,6 +709,10 @@
   <div class="hdr-inner">
     <a href="#" class="hdr-logo">
       <img src="images/logo.jpg" alt="Heart of the Sea" />
+      <div class="hdr-brand">
+        <span class="hdr-brand-name">Heart of <em>the Sea</em></span>
+        <span class="hdr-brand-sub">Miami Yacht Rentals</span>
+      </div>
     </a>
     <nav class="hdr-nav">
       <a href="#fleet">Our Fleet</a>
@@ -1206,5 +1227,4 @@ buildFaq();
 </script>
 
 </body>
-</html>
 </html>
