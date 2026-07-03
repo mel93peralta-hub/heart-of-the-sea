@@ -9,15 +9,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
     (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','TU_ID_DE_PIXEL_AQUÍ');fbq('track','PageView');
+    fbq('init','TU_ID_DE_PIXEL_AQUÍ'); 
+    fbq('track','PageView');
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_ID_DE_PIXEL_AQUÍ&ev=PageView&noscript=1"/>
+  </noscript>
 
   <style>
     /* ================================================================
@@ -147,25 +150,8 @@
       max-width: 1220px; margin: 0 auto; padding: 0 24px;
       height: 70px; display: flex; align-items: center; gap: 28px;
     }
-    .hdr-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .hdr-logo { display: flex; align-items: center; flex-shrink: 0; }
     .hdr-logo img { height: 50px; width: auto; }
-    .hdr-brand {
-      display: flex; flex-direction: column; line-height: 1.1;
-      border-left: 1px solid rgba(255,255,255,.12);
-      padding-left: 14px;
-    }
-    .hdr-brand-name {
-      font-family: var(--font-display);
-      font-size: 1.45rem; font-weight: 300;
-      color: var(--white); letter-spacing: .01em;
-    }
-    .hdr-brand-name em { font-style: italic; color: var(--coral); }
-    .hdr-brand-sub {
-      font-size: .56rem; font-weight: 700;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: var(--gold); margin-top: 1px;
-    }
-    @media (max-width: 480px) { .hdr-brand { display: none; } }
 
     .hdr-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
     .hdr-nav a {
@@ -702,17 +688,10 @@
 </head>
 <body>
 
-<!-- ================================================================
-     HEADER
-================================================================ -->
 <header id="hdr">
   <div class="hdr-inner">
     <a href="#" class="hdr-logo">
       <img src="images/logo.jpg" alt="Heart of the Sea" />
-      <div class="hdr-brand">
-        <span class="hdr-brand-name">Heart of <em>the Sea</em></span>
-        <span class="hdr-brand-sub">Miami Yacht Rentals</span>
-      </div>
     </a>
     <nav class="hdr-nav">
       <a href="#fleet">Our Fleet</a>
@@ -727,7 +706,6 @@
   </div>
 </header>
 
-<!-- Mobile nav -->
 <div id="mob-nav" role="dialog" aria-label="Mobile navigation">
   <button id="mob-close" aria-label="Close menu">✕</button>
   <a href="#fleet">Our Fleet</a>
@@ -737,9 +715,6 @@
   <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">📩 Get a Quote</a>
 </div>
 
-<!-- ================================================================
-     HERO
-================================================================ -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -754,9 +729,6 @@
   <div class="hero-scroll"><div class="scroll-line"></div> Scroll</div>
 </section>
 
-<!-- ================================================================
-     INCLUDES STRIP
-================================================================ -->
 <div id="includes">
   <div class="inc-inner">
     <span class="inc-label">Every charter includes:</span>
@@ -768,9 +740,6 @@
   </div>
 </div>
 
-<!-- ================================================================
-     STATS
-================================================================ -->
 <div id="stats">
   <div class="stats-inner">
     <div class="stat-item">
@@ -792,9 +761,6 @@
   </div>
 </div>
 
-<!-- ================================================================
-     FLEET
-================================================================ -->
 <section class="sec" id="fleet">
   <div class="sec-inner">
     <div class="sec-label">Choose Your Vessel</div>
@@ -817,9 +783,6 @@
   </div>
 </section>
 
-<!-- ================================================================
-     EXPERIENCES
-================================================================ -->
 <section class="sec sec-dark" id="experiences">
   <div class="sec-inner">
     <div class="sec-label">Special Events</div>
@@ -861,15 +824,12 @@
   </div>
 </section>
 
-<!-- ================================================================
-     WHY CHOOSE US
-================================================================ -->
 <section class="sec" id="why-us">
   <div class="sec-inner">
     <div class="why-grid">
       <div class="why-img-col">
         <div class="why-img-wrap">
-          <img src="images/yate4.jpg" alt="Azimut 90 luxury yacht Miami" loading="lazy" />
+          <img src="images/yate4.jpg" alt="Azimut 90 luxury yacht Miami" loading="lazy" onerror="this.onerror=null; this.src='images/bg.jpg';" />
         </div>
         <div class="why-float-badge">
           <div class="wfb-num">70<sup style="font-size:1rem">+</sup></div>
@@ -916,9 +876,6 @@
   </div>
 </section>
 
-<!-- ================================================================
-     HOW IT WORKS
-================================================================ -->
 <section class="sec sec-alt">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:52px">
@@ -948,9 +905,6 @@
   </div>
 </section>
 
-<!-- ================================================================
-     REVIEWS
-================================================================ -->
 <section class="sec" id="reviews">
   <div class="sec-inner">
     <div class="sec-label">What Our Guests Say</div>
@@ -995,9 +949,6 @@
   </div>
 </section>
 
-<!-- ================================================================
-     FAQ
-================================================================ -->
 <section class="sec sec-alt" id="faq">
   <div class="sec-inner">
     <div class="faq-layout">
@@ -1008,15 +959,11 @@
         <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Ask Us Anything</a>
       </div>
       <div class="faq-list" id="faq-list">
-        <!-- injected by JS -->
-      </div>
+        </div>
     </div>
   </div>
 </section>
 
-<!-- ================================================================
-     CTA BAND
-================================================================ -->
 <div id="cta-band">
   <div class="ctab-inner">
     <div class="ctab-kicker">Start Your Journey</div>
@@ -1026,17 +973,16 @@
   </div>
 </div>
 
-<!-- ================================================================
-     FOOTER
-================================================================ -->
 <footer id="footer">
   <div class="foot-grid">
     <div>
-      <img src="images/logo.jpg" alt="Heart of the Sea" class="foot-brand-logo" />
+      <img src="images/logo.jpg" alt="Heart of the Sea" class="foot-brand-logo" onerror="this.onerror=null; this.src='images/bg.jpg';" />
       <p class="foot-brand-desc">Miami's premier yacht charter company. Luxury made effortless — memories made for a lifetime.</p>
       <div class="foot-social">
         <a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="foot-soc-link" aria-label="Instagram">IG</a>
-        <a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
+        
+        <a href="https://www.facebook.com/TU_USUARIO_DE_FACEBOOK_AQUI" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
+        
         <a href="http://wa.me/17867644608" target="_blank" class="foot-soc-link" aria-label="WhatsApp">WA</a>
         <a href="https://linktr.ee/heartofthesea" target="_blank" class="foot-soc-link" aria-label="Linktree">🔗</a>
       </div>
@@ -1072,7 +1018,7 @@
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2025 Heart of the Sea · Miami Yacht Rentals. All rights reserved.</span>
+    <span>© 2026 Heart of the Sea · Miami Yacht Rentals. All rights reserved.</span>
     <div class="foot-legal">
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
@@ -1080,9 +1026,6 @@
   </div>
 </footer>
 
-<!-- ================================================================
-     WHATSAPP BUTTON
-================================================================ -->
 <div id="wa-float">
   <a href="http://wa.me/17867644608" target="_blank" class="wa-wrap" aria-label="Contact on WhatsApp">
     <div class="wa-ring"></div>
@@ -1094,9 +1037,6 @@
   </a>
 </div>
 
-<!-- ================================================================
-     SCRIPTS
-================================================================ -->
 <script>
 /* ---- YACHT DATA ---- */
 const YACHTS = [
@@ -1136,13 +1076,13 @@ function cat(ft) {
   return 'sport';
 }
 
-/* ---- RENDER FLEET ---- */
+/* ---- RENDER FLEET (Ajuste visual añadido) ---- */
 function renderFleet(filter) {
   const list = filter === 'all' ? YACHTS : YACHTS.filter(y => cat(y.ft) === filter);
   document.getElementById('fleet-grid').innerHTML = list.map(y => `
     <div class="y-card">
       <div class="y-img-wrap">
-        <img src="${y.img}" alt="${y.name}" loading="lazy" />
+        <img src="${y.img}" alt="${y.name}" loading="lazy" onerror="this.onerror=null; this.src='images/bg.jpg';" />
         ${y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : ''}
         <span class="y-badge-size">${y.ft}′</span>
       </div>
