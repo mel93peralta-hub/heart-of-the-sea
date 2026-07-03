@@ -671,6 +671,172 @@
     .wa-btn svg { width: 30px; height: 30px; fill: white; }
 
     /* ================================================================
+       IMAGE HOVER OVERLAY (click to book)
+    ================================================================ */
+    .y-img-book {
+      position: absolute; inset: 0;
+      background: rgba(7,26,46,.58);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      opacity: 0; cursor: pointer;
+      transition: opacity var(--dur) var(--ease);
+    }
+    .y-card:hover .y-img-book { opacity: 1; }
+    .y-img-book-ico { font-size: 2rem; }
+    .y-img-book-lbl {
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--white);
+      background: var(--coral); padding: 7px 18px;
+      border-radius: 30px;
+    }
+
+    /* ================================================================
+       BOOKING MODAL
+    ================================================================ */
+    #booking-overlay {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(7,26,46,.72);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s var(--ease);
+    }
+    #booking-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal-card {
+      background: var(--white); border-radius: var(--r-lg);
+      width: 100%; max-width: 510px;
+      max-height: 92vh; overflow-y: auto;
+      box-shadow: var(--sh-lg);
+      transform: translateY(22px) scale(.97);
+      transition: transform .35s cubic-bezier(.34,1.38,.64,1);
+    }
+    #booking-overlay.open .modal-card { transform: translateY(0) scale(1); }
+
+    .modal-img-wrap {
+      position: relative; height: 155px; overflow: hidden;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+    }
+    .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-img-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(7,26,46,.1) 10%, rgba(7,26,46,.82));
+    }
+    .modal-img-info {
+      position: absolute; bottom: 16px; left: 20px; right: 52px; z-index: 1;
+    }
+    .modal-boat-name {
+      font-family: var(--font-display); font-size: 1.45rem;
+      font-weight: 400; color: var(--white); line-height: 1.1;
+    }
+    .modal-boat-loc { font-size: .68rem; color: rgba(255,255,255,.62); margin-top: 3px; }
+    .modal-x {
+      position: absolute; top: 12px; right: 12px; z-index: 2;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: .9rem; cursor: pointer;
+      transition: background var(--dur) var(--ease);
+    }
+    .modal-x:hover { background: rgba(255,255,255,.32); }
+
+    .modal-body { padding: 22px 24px 0; }
+    .modal-sec-lbl {
+      font-size: .62rem; font-weight: 700; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--coral);
+      display: flex; align-items: center; gap: 8px; margin-bottom: 18px;
+    }
+    .modal-sec-lbl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg.span2 { grid-column: 1 / -1; }
+    .fg label {
+      font-size: .64rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--navy);
+    }
+    .fg input, .fg select {
+      height: 44px; padding: 0 14px;
+      border: 1.5px solid var(--border); border-radius: var(--r-sm);
+      font-family: var(--font-body); font-size: .88rem;
+      color: var(--text); background: var(--white);
+      outline: none; width: 100%;
+      transition: border-color .2s, box-shadow .2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .fg select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath fill='%23071a2e' d='M5.5 7L0 0h11z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 36px; cursor: pointer;
+    }
+    .fg input:focus, .fg select:focus {
+      border-color: var(--coral);
+      box-shadow: 0 0 0 3px rgba(12,191,170,.14);
+    }
+    .fg.has-err input, .fg.has-err select { border-color: #e05f5f; }
+    .fg .err { font-size: .67rem; color: #d44; display: none; }
+    .fg.has-err .err { display: block; }
+
+    .modal-footer {
+      padding: 18px 24px 10px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .btn-modal-wa {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      width: 100%; padding: 15px 20px; border-radius: 40px; border: none;
+      background: #25d366; color: white;
+      font-family: var(--font-body); font-size: .82rem;
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background .25s, transform .25s, box-shadow .25s;
+    }
+    .btn-modal-wa:hover {
+      background: #1dab53; transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(37,211,102,.42);
+    }
+    .btn-modal-email {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      width: 100%; padding: 15px 20px; border-radius: 40px; border: none;
+      background: var(--navy); color: white;
+      font-family: var(--font-body); font-size: .82rem;
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background .25s, transform .25s;
+    }
+    .btn-modal-email:hover { background: var(--navy-mid); transform: translateY(-2px); }
+    .modal-note {
+      text-align: center; font-size: .65rem; color: var(--text-light);
+      line-height: 1.55; padding: 6px 24px 20px;
+    }
+
+    #modal-success {
+      display: none; flex-direction: column;
+      align-items: center; text-align: center; padding: 52px 32px;
+    }
+    #modal-success.show { display: flex; }
+    .succ-ico { font-size: 3.6rem; margin-bottom: 16px; }
+    .succ-h {
+      font-family: var(--font-display); font-size: 1.9rem;
+      font-weight: 300; color: var(--navy); line-height: 1.1; margin-bottom: 10px;
+    }
+    .succ-h em { font-style: italic; color: var(--coral); }
+    .succ-p { font-size: .88rem; color: var(--text-mid); line-height: 1.68; margin-bottom: 24px; }
+    .btn-succ-close {
+      padding: 12px 32px; border-radius: 40px; border: 1.5px solid var(--border);
+      background: none; font-family: var(--font-body); font-size: .8rem;
+      font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--navy); cursor: pointer; transition: all .2s;
+    }
+    .btn-succ-close:hover { background: var(--navy); color: white; border-color: var(--navy); }
+
+    @media (max-width: 500px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .fg.span2 { grid-column: 1; }
+    }
+
+    /* ================================================================
        RESPONSIVE
     ================================================================ */
     @media (max-width: 980px) {
@@ -1081,6 +1247,86 @@
 </footer>
 
 <!-- ================================================================
+     BOOKING MODAL
+================================================================ -->
+<div id="booking-overlay" onclick="overlayClick(event)">
+  <div class="modal-card" id="modal-card">
+
+    <!-- Boat image header -->
+    <div class="modal-img-wrap">
+      <img id="modal-img" src="" alt="" />
+      <button class="modal-x" onclick="closeModal()" aria-label="Cerrar">✕</button>
+      <div class="modal-img-info">
+        <div class="modal-boat-name" id="modal-boat-name"></div>
+        <div class="modal-boat-loc" id="modal-boat-loc"></div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div id="modal-form-wrap">
+      <div class="modal-body">
+        <div class="modal-sec-lbl">Solicitud de Reserva</div>
+        <div class="form-grid">
+
+          <div class="fg span2" id="fg-name">
+            <label for="f-name">Nombre Completo</label>
+            <input id="f-name" type="text" placeholder="Ej: John Smith" autocomplete="name" />
+            <span class="err">Por favor ingresa tu nombre completo.</span>
+          </div>
+
+          <div class="fg" id="fg-phone">
+            <label for="f-phone">Teléfono</label>
+            <input id="f-phone" type="tel" placeholder="+1 (305) 000-0000" autocomplete="tel" />
+            <span class="err">Por favor ingresa tu número.</span>
+          </div>
+
+          <div class="fg" id="fg-date">
+            <label for="f-date">Fecha Deseada</label>
+            <input id="f-date" type="date" />
+            <span class="err">Selecciona una fecha.</span>
+          </div>
+
+          <div class="fg span2" id="fg-people">
+            <label for="f-people">Personas Aproximadas</label>
+            <select id="f-people">
+              <option value="">Selecciona un rango...</option>
+              <option value="1 - 2 personas">1 - 2 personas</option>
+              <option value="3 - 5 personas">3 - 5 personas</option>
+              <option value="6 - 8 personas">6 - 8 personas</option>
+              <option value="9 - 10 personas">9 - 10 personas</option>
+              <option value="11 - 12 personas">11 - 12 personas</option>
+              <option value="13+ personas (grupo grande)">13+ personas (grupo grande)</option>
+            </select>
+            <span class="err">Por favor indica cuántas personas son.</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-wa" onclick="sendRequest('whatsapp')">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar por WhatsApp
+        </button>
+        <button class="btn-modal-email" onclick="sendRequest('email')">
+          ✉️ &nbsp;Enviar por Correo Electrónico
+        </button>
+      </div>
+      <p class="modal-note">Al hacer clic se abrirá WhatsApp o tu correo con los datos listos. Nuestro equipo te responde en minutos.</p>
+    </div>
+
+    <!-- Success state -->
+    <div id="modal-success">
+      <div class="succ-ico">🛥️</div>
+      <h3 class="succ-h">¡Solicitud <em>Enviada!</em></h3>
+      <p class="succ-p">Tu solicitud fue enviada correctamente. Nuestro equipo la revisará y te contactará en breve para confirmar disponibilidad y detalles.</p>
+      <button class="btn-succ-close" onclick="closeModal()">Cerrar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
      WHATSAPP BUTTON
 ================================================================ -->
 <div id="wa-float">
@@ -1139,12 +1385,18 @@ function cat(ft) {
 /* ---- RENDER FLEET ---- */
 function renderFleet(filter) {
   const list = filter === 'all' ? YACHTS : YACHTS.filter(y => cat(y.ft) === filter);
-  document.getElementById('fleet-grid').innerHTML = list.map(y => `
+  document.getElementById('fleet-grid').innerHTML = list.map(y => {
+    const idx = YACHTS.indexOf(y);
+    return `
     <div class="y-card">
       <div class="y-img-wrap">
         <img src="${y.img}" alt="${y.name}" loading="lazy" />
         ${y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : ''}
         <span class="y-badge-size">${y.ft}′</span>
+        <div class="y-img-book" onclick="openModal(${idx})">
+          <div class="y-img-book-ico">📅</div>
+          <div class="y-img-book-lbl">Solicitar Reserva</div>
+        </div>
       </div>
       <div class="y-body">
         <div class="y-loc">📍 ${y.loc}</div>
@@ -1160,8 +1412,8 @@ function renderFleet(filter) {
           </a>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function filterFleet(filter, btn) {
@@ -1205,6 +1457,116 @@ function toggleFaq(i) {
   if (!isOpen) item.classList.add('open');
 }
 
+/* ================================================================
+   BOOKING MODAL
+================================================================ */
+let activeYacht = null;
+
+function openModal(idx) {
+  activeYacht = YACHTS[idx];
+  const y = activeYacht;
+
+  // Populate header
+  document.getElementById('modal-img').src = y.img;
+  document.getElementById('modal-img').alt = y.name;
+  document.getElementById('modal-boat-name').textContent = y.name;
+  document.getElementById('modal-boat-loc').textContent = '📍 ' + y.loc + '  ·  👥 Hasta ' + y.cap + ' personas';
+
+  // Reset form & success state
+  document.getElementById('modal-form-wrap').style.display = '';
+  document.getElementById('modal-success').classList.remove('show');
+  ['fg-name','fg-phone','fg-date','fg-people'].forEach(id =>
+    document.getElementById(id).classList.remove('has-err'));
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-people').value = '';
+
+  // Set min date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('f-date').min = today;
+  document.getElementById('f-date').value = '';
+
+  // Open overlay
+  document.getElementById('booking-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('booking-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function overlayClick(e) {
+  if (e.target === document.getElementById('booking-overlay')) closeModal();
+}
+
+// Close with Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+function validateForm() {
+  const fields = [
+    { id: 'fg-name',   input: 'f-name',   check: v => v.trim().length >= 3 },
+    { id: 'fg-phone',  input: 'f-phone',  check: v => v.trim().length >= 7 },
+    { id: 'fg-date',   input: 'f-date',   check: v => v !== '' },
+    { id: 'fg-people', input: 'f-people', check: v => v !== '' },
+  ];
+  let ok = true;
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const val = document.getElementById(f.input).value;
+    if (!f.check(val)) { el.classList.add('has-err'); ok = false; }
+    else { el.classList.remove('has-err'); }
+  });
+  return ok;
+}
+
+function fmtDate(raw) {
+  if (!raw) return '—';
+  const [y, m, d] = raw.split('-');
+  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+}
+
+function sendRequest(channel) {
+  if (!validateForm()) return;
+
+  const y     = activeYacht;
+  const name  = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const date  = fmtDate(document.getElementById('f-date').value);
+  const ppl   = document.getElementById('f-people').value;
+
+  const msgLines = [
+    '🛥️ *SOLICITUD DE RESERVA — Heart of the Sea*',
+    '',
+    `*Embarcación:* ${y.name}`,
+    `*Marina:* ${y.loc}`,
+    '',
+    `*Nombre:* ${name}`,
+    `*Teléfono:* ${phone}`,
+    `*Fecha deseada:* ${date}`,
+    `*Personas aprox.:* ${ppl}`,
+    '',
+    '¡Hola! Me gustaría reservar esta embarcación. ¿Pueden confirmar disponibilidad? 🙏',
+  ];
+  const msgText = msgLines.join('\n');
+
+  if (channel === 'whatsapp') {
+    const waUrl = 'https://wa.me/17867644608?text=' + encodeURIComponent(msgText);
+    window.open(waUrl, '_blank');
+  } else {
+    const subject = encodeURIComponent('Solicitud de Reserva — ' + y.name);
+    const body    = encodeURIComponent(msgLines.join('\r\n'));
+    window.open('mailto:info@heartofthesea.com?subject=' + subject + '&body=' + body, '_blank');
+  }
+
+  // Show success state
+  document.getElementById('modal-form-wrap').style.display = 'none';
+  document.getElementById('modal-success').classList.add('show');
+}
+
 /* ---- HEADER SCROLL ---- */
 window.addEventListener('scroll', () => {
   document.getElementById('hdr').classList.toggle('shadow', window.scrollY > 50);
@@ -1227,4 +1589,5 @@ buildFaq();
 </script>
 
 </body>
+</html>
 </html>
