@@ -214,6 +214,13 @@
       border-bottom: 1px solid rgba(255,255,255,.07);
     }
     .mob-nav-top img { height: 42px; width: auto; }
+    .mob-nav-logo-btn {
+      display: flex; align-items: center; gap: 10px;
+      flex: 1; background: none; border: none; cursor: pointer;
+      padding: 0; text-align: left;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mob-nav-logo-btn:active { opacity: .7; }
     .mob-nav-top-brand {
       flex: 1;
       font-family: var(--font-display); font-size: 1.2rem;
@@ -260,11 +267,14 @@
       font-family: var(--font-body); font-size: .72rem; font-weight: 600;
       letter-spacing: .14em; text-transform: uppercase;
       color: rgba(255,255,255,.35); background: none; border: none;
-      cursor: pointer; padding: 8px 16px;
+      cursor: pointer; padding: 12px 24px;
       display: flex; align-items: center; gap: 8px;
       transition: color .2s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
-    .mob-nav-back:hover { color: rgba(255,255,255,.65); }
+    .mob-nav-back:hover, .mob-nav-back:active { color: rgba(255,255,255,.75); }
+    #mob-close, .mob-nav-logo-btn { touch-action: manipulation; }
 
     /* ================================================================
        HERO
@@ -968,10 +978,12 @@
 <!-- Mobile nav -->
 <div id="mob-nav" role="dialog" aria-label="Mobile navigation">
 
-  <!-- Top bar with branding and close -->
+  <!-- Top bar: logo + brand (tap to go to top) + close -->
   <div class="mob-nav-top">
-    <img src="images/logo.jpg" alt="Heart of the Sea" decoding="async" />
-    <span class="mob-nav-top-brand">Heart of <em>the Sea</em></span>
+    <button id="mob-nav-logo" class="mob-nav-logo-btn" aria-label="Go to top of page">
+      <img src="images/logo.jpg" alt="Heart of the Sea" decoding="async" />
+      <span class="mob-nav-top-brand">Heart of <em>the Sea</em></span>
+    </button>
     <button id="mob-close" aria-label="Close menu">✕</button>
   </div>
 
@@ -986,7 +998,7 @@
   <!-- Bottom CTA + back button -->
   <div class="mob-nav-bottom">
     <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral" onclick="closeMobileNav()">📩 Get a Free Quote</a>
-    <button class="mob-nav-back" onclick="closeMobileNav()">← Back to Page</button>
+    <button class="mob-nav-back">← Back to Page</button>
   </div>
 
 </div>
@@ -1684,15 +1696,32 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ---- MOBILE NAV ---- */
-document.getElementById('hdr-ham').addEventListener('click', () => {
+function openMobileNav() {
   document.getElementById('mob-nav').classList.add('open');
-});
-document.getElementById('mob-close').addEventListener('click', () => {
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
   document.getElementById('mob-nav').classList.remove('open');
-});
-document.querySelectorAll('#mob-nav a').forEach(a => {
-  a.addEventListener('click', () => document.getElementById('mob-nav').classList.remove('open'));
-});
+  document.body.style.overflow = '';
+}
+
+function goToTop() {
+  closeMobileNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Hamburger opens menu
+document.getElementById('hdr-ham').addEventListener('click', openMobileNav);
+
+// ✕ button closes menu
+document.getElementById('mob-close').addEventListener('click', closeMobileNav);
+
+// Back to Page button
+document.querySelector('.mob-nav-back').addEventListener('click', closeMobileNav);
+
+// Logo + brand name → scroll to top
+document.getElementById('mob-nav-logo').addEventListener('click', goToTop);
 
 /* ---- INIT ---- */
 renderFleet('all');
