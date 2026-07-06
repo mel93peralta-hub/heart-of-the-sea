@@ -5,19 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Heart of the Sea | Miami Yacht Rentals & Boat Charters</title>
   <meta name="description" content="Luxury yacht rentals in Miami. 70+ vessels, all-inclusive charters with private captain & crew. Perfect for parties, sunset cruises & corporate events." />
+  <meta name="theme-color" content="#071a2e" />
+
+  <!-- DNS prefetch for third-party origins -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="//wa.me" />
+
+  <!-- Preconnect for fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Facebook Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','TU_ID_DE_PIXEL_AQUÍ');fbq('track','PageView');
-  </script>
+  <!-- Preload critical above-the-fold assets -->
+  <link rel="preload" as="image" href="images/bg.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="images/logo.jpg" />
+  <link rel="preload" as="image" href="images/yate1.jpg" />
+  <link rel="preload" as="image" href="images/yate2.jpg" />
+  <link rel="preload" as="image" href="images/yate3.jpg" />
+
+  <!-- Google Fonts — only weights actually used (8 variants vs 11 before) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ================================================================
@@ -340,6 +347,8 @@
       box-shadow: var(--sh-sm);
       transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
       display: flex; flex-direction: column;
+      will-change: transform;
+      contain: layout style;
     }
     .y-card:hover {
       transform: translateY(-6px);
@@ -883,7 +892,7 @@
 <header id="hdr">
   <div class="hdr-inner">
     <a href="#" class="hdr-logo">
-      <img src="images/logo.jpg" alt="Heart of the Sea" />
+      <img src="images/logo.jpg" alt="Heart of the Sea" fetchpriority="high" decoding="async" />
       <div class="hdr-brand">
         <span class="hdr-brand-name">Heart of <em>the Sea</em></span>
         <span class="hdr-brand-sub">Miami Yacht Rentals</span>
@@ -1044,7 +1053,7 @@
     <div class="why-grid">
       <div class="why-img-col">
         <div class="why-img-wrap">
-          <img src="images/yate4.jpg" alt="Azimut 90 luxury yacht Miami" loading="lazy" />
+          <img src="images/yate4.jpg" alt="Azimut 90 luxury yacht Miami" loading="lazy" decoding="async" />
         </div>
         <div class="why-float-badge">
           <div class="wfb-num">70<sup style="font-size:1rem">+</sup></div>
@@ -1391,15 +1400,14 @@ function cat(ft) {
   return 'sport';
 }
 
-/* ---- RENDER FLEET ---- */
-function renderFleet(filter) {
-  const list = filter === 'all' ? YACHTS : YACHTS.filter(y => cat(y.ft) === filter);
-  document.getElementById('fleet-grid').innerHTML = list.map(y => {
-    const idx = YACHTS.indexOf(y);
-    return `
+/* ---- BUILD CARD ---- */
+function buildCard(y, idx, priority) {
+  const fetchAttr  = priority ? 'fetchpriority="high"' : 'fetchpriority="low"';
+  const loadingAttr = priority ? 'loading="eager"'    : 'loading="lazy"';
+  return `
     <div class="y-card">
       <div class="y-img-wrap">
-        <img src="${y.img}" alt="${y.name}" loading="lazy" />
+        <img src="${y.img}" alt="${y.name}" ${loadingAttr} ${fetchAttr} decoding="async" />
         ${y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : ''}
         <span class="y-badge-size">${y.ft}′</span>
         <div class="y-img-book" onclick="openModal(${idx})">
@@ -1422,7 +1430,31 @@ function renderFleet(filter) {
         </div>
       </div>
     </div>`;
-  }).join('');
+}
+
+/* ---- RENDER FLEET (deferred) ---- */
+function renderFleet(filter) {
+  const list  = filter === 'all' ? YACHTS : YACHTS.filter(y => cat(y.ft) === filter);
+  const FOLD  = 6; // cards visible without scrolling
+  const first = list.slice(0, FOLD);
+  const rest  = list.slice(FOLD);
+
+  // Render first 6 immediately — user sees these right away
+  const grid = document.getElementById('fleet-grid');
+  grid.innerHTML = first.map(y => buildCard(y, YACHTS.indexOf(y), true)).join('')
+    + (rest.length ? '<div id="fleet-rest"></div>' : '');
+
+  // Render remaining cards when browser is idle
+  if (rest.length) {
+    const renderRest = () => {
+      const el = document.getElementById('fleet-rest');
+      if (!el) return;
+      el.outerHTML = rest.map(y => buildCard(y, YACHTS.indexOf(y), false)).join('');
+    };
+    'requestIdleCallback' in window
+      ? requestIdleCallback(renderRest, { timeout: 1500 })
+      : setTimeout(renderRest, 200);
+  }
 }
 
 function filterFleet(filter, btn) {
@@ -1597,6 +1629,17 @@ renderFleet('all');
 buildFaq();
 </script>
 
+  <!-- Facebook Pixel — deferred 3s so it never blocks first render -->
+  <script>
+    setTimeout(function() {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init','TU_ID_DE_PIXEL_AQUÍ');fbq('track','PageView');
+    }, 3000);
+  </script>
+
 </body>
-</html>
 </html>
