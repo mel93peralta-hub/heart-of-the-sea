@@ -172,7 +172,11 @@
       letter-spacing: .22em; text-transform: uppercase;
       color: var(--gold); margin-top: 1px;
     }
-    @media (max-width: 480px) { .hdr-brand { display: none; } }
+    @media (max-width: 480px) {
+      .hdr-brand { padding-left: 10px; }
+      .hdr-brand-name { font-size: 1.1rem; }
+      .hdr-brand-sub { display: none; }
+    }
 
     .hdr-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
     .hdr-nav a {
@@ -196,21 +200,71 @@
     }
     .hdr-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); }
 
-    /* Mobile overlay */
+    /* Mobile overlay — redesigned */
     #mob-nav {
       display: none; position: fixed; inset: 0; z-index: 999;
-      background: var(--navy); flex-direction: column;
-      align-items: center; justify-content: center; gap: 28px;
+      background: var(--navy);
+      flex-direction: column;
     }
     #mob-nav.open { display: flex; }
-    #mob-nav a {
-      font-family: var(--font-display); font-size: 2rem;
-      color: var(--white); font-weight: 400;
+
+    .mob-nav-top {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 20px; height: 70px; flex-shrink: 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
+    .mob-nav-top img { height: 42px; width: auto; }
+    .mob-nav-top-brand {
+      flex: 1;
+      font-family: var(--font-display); font-size: 1.2rem;
+      font-weight: 300; color: var(--white);
+    }
+    .mob-nav-top-brand em { font-style: italic; color: var(--coral); }
     #mob-close {
-      position: absolute; top: 22px; right: 26px;
-      font-size: 1.6rem; color: var(--white); padding: 6px;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.75); font-size: 1rem; cursor: pointer;
+      flex-shrink: 0;
+      transition: background .2s, color .2s;
     }
+    #mob-close:hover { background: rgba(255,255,255,.18); color: var(--white); }
+
+    .mob-nav-links {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; padding: 0 32px; gap: 0;
+    }
+    .mob-nav-links a {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 300; color: rgba(255,255,255,.75);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: color .2s, padding-left .2s;
+    }
+    .mob-nav-links a:first-child { border-top: 1px solid rgba(255,255,255,.06); }
+    .mob-nav-links a:hover { color: var(--coral); padding-left: 6px; }
+    .mob-nav-links a .arrow { font-size: 1rem; opacity: .35; }
+
+    .mob-nav-bottom {
+      padding: 20px 24px 36px; flex-shrink: 0;
+      border-top: 1px solid rgba(255,255,255,.07);
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+    }
+    .mob-nav-bottom .btn-coral {
+      width: 100%; justify-content: center;
+      padding: 16px 24px; font-size: .85rem;
+    }
+    .mob-nav-back {
+      font-family: var(--font-body); font-size: .72rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.35); background: none; border: none;
+      cursor: pointer; padding: 8px 16px;
+      display: flex; align-items: center; gap: 8px;
+      transition: color .2s;
+    }
+    .mob-nav-back:hover { color: rgba(255,255,255,.65); }
 
     /* ================================================================
        HERO
@@ -913,12 +967,28 @@
 
 <!-- Mobile nav -->
 <div id="mob-nav" role="dialog" aria-label="Mobile navigation">
-  <button id="mob-close" aria-label="Close menu">✕</button>
-  <a href="#fleet">Our Fleet</a>
-  <a href="#experiences">Experiences</a>
-  <a href="#why-us">About</a>
-  <a href="#faq">FAQ</a>
-  <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">📩 Get a Quote</a>
+
+  <!-- Top bar with branding and close -->
+  <div class="mob-nav-top">
+    <img src="images/logo.jpg" alt="Heart of the Sea" decoding="async" />
+    <span class="mob-nav-top-brand">Heart of <em>the Sea</em></span>
+    <button id="mob-close" aria-label="Close menu">✕</button>
+  </div>
+
+  <!-- Navigation links -->
+  <nav class="mob-nav-links">
+    <a href="#fleet"       onclick="closeMobileNav()">Our Fleet       <span class="arrow">›</span></a>
+    <a href="#experiences" onclick="closeMobileNav()">Experiences      <span class="arrow">›</span></a>
+    <a href="#why-us"      onclick="closeMobileNav()">About Us         <span class="arrow">›</span></a>
+    <a href="#faq"         onclick="closeMobileNav()">FAQ              <span class="arrow">›</span></a>
+  </nav>
+
+  <!-- Bottom CTA + back button -->
+  <div class="mob-nav-bottom">
+    <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral" onclick="closeMobileNav()">📩 Get a Free Quote</a>
+    <button class="mob-nav-back" onclick="closeMobileNav()">← Back to Page</button>
+  </div>
+
 </div>
 
 <!-- ================================================================
