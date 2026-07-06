@@ -23,8 +23,10 @@
   <link rel="preload" as="image" href="images/yate2.jpg" />
   <link rel="preload" as="image" href="images/yate3.jpg" />
 
-  <!-- Google Fonts — only weights actually used (8 variants vs 11 before) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Google Fonts — non-blocking (print media trick, swaps to all on load) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" /></noscript>
 
   <style>
     /* ================================================================
@@ -53,19 +55,28 @@
       --r-xl:  28px;
 
       --sh-sm: 0 2px 12px rgba(7,26,46,.07);
-      --sh-md: 0 6px 28px rgba(7,26,46,.11);
       --sh-lg: 0 16px 56px rgba(7,26,46,.16);
 
       --ease: cubic-bezier(.4,0,.2,1);
       --dur:  .28s;
     }
 
+    /* Reduce layout shift when web fonts swap in */
+    @font-face {
+      font-family: 'Inter-fallback';
+      src: local('Arial');
+      ascent-override: 90%;
+      descent-override: 22%;
+      line-gap-override: 0%;
+      size-adjust: 107%;
+    }
+    body { font-family: var(--font-body); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+
     /* ================================================================
        RESET
     ================================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--font-body); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
     ul, ol { list-style: none; }
@@ -107,10 +118,21 @@
     /* ================================================================
        SECTION SCAFFOLD
     ================================================================ */
-    .sec { padding: 88px 24px; }
+    .sec { padding: 88px 24px; contain: layout; }
     .sec-inner { max-width: 1220px; margin: 0 auto; }
     .sec-alt { background: var(--off-white); }
     .sec-dark { background: var(--navy); }
+
+    /* Scroll-triggered fade-in */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up.delay-1 { transition-delay: .1s; }
+    .fade-up.delay-2 { transition-delay: .2s; }
+    .fade-up.delay-3 { transition-delay: .3s; }
 
     .sec-label {
       display: inline-flex; align-items: center; gap: 10px;
@@ -145,6 +167,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       background: rgba(7,26,46,.97);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,.05);
       transition: box-shadow var(--dur) var(--ease);
     }
@@ -332,8 +355,10 @@
       width: 1px; height: 44px;
       background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
       animation: scrollBob 2.2s ease-in-out infinite;
+      will-change: opacity, transform;
     }
     @keyframes scrollBob { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+    .hero-scroll { pointer-events: none; }
 
     /* ================================================================
        INCLUDES STRIP
@@ -727,6 +752,7 @@
       position: absolute; inset: 0; border-radius: 50%;
       background: rgba(37,211,102,.28);
       animation: waPulse 2.2s ease-out infinite;
+      will-change: transform, opacity;
     }
     @keyframes waPulse {
       0% { transform: scale(1); opacity: .8; }
@@ -742,6 +768,24 @@
     }
     .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,.55); }
     .wa-btn svg { width: 30px; height: 30px; fill: white; }
+
+    /* ================================================================
+       IMAGE ERROR PLACEHOLDER
+    ================================================================ */
+    .y-img-wrap.img-err {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+    }
+    .y-img-wrap.img-err::before {
+      content: '🛥️'; font-size: 2.6rem; opacity: .35;
+    }
+    .y-img-wrap.img-err::after {
+      content: attr(data-name);
+      font-family: var(--font-display); font-size: .95rem;
+      font-weight: 300; color: rgba(255,255,255,.38);
+      text-align: center; padding: 0 20px; line-height: 1.3;
+    }
 
     /* ================================================================
        IMAGE HOVER OVERLAY (click to book)
@@ -1488,8 +1532,9 @@ function buildCard(y, idx, priority) {
   const loadingAttr = priority ? 'loading="eager"'    : 'loading="lazy"';
   return `
     <div class="y-card">
-      <div class="y-img-wrap">
-        <img src="${y.img}" alt="${y.name}" ${loadingAttr} ${fetchAttr} decoding="async" />
+      <div class="y-img-wrap" data-name="${y.name}">
+        <img src="${y.img}" alt="${y.name}" ${loadingAttr} ${fetchAttr} decoding="async"
+             onerror="this.style.display='none';this.closest('.y-img-wrap').classList.add('img-err')" />
         ${y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : ''}
         <span class="y-badge-size">${y.ft}′</span>
         <div class="y-img-book" onclick="openModal(${idx})">
@@ -1726,6 +1771,39 @@ document.getElementById('mob-nav-logo').addEventListener('click', goToTop);
 /* ---- INIT ---- */
 renderFleet('all');
 buildFaq();
+
+/* ---- BACKDROP-FILTER: disable on mobile to save GPU ---- */
+if (window.matchMedia('(max-width: 680px)').matches) {
+  document.getElementById('hdr').style.backdropFilter = 'none';
+  document.getElementById('hdr').style.webkitBackdropFilter = 'none';
+  document.getElementById('hdr').style.background = 'rgba(7,26,46,.99)';
+}
+
+/* ---- INTERSECTION OBSERVER: fade-in sections ---- */
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  // Observe after a tiny delay so above-fold elements aren't invisible on first paint
+  requestAnimationFrame(() => {
+    document.querySelectorAll(
+      '.sec-label, .sec-h, .sec-sub, .stat-item, ' +
+      '.exp-card, .step-card, .rv-card, .why-item, ' +
+      '.faq-item, .inc-pill'
+    ).forEach((el, i) => {
+      el.classList.add('fade-up');
+      if (i % 3 === 1) el.classList.add('delay-1');
+      if (i % 3 === 2) el.classList.add('delay-2');
+      io.observe(el);
+    });
+  });
+}
 </script>
 
   <!-- Facebook Pixel — deferred 3s so it never blocks first render -->
