@@ -221,7 +221,13 @@
       display: none; flex-direction: column; gap: 5px;
       padding: 8px; margin-left: auto;
     }
-    .hdr-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); }
+    .hdr-hamburger span {
+      display: block; width: 22px; height: 2px; background: var(--white);
+      transition: transform .3s var(--ease), opacity .3s var(--ease);
+    }
+    .hdr-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hdr-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hdr-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
     /* Mobile overlay — redesigned */
     #mob-nav {
@@ -361,28 +367,47 @@
     .hero-scroll { pointer-events: none; }
 
     /* ================================================================
-       INCLUDES STRIP
+       ADD-ONS TICKER
     ================================================================ */
-    #includes {
-      background: var(--off-white);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
+    #ticker-bar {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 13px 0;
+      overflow: hidden;
+      position: relative;
     }
-    .inc-inner {
-      max-width: 1220px; margin: 0 auto;
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    #ticker-bar::before,
+    #ticker-bar::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0; width: 80px; z-index: 1;
+      pointer-events: none;
     }
-    .inc-label {
-      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--navy); margin-right: 4px;
-      flex-shrink: 0;
+    #ticker-bar::before {
+      left: 0;
+      background: linear-gradient(to right, var(--navy), transparent);
     }
-    .inc-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 20px; padding: 5px 13px;
-      font-size: .72rem; font-weight: 500; color: var(--text-mid);
+    #ticker-bar::after {
+      right: 0;
+      background: linear-gradient(to left, var(--navy), transparent);
     }
+    .ticker-track {
+      display: flex; align-items: center;
+      white-space: nowrap; width: max-content;
+      animation: tickerScroll 28s linear infinite;
+      will-change: transform;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .t-item {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 0 28px;
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.65);
+    }
+    .t-star { color: var(--coral); font-size: .55rem; }
 
     /* ================================================================
        STATS BAR
@@ -1054,8 +1079,8 @@
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-kicker">Miami Luxury Yacht Rentals</div>
-    <h1 class="hero-h1">Set Sail on the<br><em>Heart of Miami</em></h1>
-    <p class="hero-p">Over 70 private yachts and boats available for charter. Every trip includes a licensed captain, crew, fuel, and ice — you just bring the good vibes.</p>
+    <h1 class="hero-h1">Experience Miami from the<br><em>Heart of the Sea</em></h1>
+    <p class="hero-p">Over 70 private yachts and boats available for charter — you just bring the good vibes.</p>
     <div class="hero-actions">
       <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
       <a href="#fleet" class="btn btn-ghost">Browse Our Fleet</a>
@@ -1065,16 +1090,27 @@
 </section>
 
 <!-- ================================================================
-     INCLUDES STRIP
+     ADD-ONS TICKER
 ================================================================ -->
-<div id="includes">
-  <div class="inc-inner">
-    <span class="inc-label">Every charter includes:</span>
-    <span class="inc-pill">👨‍✈️ Private Captain & Crew</span>
-    <span class="inc-pill">⛽ Fuel</span>
-    <span class="inc-pill">🧊 Ice & Coolers</span>
-    <span class="inc-pill">🎵 Bluetooth Sound System</span>
-    <span class="inc-pill">📍 Multiple Miami Marinas</span>
+<div id="ticker-bar">
+  <div class="ticker-track">
+    <span class="t-item"><span class="t-star">✦</span> Add-Ons for Your Experience</span>
+    <span class="t-item"><span class="t-star">✦</span> 👨‍🍳 Chef</span>
+    <span class="t-item"><span class="t-star">✦</span> 🍽️ Catering</span>
+    <span class="t-item"><span class="t-star">✦</span> 🎵 DJs</span>
+    <span class="t-item"><span class="t-star">✦</span> 📸 Photos & Videos</span>
+    <span class="t-item"><span class="t-star">✦</span> 🎉 Decorations</span>
+    <span class="t-item"><span class="t-star">✦</span> 🏄 Water Toys</span>
+    <span class="t-item"><span class="t-star">✦</span> ✨ And More</span>
+    <!-- Duplicate for seamless infinite loop -->
+    <span class="t-item"><span class="t-star">✦</span> Add-Ons for Your Experience</span>
+    <span class="t-item"><span class="t-star">✦</span> 👨‍🍳 Chef</span>
+    <span class="t-item"><span class="t-star">✦</span> 🍽️ Catering</span>
+    <span class="t-item"><span class="t-star">✦</span> 🎵 DJs</span>
+    <span class="t-item"><span class="t-star">✦</span> 📸 Photos & Videos</span>
+    <span class="t-item"><span class="t-star">✦</span> 🎉 Decorations</span>
+    <span class="t-item"><span class="t-star">✦</span> 🏄 Water Toys</span>
+    <span class="t-item"><span class="t-star">✦</span> ✨ And More</span>
   </div>
 </div>
 
@@ -1188,35 +1224,35 @@
       </div>
       <div class="why-text">
         <div class="sec-label">Why Heart of the Sea</div>
-        <h2 class="sec-h">Miami's Most <em>Trusted</em> Charter</h2>
-        <p class="sec-sub">We've built our reputation on one thing: making your time on the water completely effortless.</p>
+        <h2 class="sec-h">Miami's Trusted <em>Bareboat Charter</em> Experience</h2>
+        <p class="sec-sub">Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.</p>
         <div class="why-items">
           <div class="why-item">
             <div class="wi-icon">👨‍✈️</div>
             <div>
-              <div class="wi-h">Licensed Captain & Crew on Every Charter</div>
-              <p class="wi-p">All captains are Coast Guard-certified and experienced navigating Miami's waters, so you can relax from the moment you step aboard.</p>
+              <div class="wi-h">Choose Your Own Qualified Captain & Crew</div>
+              <p class="wi-p">As the charterer, you have the right to select and hire your own qualified captain and crew. For your convenience, we can provide a list of independent, qualified professionals to choose from.</p>
             </div>
           </div>
           <div class="why-item">
-            <div class="wi-icon">✅</div>
+            <div class="wi-icon">💳</div>
             <div>
-              <div class="wi-h">All-Inclusive — No Hidden Fees</div>
-              <p class="wi-p">Fuel, ice, coolers, and a premium Bluetooth sound system are included on every single charter. What you see is what you pay.</p>
+              <div class="wi-h">Transparent Charter Pricing</div>
+              <p class="wi-p">Vessel charter fees and independent crew fees are clearly disclosed and handled separately. No surprises — just clear information before you book.</p>
             </div>
           </div>
           <div class="why-item">
             <div class="wi-icon">📍</div>
             <div>
               <div class="wi-h">Multiple Miami Marina Locations</div>
-              <p class="wi-p">Departing from Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, and more — always convenient.</p>
+              <p class="wi-p">Departing from convenient locations throughout Miami, depending on the vessel and availability.</p>
             </div>
           </div>
           <div class="why-item">
             <div class="wi-icon">⚡</div>
             <div>
-              <div class="wi-h">Instant WhatsApp Booking</div>
-              <p class="wi-p">Skip the forms. Chat directly with our team, get a real quote in minutes, and lock in your date before someone else does.</p>
+              <div class="wi-h">Fast & Easy WhatsApp Inquiries</div>
+              <p class="wi-p">Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.</p>
             </div>
           </div>
         </div>
@@ -1346,7 +1382,7 @@
       <p class="foot-brand-desc">Miami's premier yacht charter company. Luxury made effortless — memories made for a lifetime.</p>
       <div class="foot-social">
         <a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="foot-soc-link" aria-label="Instagram">IG</a>
-        <a href="https://www.facebook.com/TU_PAGINA" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
+        <a href="https://www.facebook.com/profile.php?id=61591140609475" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
         <a href="http://wa.me/17867644608" target="_blank" class="foot-soc-link" aria-label="WhatsApp">WA</a>
         <a href="https://linktr.ee/heartofthesea" target="_blank" class="foot-soc-link" aria-label="Linktree">🔗</a>
       </div>
@@ -1490,32 +1526,31 @@
 <script>
 /* ---- YACHT DATA ---- */
 const YACHTS = [
-  { name:"42' Barbie Pink Boat",        img:"images/yate1.jpg",  loc:"Miami River",         cap:12, ft:42,  tags:["Unique Style","Ice & Water"],        link:"https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0", feat:true },
+  { name:"42' Barbie Pink Boat",        img:"images/yate1.jpg",  loc:"Miami River",         cap:13, ft:42,  tags:["Unique Style","Ice & Water"],        link:"https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0", feat:true },
   { name:"110' Antago",                  img:"images/yate2.jpg",  loc:"Grove Harbour Marina", cap:13, ft:110, tags:["VIP Crew","Mega Yacht"],              link:"https://yachtfleet.smugmug.com/110-Antago", feat:true },
   { name:"105' DOMINATOR",              img:"images/yate3.jpg",  loc:"Miami Beach Marina",   cap:13, ft:105, tags:["Onboard Jacuzzi","Chef Optional"],    link:"https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link", feat:true },
   { name:"Azimut 90' Day Dreamin'",     img:"images/yate4.jpg",  loc:"Miami Beach Marina",   cap:13, ft:90,  tags:["Onboard Jacuzzi","Water Toys"],       link:"https://jsrking.wixstudio.com/day-dreamin-miami", feat:true },
   { name:"Pershing 90'",                img:"images/yate5.jpg",  loc:"Miami River",          cap:13, ft:90,  tags:["Captain & Crew","Premium Sound"],     link:"https://rym.smugmug.com/90-Pershing-", feat:false },
   { name:"BAIA Panther 85'",            img:"images/yate6.jpg",  loc:"Regal Marina",         cap:13, ft:85,  tags:["Onboard Jacuzzi","VIP Experience"],   link:"https://baiapanther85.jsrking.com", feat:true },
-  { name:"80' Aicon",                   img:"images/yate7.jpg",  loc:"Epic Hotel",           cap:12, ft:80,  tags:["Ice & Water","Bluetooth Audio"],      link:"https://photos.app.goo.gl/q3hSua7Ut2ySLARJ9", feat:false },
+  { name:"80' Aicon",                   img:"images/yate7.jpg",  loc:"Epic Hotel",           cap:13, ft:80,  tags:["Ice & Water","Bluetooth Audio"],      link:"https://photos.app.goo.gl/q3hSua7Ut2ySLARJ9", feat:false },
   { name:"70' Azimut Le Grand Bleu",    img:"images/yate8.jpg",  loc:"Haulover",             cap:13, ft:70,  tags:["Captain & Crew","Water Toys"],        link:"https://photos.app.goo.gl/Z9sVkrrUQystsVVG8", feat:true },
-  { name:"Pershing 64'",                img:"images/yate9.jpg",  loc:"Venetian Marina",      cap:12, ft:64,  tags:["Ice & Coolers","Premium Sound"],      link:"https://drive.google.com/drive/mobile/folders/1gFbNJ1VIiVMWNR3ercuUwtbmZxjyzobU", feat:false },
-  { name:"Absolute 60'",                img:"images/yate10.jpg", loc:"Venetian Marina",      cap:12, ft:60,  tags:["Crew Included","Luxury Charter"],     link:"https://www.dropbox.com/scl/fo/fegj08id412p43of8d96f/AOT6ZQPxxeW0wi4vi6ulRwc?rlkey=0for94u51wfy5t8qifp349str&st=n8nho6a2&dl=0", feat:false },
-  { name:"Azimuth 60' Freedom",         img:"images/yate11.jpg", loc:"Miami Beach Marina",   cap:12, ft:60,  tags:["Ice & Water","Bluetooth Audio"],      link:"https://azimuth60.jsrking.com", feat:false },
-  { name:"Vandutch 55' – The Godfather",img:"images/yate12.jpg", loc:"Miami Beach Marina",   cap:12, ft:55,  tags:["Captain Included","VIP Experience"],  link:"https://www.dropbox.com/scl/fo/bgotdukd1mm4orrlbyrgq/AOoVH3Cmgd-DhO3qVnK_fD0?rlkey=jnsrn4t0ii7xjz0aa0lla9g1a&st=er41f7qw&", feat:true },
-  { name:"Viking Princess 55' Takeella",img:"images/yate13.jpg", loc:"Regal Marina",         cap:12, ft:55,  tags:["Ice & Coolers","Premium Sound"],      link:"https://photos.app.goo.gl/NLMt7BmyCMFP6MwY9", feat:false },
-  { name:"58' Sea Ray Serenity",        img:"images/yate14.jpg", loc:"Miami Beach Marina",   cap:12, ft:58,  tags:["Crew Included","Water Toys"],         link:"https://drive.google.com/drive/u/0/mobile/folders/1-HSnIPAlI8VcyZteT7zHrMcxe-QTpFVE", feat:false },
-  { name:"Azimut 55' Flybridge",        img:"images/yate15.jpg", loc:"Venetian Marina",      cap:12, ft:55,  tags:["Ice & Water","Luxury Charter"],       link:"https://drive.google.com/drive/folders/1bH6b-6qGJ27o6ABXputjTLEmlNCp5dCY?usp=share_link", feat:false },
-  { name:"Cruiser Sport 55'",           img:"images/yate16.jpg", loc:"Venetian Marina",      cap:12, ft:55,  tags:["Captain Included","Bluetooth Audio"], link:"https://drive.google.com/drive/folders/1yRTLnai8kPA3aCbEoR927QD-QswRjzEU", feat:false },
-  { name:"Beneteau Flybridge 52'",      img:"images/yate17.jpg", loc:"Venetian Marina",      cap:12, ft:52,  tags:["Ice & Coolers","VIP Experience"],     link:"https://drive.google.com/drive/folders/1zAScbzWszWbsJEJWq0iFi72azoQhdd3t?usp=share_link", feat:false },
+  { name:"Pershing 64'",                img:"images/yate9.jpg",  loc:"Venetian Marina",      cap:13, ft:64,  tags:["Ice & Coolers","Premium Sound"],      link:"https://drive.google.com/drive/mobile/folders/1gFbNJ1VIiVMWNR3ercuUwtbmZxjyzobU", feat:false },
+  { name:"Absolute 60'",                img:"images/yate10.jpg", loc:"Venetian Marina",      cap:13, ft:60,  tags:["Crew Included","Luxury Charter"],     link:"https://www.dropbox.com/scl/fo/fegj08id412p43of8d96f/AOT6ZQPxxeW0wi4vi6ulRwc?rlkey=0for94u51wfy5t8qifp349str&st=n8nho6a2&dl=0", feat:false },
+  { name:"Azimuth 60' Freedom",         img:"images/yate11.jpg", loc:"Miami Beach Marina",   cap:13, ft:60,  tags:["Ice & Water","Bluetooth Audio"],      link:"https://azimuth60.jsrking.com", feat:false },
+  { name:"Vandutch 55' – The Godfather",img:"images/yate12.jpg", loc:"Miami Beach Marina",   cap:13, ft:55,  tags:["Captain Included","VIP Experience"],  link:"https://www.dropbox.com/scl/fo/bgotdukd1mm4orrlbyrgq/AOoVH3Cmgd-DhO3qVnK_fD0?rlkey=jnsrn4t0ii7xjz0aa0lla9g1a&st=er41f7qw&", feat:true },
+  { name:"Viking Princess 55' Takeella",img:"images/yate13.jpg", loc:"Regal Marina",         cap:13, ft:55,  tags:["Ice & Coolers","Premium Sound"],      link:"https://photos.app.goo.gl/NLMt7BmyCMFP6MwY9", feat:false },
+  { name:"58' Sea Ray Serenity",        img:"images/yate14.jpg", loc:"Miami Beach Marina",   cap:13, ft:58,  tags:["Crew Included","Water Toys"],         link:"https://drive.google.com/drive/u/0/mobile/folders/1-HSnIPAlI8VcyZteT7zHrMcxe-QTpFVE", feat:false },
+  { name:"Azimut 55' Flybridge",        img:"images/yate15.jpg", loc:"Venetian Marina",      cap:13, ft:55,  tags:["Ice & Water","Luxury Charter"],       link:"https://drive.google.com/drive/folders/1bH6b-6qGJ27o6ABXputjTLEmlNCp5dCY?usp=share_link", feat:false },
+  { name:"Cruiser Sport 55'",           img:"images/yate16.jpg", loc:"Venetian Marina",      cap:13, ft:55,  tags:["Captain Included","Bluetooth Audio"], link:"https://drive.google.com/drive/folders/1yRTLnai8kPA3aCbEoR927QD-QswRjzEU", feat:false },
+  { name:"Beneteau Flybridge 52'",      img:"images/yate17.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Ice & Coolers","VIP Experience"],     link:"https://drive.google.com/drive/folders/1zAScbzWszWbsJEJWq0iFi72azoQhdd3t?usp=share_link", feat:false },
   { name:"52' FAIRLINE",                img:"images/yate18.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Captain & Crew","Premium Sound"],     link:"https://drive.google.com/drive/mobile/folders/1rfDq-nFbhImoEFYWQliPsizjRW7EGH_H?usp=sharing", feat:false },
-  { name:"SeaRay 50'",                  img:"images/yate19.jpg", loc:"Jones Boat Yard",      cap:12, ft:50,  tags:["Ice & Water","Water Toys"],           link:"https://drive.google.com/drive/mobile/folders/17WFNEiWfx0-KuuYsmupYmEg2HK4oAYkX?usp=share_link", feat:false },
-  { name:"Cruiser Sport Fly 50' Remedy",img:"images/yate20.jpg", loc:"Miami Beach Marina",   cap:12, ft:50,  tags:["Crew Included","Luxury Charter"],     link:"https://drive.google.com/drive/mobile/folders/1SJ9aN7D4WwWcw-UPlrtETIqwHOiE-ozO?usp=share_link", feat:false },
-  { name:"Pershing 50'",                img:"images/yate21.jpg", loc:"Venetian Marina",      cap:12, ft:50,  tags:["Ice & Coolers","Bluetooth Audio"],     link:"https://drive.google.com/drive/mobile/folders/1r-9NnmQJtXQjJhF7FAT0nrjTaXJNMsRf?usp=share_link", feat:false },
-  { name:"SeaRay 48'",                  img:"images/yate22.jpg", loc:"Venetian Marina",      cap:12, ft:48,  tags:["Captain Included","VIP Experience"],  link:"https://drive.google.com/drive/folders/1Fs6zGEB8OMJrKSja3W2u1eZAyAsFoe1o", feat:false },
-  { name:"45' Maxum",                   img:"images/yate23.jpg", loc:"Venetian Marina",      cap:12, ft:45,  tags:["Ice & Water","Premium Sound"],        link:"https://photos.app.goo.gl/RYnku97FCFvqxTZw9", feat:false },
-  { name:"44' SeaRay Harmony",          img:"images/yate24.jpg", loc:"Jones Boat Yard",      cap:12, ft:44,  tags:["Captain & Crew","Water Toys"],        link:"https://drive.google.com/drive/mobile/folders/1v3WsCIbACu8JJG5mBkz65Tt2UdWWHJxG", feat:false },
-  { name:"LADY G (PINK)",               img:"images/yate25.jpg", loc:"Jones Boat Yard",      cap:12, ft:42,  tags:["Ice & Coolers","Party Ready"],        link:"https://drive.google.com/drive/folders/1OpjJ38ucbu5AzoefYPwwbo0kCAeMomcz", feat:true },
-  { name:"Azimut 53'",                  img:"images/yate26.jpg", loc:"Regal Marina",         cap:12, ft:53,  tags:["Crew Included","Bluetooth Audio"],    link:"https://www.dropbox.com/scl/fo/ank1joy2v6hkvl1msf2q5/AIxkcKe6Hb3aioehb5ImyfU?rlkey=cczgkqinwf6m68scwpp8xp42u&st=nd7b7vrd&dl=0", feat:false },
+  { name:"SeaRay 50'",                  img:"images/yate19.jpg", loc:"Jones Boat Yard",      cap:13, ft:50,  tags:["Ice & Water","Water Toys"],           link:"https://drive.google.com/drive/mobile/folders/17WFNEiWfx0-KuuYsmupYmEg2HK4oAYkX?usp=share_link", feat:false },
+  { name:"Cruiser Sport Fly 50' Remedy",img:"images/yate20.jpg", loc:"Miami Beach Marina",   cap:13, ft:50,  tags:["Crew Included","Luxury Charter"],     link:"https://drive.google.com/drive/mobile/folders/1SJ9aN7D4WwWcw-UPlrtETIqwHOiE-ozO?usp=share_link", feat:false },
+  { name:"Pershing 50'",                img:"images/yate21.jpg", loc:"Venetian Marina",      cap:13, ft:50,  tags:["Ice & Coolers","Bluetooth Audio"],     link:"https://drive.google.com/drive/mobile/folders/1r-9NnmQJtXQjJhF7FAT0nrjTaXJNMsRf?usp=share_link", feat:false },
+  { name:"SeaRay 48'",                  img:"images/yate22.jpg", loc:"Venetian Marina",      cap:13, ft:48,  tags:["Captain Included","VIP Experience"],  link:"https://drive.google.com/drive/folders/1Fs6zGEB8OMJrKSja3W2u1eZAyAsFoe1o", feat:false },
+  { name:"44' SeaRay Harmony",          img:"images/yate24.jpg", loc:"Jones Boat Yard",      cap:13, ft:44,  tags:["Captain & Crew","Water Toys"],        link:"https://drive.google.com/drive/mobile/folders/1v3WsCIbACu8JJG5mBkz65Tt2UdWWHJxG", feat:false },
+  { name:"LADY G (PINK)",               img:"images/yate25.jpg", loc:"Jones Boat Yard",      cap:13, ft:42,  tags:["Ice & Coolers","Party Ready"],        link:"https://drive.google.com/drive/folders/1OpjJ38ucbu5AzoefYPwwbo0kCAeMomcz", feat:true },
+  { name:"Azimut 53'",                  img:"images/yate26.jpg", loc:"Regal Marina",         cap:13, ft:53,  tags:["Crew Included","Bluetooth Audio"],    link:"https://www.dropbox.com/scl/fo/ank1joy2v6hkvl1msf2q5/AIxkcKe6Hb3aioehb5ImyfU?rlkey=cczgkqinwf6m68scwpp8xp42u&st=nd7b7vrd&dl=0", feat:false },
 ];
 
 /* ---- CATEGORY ---- */
@@ -1593,13 +1628,13 @@ function filterFleet(filter, btn) {
 /* ---- FAQ ---- */
 const FAQS = [
   { q: "What's included in the charter price?",
-    a: "All our charters include a licensed private captain and crew, fuel, ice, coolers, and a premium Bluetooth sound system. Food, beverages, and additional extras can be arranged for an additional cost." },
+    a: "The charter price includes the vessel and its listed amenities. Captain and crew are selected and paid separately by the charterer. Additional services are available upon request." },
   { q: "How many guests can we bring?",
-    a: "USCG regulations allow up to 12 passengers on most vessels. Some larger yachts accommodate up to 13. For bigger groups, ask us about our larger fleet options — we have vessels that can host more." },
+    a: "Bareboat charters may accommodate up to 13 individuals total, including the charterer and guests, subject to the vessel's legal capacity. Captain and crew are not included in the charter party count." },
   { q: "How much does a yacht charter cost?",
-    a: "Pricing depends on the vessel and duration. Smaller boats start around $800 for a half day. Luxury yachts range from $2,500 to $10,000+ per outing. Message us for a personalized quote — it's free and fast." },
+    a: "Pricing varies by vessel, date, and duration. Starting at $800. Contact us directly for a personalized quote based on your needs." },
   { q: "Can we bring our own food and drinks?",
-    a: "Absolutely. You're welcome to bring your own food and beverages. We provide ice and coolers to keep everything fresh. We also offer optional catering and bar packages on request." },
+    a: "Absolutely! You're welcome to bring your own food and beverages. Optional catering and additional services are also available upon request." },
   { q: "Where do we depart from?",
     a: "We have vessels at Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, Grove Harbour, Jones Boat Yard, and the Epic Hotel. Your booking agent will confirm the exact marina when you book." },
   { q: "How do I confirm my booking?",
@@ -1743,12 +1778,20 @@ window.addEventListener('scroll', () => {
 /* ---- MOBILE NAV ---- */
 function openMobileNav() {
   document.getElementById('mob-nav').classList.add('open');
+  document.getElementById('hdr-ham').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeMobileNav() {
   document.getElementById('mob-nav').classList.remove('open');
+  document.getElementById('hdr-ham').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function toggleMobileNav() {
+  document.getElementById('mob-nav').classList.contains('open')
+    ? closeMobileNav()
+    : openMobileNav();
 }
 
 function goToTop() {
@@ -1756,8 +1799,8 @@ function goToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Hamburger opens menu
-document.getElementById('hdr-ham').addEventListener('click', openMobileNav);
+// Hamburger toggles open/close
+document.getElementById('hdr-ham').addEventListener('click', toggleMobileNav);
 
 // ✕ button closes menu
 document.getElementById('mob-close').addEventListener('click', closeMobileNav);
