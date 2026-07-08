@@ -577,9 +577,10 @@
     .why-img-col { position: relative; }
     .why-img-wrap {
       border-radius: var(--r-lg); overflow: hidden;
-      aspect-ratio: 4/5;
+      aspect-ratio: 9/16;
     }
-    .why-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .why-img-wrap img,
+    .why-img-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .why-float-badge {
       position: absolute; bottom: 32px; right: -24px;
       background: var(--coral); color: var(--white);
@@ -1215,7 +1216,12 @@
     <div class="why-grid">
       <div class="why-img-col">
         <div class="why-img-wrap">
-          <img src="images/yate4.jpg" alt="Azimut 90 luxury yacht Miami" loading="lazy" decoding="async" />
+          <video
+            src="images/Video%20Promo%20Landing.mp4"
+            autoplay muted loop playsinline
+            preload="none"
+            aria-label="Heart of the Sea — Miami Yacht Rentals promo video">
+          </video>
         </div>
         <div class="why-float-badge">
           <div class="wfb-num">70<sup style="font-size:1rem">+</sup></div>
@@ -1563,8 +1569,11 @@ function cat(ft) {
 
 /* ---- BUILD CARD ---- */
 function buildCard(y, idx, priority) {
-  const fetchAttr  = priority ? 'fetchpriority="high"' : 'fetchpriority="low"';
-  const loadingAttr = priority ? 'loading="eager"'    : 'loading="lazy"';
+  const fetchAttr   = priority ? 'fetchpriority="high"' : 'fetchpriority="low"';
+  const loadingAttr = priority ? 'loading="eager"'      : 'loading="lazy"';
+  // Only show audio and jacuzzi — everything else is optional/add-on
+  const SHOW_TAGS   = ['Onboard Jacuzzi', 'Premium Sound', 'Bluetooth Audio'];
+  const visibleTags = y.tags.filter(t => SHOW_TAGS.includes(t));
   return `
     <div class="y-card">
       <div class="y-img-wrap" data-name="${y.name}">
@@ -1581,8 +1590,7 @@ function buildCard(y, idx, priority) {
         <div class="y-loc">📍 ${y.loc}</div>
         <h3 class="y-name">${y.name}</h3>
         <div class="y-tags">
-          ${y.tags.map(t => `<span class="y-tag">${t}</span>`).join('')}
-          <span class="y-tag">✅ Captain incl.</span>
+          ${visibleTags.map(t => `<span class="y-tag">${t}</span>`).join('')}
         </div>
         <div class="y-footer">
           <div class="y-cap">👥 Up to <strong>${y.cap} guests</strong></div>
@@ -1849,17 +1857,25 @@ if ('IntersectionObserver' in window) {
 }
 </script>
 
-  <!-- Facebook Pixel — deferred 3s so it never blocks first render -->
+  <!-- Meta Pixel — deferred 3s so it never blocks first render -->
   <script>
     setTimeout(function() {
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init','TU_ID_DE_PIXEL_AQUÍ');fbq('track','PageView');
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init','1338576037799348');
+      fbq('track','PageView');
     }, 3000);
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1338576037799348&ev=PageView&noscript=1" />
+  </noscript>
 
 </body>
 </html>
