@@ -586,12 +586,15 @@
 
     .why-middle {
       display: grid;
-      grid-template-columns: 1fr 260px 1fr;
-      gap: 48px; align-items: center;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 40px; align-items: center;
       margin-bottom: 48px;
     }
     .why-col { display: flex; flex-direction: column; gap: 32px; }
-    .why-video-col { border-radius: var(--r-lg); overflow: hidden; }
+    .why-video-col {
+      border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: var(--sh-lg);
+    }
     .why-video-col video { width: 100%; height: auto; display: block; }
     .why-cta { text-align: center; }
 
