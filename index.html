@@ -570,22 +570,21 @@
     /* ================================================================
        WHY US
     ================================================================ */
-    .why-grid {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 52px;
-    }
-    .why-img-col {
-      position: relative; width: 100%;
-      max-width: 420px;
-    }
-    .why-img-wrap {
-      border-radius: var(--r-lg); overflow: hidden;
-    }
-    .why-img-wrap img,
-    .why-img-wrap video { width: 100%; height: auto; display: block; }
+    .why-header { text-align: center; margin-bottom: 52px; }
+    .why-header .sec-label { justify-content: center; }
+    .why-header .sec-sub { max-width: 640px; margin: 0 auto; }
 
-    .why-text { width: 100%; max-width: 780px; }
-    .why-items { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px; margin-bottom: 38px; }
+    .why-middle {
+      display: grid;
+      grid-template-columns: 1fr 260px 1fr;
+      gap: 48px; align-items: center;
+      margin-bottom: 48px;
+    }
+    .why-col { display: flex; flex-direction: column; gap: 32px; }
+    .why-video-col { border-radius: var(--r-lg); overflow: hidden; }
+    .why-video-col video { width: 100%; height: auto; display: block; }
+    .why-cta { text-align: center; }
+
     .why-item { display: flex; gap: 14px; align-items: flex-start; }
     .wi-icon {
       flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
@@ -985,6 +984,8 @@
       .stats-inner .stat-item:nth-child(3) { border-left: none; border-top: 1px solid rgba(255,255,255,.08); }
       .stats-inner .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.08); }
       .why-items { grid-template-columns: 1fr; }
+      .why-middle { grid-template-columns: 1fr; }
+      .why-video-col { max-width: 320px; margin: 0 auto; }
       .steps-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
       .faq-layout { grid-template-columns: 1fr; gap: 40px; }
       .faq-intro { position: static; }
@@ -1199,59 +1200,73 @@
 ================================================================ -->
 <section class="sec" id="why-us">
   <div class="sec-inner">
-    <div class="why-grid">
-      <div class="why-img-col">
-        <div class="why-img-wrap">
-          <video
-            autoplay muted loop playsinline
-            preload="auto"
-            poster="images/yate2.jpg"
-            aria-label="Heart of the Sea — Miami Yacht Rentals promo video">
-            <source src="images/Video%20Promo%20Landing.mp4"  type="video/mp4" />
-            <source src="images/Video%20Promo%20Landing.MP4"  type="video/mp4" />
-            <source src="images/Video%20Promo%20Landing.mov"  type="video/quicktime" />
-            <source src="images/Video%20Promo%20Landing.MOV"  type="video/quicktime" />
-            <source src="images/VideoPromoLanding.mp4"        type="video/mp4" />
-          </video>
-        </div>
-      </div>
-      <div class="why-text">
-        <div class="sec-label">Why Heart of the Sea</div>
-        <h2 class="sec-h">Miami's Trusted <em>Bareboat Charter</em> Experience</h2>
-        <p class="sec-sub">Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.</p>
-        <div class="why-items">
-          <div class="why-item">
-            <div class="wi-icon">👨‍✈️</div>
-            <div>
-              <div class="wi-h">Choose Your Own Qualified Captain & Crew</div>
-              <p class="wi-p">As the charterer, you have the right to select and hire your own qualified captain and crew. For your convenience, we can provide a list of independent, qualified professionals to choose from.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="wi-icon">💳</div>
-            <div>
-              <div class="wi-h">Transparent Charter Pricing</div>
-              <p class="wi-p">Vessel charter fees and independent crew fees are clearly disclosed and handled separately. No surprises — just clear information before you book.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="wi-icon">📍</div>
-            <div>
-              <div class="wi-h">Multiple Miami Marina Locations</div>
-              <p class="wi-p">Departing from convenient locations throughout Miami, depending on the vessel and availability.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="wi-icon">⚡</div>
-            <div>
-              <div class="wi-h">Fast & Easy WhatsApp Inquiries</div>
-              <p class="wi-p">Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.</p>
-            </div>
-          </div>
-        </div>
-        <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Book via WhatsApp</a>
-      </div>
+
+    <!-- Title & subtitle — full width centered -->
+    <div class="why-header">
+      <div class="sec-label">Why Heart of the Sea</div>
+      <h2 class="sec-h">Miami's Trusted <em>Bareboat Charter</em> Experience</h2>
+      <p class="sec-sub">Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.</p>
     </div>
+
+    <!-- 3 columns: items | video | items -->
+    <div class="why-middle">
+
+      <!-- Left items -->
+      <div class="why-col">
+        <div class="why-item">
+          <div class="wi-icon">👨‍✈️</div>
+          <div>
+            <div class="wi-h">Choose Your Own Qualified Captain & Crew</div>
+            <p class="wi-p">As the charterer, you have the right to select and hire your own qualified captain and crew. For your convenience, we can provide a list of independent, qualified professionals to choose from.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="wi-icon">💳</div>
+          <div>
+            <div class="wi-h">Transparent Charter Pricing</div>
+            <p class="wi-p">Vessel charter fees and independent crew fees are clearly disclosed and handled separately. No surprises — just clear information before you book.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center video -->
+      <div class="why-video-col">
+        <video autoplay muted loop playsinline preload="auto"
+               poster="images/yate2.jpg"
+               aria-label="Heart of the Sea — Miami Yacht Rentals promo video">
+          <source src="images/Video%20Promo%20Landing.mp4" type="video/mp4" />
+          <source src="images/Video%20Promo%20Landing.MP4" type="video/mp4" />
+          <source src="images/Video%20Promo%20Landing.mov" type="video/quicktime" />
+          <source src="images/Video%20Promo%20Landing.MOV" type="video/quicktime" />
+          <source src="images/VideoPromoLanding.mp4"       type="video/mp4" />
+        </video>
+      </div>
+
+      <!-- Right items -->
+      <div class="why-col">
+        <div class="why-item">
+          <div class="wi-icon">📍</div>
+          <div>
+            <div class="wi-h">Multiple Miami Marina Locations</div>
+            <p class="wi-p">Departing from convenient locations throughout Miami, depending on the vessel and availability.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="wi-icon">⚡</div>
+          <div>
+            <div class="wi-h">Fast & Easy WhatsApp Inquiries</div>
+            <p class="wi-p">Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="why-cta">
+      <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Book via WhatsApp</a>
+    </div>
+
   </div>
 </section>
 
