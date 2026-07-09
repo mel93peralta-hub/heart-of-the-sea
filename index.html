@@ -180,7 +180,8 @@
     .hdr-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .hdr-logo img {
       height: 50px; width: auto;
-      mix-blend-mode: multiply;
+      filter: invert(1) hue-rotate(180deg);
+      mix-blend-mode: screen;
       border-radius: 4px;
     }
     .hdr-brand {
@@ -201,8 +202,8 @@
     }
     @media (max-width: 480px) {
       .hdr-brand { padding-left: 10px; }
-      .hdr-brand-name { font-size: 1.1rem; }
-      .hdr-brand-sub { display: none; }
+      .hdr-brand-name { font-size: 1.05rem; }
+      .hdr-brand-sub { font-size: .5rem; letter-spacing: .18em; }
     }
 
     .hdr-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
@@ -254,7 +255,8 @@
       -webkit-tap-highlight-color: transparent;
     }
     .mob-nav-logo-btn img {
-      mix-blend-mode: multiply;
+      filter: invert(1) hue-rotate(180deg);
+      mix-blend-mode: screen;
       border-radius: 4px;
     }
     .mob-nav-logo-btn:active { opacity: .7; }
@@ -734,7 +736,8 @@
     }
     .foot-brand-logo {
       height: 46px; margin-bottom: 16px;
-      mix-blend-mode: multiply;
+      filter: invert(1) hue-rotate(180deg);
+      mix-blend-mode: screen;
       border-radius: 4px;
     }
     .foot-brand-desc { font-size: .8rem; line-height: 1.72; margin-bottom: 24px; }
