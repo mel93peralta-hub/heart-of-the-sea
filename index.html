@@ -801,6 +801,35 @@
     .wa-btn svg { width: 30px; height: 30px; fill: white; }
 
     /* ================================================================
+       SALE BADGE & PRICE
+    ================================================================ */
+    .y-badge-sale {
+      position: absolute; top: 12px; left: 12px;
+      background: #e63946; color: #fff;
+      font-size: .6rem; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase; padding: 5px 11px; border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(230,57,70,.5);
+      animation: salePulse 2s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes salePulse {
+      0%,100% { box-shadow: 0 2px 10px rgba(230,57,70,.5); transform: scale(1); }
+      50%      { box-shadow: 0 4px 20px rgba(230,57,70,.8); transform: scale(1.06); }
+    }
+    .y-price {
+      display: flex; align-items: baseline; gap: 6px; margin: 2px 0 4px;
+    }
+    .y-price-from {
+      font-size: .62rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-light);
+    }
+    .y-price-amount {
+      font-family: var(--font-display); font-size: 1.5rem;
+      font-weight: 400; color: var(--navy); line-height: 1;
+    }
+    .y-price-amount em { font-style: normal; font-size: .75rem; color: var(--text-light); }
+
+    /* ================================================================
        IMAGE ERROR PLACEHOLDER
     ================================================================ */
     .y-img-wrap.img-err {
@@ -1555,7 +1584,7 @@
 <script>
 /* ---- YACHT DATA ---- */
 const YACHTS = [
-  { name:"42' Barbie Pink Boat",        img:"images/yate1.jpg",  loc:"Miami River",         cap:13, ft:42,  tags:["Unique Style","Ice & Water"],        link:"https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0", feat:true },
+  { name:"42' Barbie Pink Boat", img:"images/yate1.jpg", loc:"Miami River", cap:13, ft:42, tags:["Unique Style","Ice & Water"], link:"https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0", feat:true, sale:true, price:"$1,000" },
   { name:"110' Antago",                  img:"images/yate2.jpg",  loc:"Grove Harbour Marina", cap:13, ft:110, tags:["VIP Crew","Mega Yacht"],              link:"https://yachtfleet.smugmug.com/110-Antago", feat:true },
   { name:"105' DOMINATOR",              img:"images/yate3.jpg",  loc:"Miami Beach Marina",   cap:13, ft:105, tags:["Onboard Jacuzzi","Chef Optional"],    link:"https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link", feat:true },
   { name:"Azimut 90' Day Dreamin'",     img:"images/yate4.jpg",  loc:"Miami Beach Marina",   cap:13, ft:90,  tags:["Onboard Jacuzzi","Water Toys"],       link:"https://jsrking.wixstudio.com/day-dreamin-miami", feat:true },
@@ -1602,7 +1631,7 @@ function buildCard(y, idx, priority) {
       <div class="y-img-wrap" data-name="${y.name}">
         <img src="${y.img}" alt="${y.name}" ${loadingAttr} ${fetchAttr} decoding="async"
              onerror="this.style.display='none';this.closest('.y-img-wrap').classList.add('img-err')" />
-        ${y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : ''}
+        ${y.sale ? '<span class="y-badge-sale">🔥 Sale</span>' : (y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : '')}
         <span class="y-badge-size">${y.ft}′</span>
         <div class="y-img-book" onclick="openModal(${idx})">
           <div class="y-img-book-ico">📅</div>
@@ -1612,6 +1641,7 @@ function buildCard(y, idx, priority) {
       <div class="y-body">
         <div class="y-loc">📍 ${y.loc}</div>
         <h3 class="y-name">${y.name}</h3>
+        ${y.price ? `<div class="y-price"><span class="y-price-from">Starting at</span><span class="y-price-amount">${y.price}<em>/day</em></span></div>` : ''}
         <div class="y-tags">
           ${visibleTags.map(t => `<span class="y-tag">${t}</span>`).join('')}
         </div>
