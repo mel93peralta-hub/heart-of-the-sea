@@ -244,7 +244,40 @@
     .why-col:last-child .why-item { flex-direction: row-reverse; }
     .why-video-col { border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-lg); }
     .why-video-col video { width: 100%; height: auto; display: block; }
-    .why-cta { text-align: center; }
+    .why-cta {
+      text-align: center;
+      margin-top: 56px;
+      padding: 52px 40px;
+      background: var(--navy);
+      border-radius: var(--r-lg);
+      position: relative; overflow: hidden;
+    }
+    .why-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center bottom, rgba(200,151,63,.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .why-cta-kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .62rem; font-weight: 700; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .why-cta-kicker::before, .why-cta-kicker::after {
+      content: ''; width: 28px; height: 1px; background: var(--gold);
+    }
+    .why-cta-h {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300; color: var(--gold);
+      line-height: 1.08; margin-bottom: 14px;
+    }
+    .why-cta-h em { font-style: italic; color: var(--coral); }
+    .why-cta-p {
+      font-size: .92rem; color: rgba(255,255,255,.45);
+      max-width: 420px; margin: 0 auto 36px; line-height: 1.72;
+    }
     .why-item { display: flex; gap: 14px; align-items: flex-start; padding: 20px 0; }
     .why-col .why-item + .why-item { border-top: 1px solid rgba(0,0,0,.07); }
     .wi-icon { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: rgba(12,191,170,.1); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
@@ -530,7 +563,14 @@
         <div class="why-item"><div class="wi-icon">⚡</div><div><div class="wi-h">Fast &amp; Easy WhatsApp Inquiries</div><p class="wi-p">Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.</p></div></div>
       </div>
     </div>
-    <div class="why-cta"><a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Book via WhatsApp</a></div>
+    <div class="why-cta">
+      <div style="position:relative;z-index:1">
+        <div class="why-cta-kicker">Start Your Journey</div>
+        <h3 class="why-cta-h">Ready to <em>Cast Off?</em></h3>
+        <p class="why-cta-p">Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.</p>
+        <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
+      </div>
+    </div>
   </div>
 </section>
 
