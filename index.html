@@ -906,7 +906,7 @@ function buildCard(y, idx, priority) {
       <div class="y-body">
         <div class="y-loc">📍 ${y.loc}</div>
         <h3 class="y-name">${y.name}</h3>
-        ${y.price ? `<div class="y-price"><span class="y-price-from">Starting at</span><span class="y-price-amount">${y.price}<em>/day</em></span></div>` : ''}
+        ${y.price ? `<div class="y-price"><span class="y-price-from">Starting at</span><span class="y-price-amount">${y.price}</span></div>` : ''}
         <div class="y-tags">${visibleTags.map(t => `<span class="y-tag">${t}</span>`).join('')}</div>
         <div class="y-footer">
           <div class="y-cap">👥 Up to <strong>${y.cap} guests</strong></div>
