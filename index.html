@@ -483,7 +483,7 @@
       <a href="#experiences">Experiences</a>
       <a href="#why-us">About</a>
       <a href="#faq">FAQ</a>
-      <a href="http://wa.me/17867644608" target="_blank" class="btn-cta">📩 Get a Quote</a>
+      <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn-cta">📩 Get a Quote</a>
     </nav>
     <button class="hdr-hamburger" id="hdr-ham" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -506,7 +506,7 @@
     <a href="#faq"         onclick="closeMobileNav()">FAQ              <span class="arrow">›</span></a>
   </nav>
   <div class="mob-nav-bottom">
-    <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral" onclick="closeMobileNav()">📩 Get a Free Quote</a>
+    <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral" onclick="if(window.fbq)fbq('track','Contact');closeMobileNav()">📩 Get a Free Quote</a>
     <button class="mob-nav-back">← Back to Page</button>
   </div>
 </div>
@@ -518,7 +518,7 @@
     <h1 class="hero-h1">Experience Miami from the<br><em>Heart of the Sea</em></h1>
     <p class="hero-p">The most beautiful views for your memories.</p>
     <div class="hero-actions">
-      <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
+      <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
       <a href="#fleet" class="btn btn-ghost">Browse Our Fleet</a>
     </div>
   </div>
@@ -598,7 +598,7 @@
         <div class="why-cta-kicker">Start Your Journey</div>
         <h3 class="why-cta-h">Ready to <em>Cast Off?</em></h3>
         <p class="why-cta-p">Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.</p>
-        <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
+        <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
       </div>
     </div>
   </div>
@@ -684,7 +684,7 @@
         <div class="sec-label">FAQs</div>
         <h2 class="sec-h">Everything You <em>Need to Know</em></h2>
         <p class="sec-sub" style="margin-bottom:32px">Can't find the answer you're looking for? Chat with us directly — we reply fast.</p>
-        <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Ask Us Anything</a>
+        <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral">Ask Us Anything</a>
       </div>
       <div class="faq-list" id="faq-list"></div>
     </div>
@@ -701,7 +701,7 @@
       <div class="foot-social">
         <a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="foot-soc-link" aria-label="Instagram">IG</a>
         <a href="https://www.facebook.com/profile.php?id=61591140609475" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
-        <a href="http://wa.me/17867644608" target="_blank" class="foot-soc-link" aria-label="WhatsApp">WA</a>
+        <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="foot-soc-link" aria-label="WhatsApp">WA</a>
         <a href="https://linktr.ee/heartofthesea" target="_blank" class="foot-soc-link" aria-label="Linktree">🔗</a>
       </div>
     </div>
@@ -729,7 +729,7 @@
       <div class="foot-col-h">Contact</div>
       <ul>
         <li><a href="tel:+17867644608">📞 (786) 764-4608</a></li>
-        <li><a href="http://wa.me/17867644608" target="_blank">💬 WhatsApp Us</a></li>
+        <li><a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">💬 WhatsApp Us</a></li>
         <li><a href="mailto:info@heartofthesea.com">✉️ Email Us</a></li>
         <li><a href="#fleet">📍 Miami, FL</a></li>
       </ul>
@@ -816,7 +816,7 @@
 </div>
 
 <div id="wa-float">
-  <a href="http://wa.me/17867644608" target="_blank" class="wa-wrap" aria-label="Contact on WhatsApp">
+  <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="wa-wrap" aria-label="Contact on WhatsApp">
     <div class="wa-ring"></div>
     <div class="wa-btn">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -974,6 +974,7 @@ function openModal(idx) {
   activeYacht = YACHTS[idx];
   galleryIdx  = 0;
   const y = activeYacht;
+  if (window.fbq) fbq('track', 'ViewContent', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : undefined), currency: 'USD' });
 
   // Gallery
   renderGallery();
@@ -1108,6 +1109,7 @@ function fmtDate(raw) {
 function sendRequest(channel) {
   if (!validateForm()) return;
   const y    = activeYacht;
+  if (window.fbq) fbq('track', 'Lead', { content_name: y.name, content_category: 'yacht_charter', channel: channel });
   const name = document.getElementById('f-name').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const date  = fmtDate(document.getElementById('f-date').value);
@@ -1173,18 +1175,16 @@ if ('IntersectionObserver' in window) {
 </script>
 
 <script>
-  setTimeout(function() {
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window,document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','1338576037799348');
-    fbq('track','PageView');
-  }, 3000);
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;
+  setTimeout(function(){ s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s); }, 3000);
+  }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1338576037799348');
+  fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1338576037799348&ev=PageView&noscript=1" /></noscript>
 
