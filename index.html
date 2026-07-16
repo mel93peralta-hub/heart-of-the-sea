@@ -214,25 +214,41 @@
     .exp-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
     .exp-card {
       position: relative; overflow: hidden;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--r-md); padding: 28px 22px 24px;
-      background-size: cover !important; background-position: center !important;
-      transition: all var(--dur) var(--ease);
-      min-height: 200px; display: flex; flex-direction: column; justify-content: flex-end;
+      border: 1px solid rgba(200,151,63,.2);
+      border-radius: var(--r-md);
+      background-size: cover !important; background-position: center top !important;
+      transition: all .4s var(--ease);
+      min-height: 340px; display: flex; flex-direction: column; justify-content: flex-end;
     }
     .exp-card::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(4,27,63,.96) 0%, rgba(4,27,63,.55) 50%, rgba(4,27,63,.25) 100%);
-      transition: all .35s var(--ease);
+      background: linear-gradient(to top,
+        rgba(4,27,63,1)   0%,
+        rgba(4,27,63,1)   38%,
+        rgba(4,27,63,.65) 58%,
+        rgba(4,27,63,.15) 100%
+      );
       z-index: 0;
+      transition: all .4s var(--ease);
     }
-    .exp-card:hover::before { background: linear-gradient(to top, rgba(4,27,63,.90) 0%, rgba(4,27,63,.40) 50%, rgba(4,27,63,.10) 100%); }
-    .exp-card:hover { border-color: rgba(12,191,170,.4); transform: translateY(-4px); }
-    .exp-card > * { position: relative; z-index: 1; }
+    .exp-card::after {
+      content: '';
+      position: absolute; bottom: 88px; left: 22px; right: 22px;
+      height: 1px; background: rgba(200,151,63,.35);
+      z-index: 1;
+      transition: opacity .4s var(--ease);
+    }
+    .exp-card:hover::before { background: linear-gradient(to top, rgba(4,27,63,1) 0%, rgba(4,27,63,.95) 35%, rgba(4,27,63,.50) 60%, rgba(4,27,63,.05) 100%); }
+    .exp-card:hover { border-color: rgba(200,151,63,.5); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(4,27,63,.4); }
+    .exp-card:hover::after { opacity: .7; }
+    .exp-card > * { position: relative; z-index: 2; }
     .exp-icon { display: none; }
-    .exp-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--gold); margin-bottom: 7px; letter-spacing: .02em; }
-    .exp-desc { font-size: .76rem; color: rgba(255,255,255,.60); line-height: 1.6; }
+    .exp-card .exp-title, .exp-card .exp-desc { padding: 0 22px; }
+    .exp-card .exp-title { padding-top: 20px; }
+    .exp-card .exp-desc { padding-bottom: 22px; }
+    .exp-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--gold); margin-bottom: 8px; letter-spacing: .03em; text-shadow: 0 1px 8px rgba(4,27,63,.8); }
+    .exp-desc { font-size: .74rem; color: rgba(255,255,255,.68); line-height: 1.62; letter-spacing: .01em; }
 
     /* WHY US */
     .why-header { text-align: center; margin-bottom: 52px; }
@@ -577,8 +593,8 @@
 <section class="sec sec-dark" id="experiences">
   <div class="sec-inner">
     <div class="sec-label">Special Events</div>
-    <h2 class="sec-h">We Make <em>Every Occasion</em> Unforgettable</h2>
-    <p class="sec-sub">From bachelorette parties to corporate buyouts — our team handles every detail so you can focus on the moment.</p>
+    <h2 class="sec-h">Your Story Deserves <em>the Perfect</em> Setting</h2>
+    <p class="sec-sub">Every milestone in life deserves to be celebrated in a way that feels extraordinary. Tell us your vision — we'll make it happen on the water.</p>
     <div class="exp-grid">
 
       <!-- 1. Birthdays & Bachelorettes (merged) -->
