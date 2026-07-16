@@ -205,7 +205,14 @@
 
     /* IMAGE HOVER OVERLAY */
     .y-img-book { position: absolute; inset: 0; background: rgba(4,27,63,.0); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; opacity: 0; cursor: pointer; transition: opacity var(--dur) var(--ease), background var(--dur) var(--ease); }
-    .y-img-wrap:hover .y-img-book, .y-card:hover .y-img-book { opacity: 1; background: rgba(4,27,63,.58); }
+    .y-img-wrap:hover .y-img-book, .y-img-wrap:hover .y-img-book,
+    .y-card:hover .y-img-book {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(4,27,63,.82) 0%, transparent 55%) !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      padding-bottom: 14px !important;
+    }
     .y-img-book-ico { display: none; }
     .y-img-book-lbl { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: var(--coral); padding: 7px 18px; border-radius: 30px; }
         @media (hover: none) {
