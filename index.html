@@ -917,17 +917,8 @@ function renderGallery() {
   const total  = photos.length;
   const img    = document.getElementById('modal-gallery-img');
 
-  // Always reset visibility before loading new photo
-  img.style.display = '';
-  img.style.opacity = '0';
-  img.closest('.modal-gallery-area').style.background = 'var(--navy)';
-
   img.src = photos[galleryIdx];
   img.alt = y.name;
-
-  img.onload = function() {
-    this.style.opacity = '1';
-  };
   img.onerror = function() {
     this.style.display = 'none';
     this.closest('.modal-gallery-area').style.background = 'var(--navy-mid)';
