@@ -19,9 +19,6 @@
   <!-- Preload critical above-the-fold assets -->
   <link rel="preload" as="image" href="images/bg.jpg" fetchpriority="high" />
   <link rel="preload" as="image" href="images/logo.png" />
-  <link rel="preload" as="image" href="images/yate1.jpg" />
-  <link rel="preload" as="image" href="images/yate2.jpg" />
-  <link rel="preload" as="image" href="images/yate3.jpg" />
 
   <!-- Google Fonts — non-blocking (print media trick, swaps to all on load) -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" />
@@ -538,11 +535,13 @@
       font-size: .76rem; color: var(--text-light);
     }
     .y-cap strong { color: var(--text); font-weight: 600; }
+    
     .y-link {
       display: inline-flex; align-items: center; gap: 5px;
       font-size: .72rem; font-weight: 700; letter-spacing: .05em;
       text-transform: uppercase; color: var(--coral);
       transition: gap var(--dur) var(--ease);
+      cursor: pointer;
     }
     .y-link:hover { gap: 9px; }
 
@@ -877,7 +876,7 @@
     }
 
     /* ================================================================
-       BOOKING MODAL
+       BOOKING MODAL (CON SLIDER)
     ================================================================ */
     #booking-overlay {
       position: fixed; inset: 0; z-index: 3000;
@@ -901,16 +900,49 @@
     #booking-overlay.open .modal-card { transform: translateY(0) scale(1); }
 
     .modal-img-wrap {
-      position: relative; height: 155px; overflow: hidden;
-      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      position: relative; height: 220px; 
+      overflow: hidden; border-radius: var(--r-lg) var(--r-lg) 0 0;
     }
-    .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-img-wrap::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(7,26,46,.1) 10%, rgba(7,26,46,.82));
+    .modal-slider-track {
+      display: flex; height: 100%; width: 100%;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
+    .modal-slider-track img {
+      width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;
+    }
+    .modal-img-gradient {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: linear-gradient(to bottom, rgba(7,26,46,.05) 20%, rgba(7,26,46,.85));
+    }
+    .modal-boat-name, .modal-boat-loc, .modal-x { z-index: 2; position: relative; }
+    
+    /* Botones del slider */
+    .slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+      background: rgba(255,255,255,.25); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.4); color: white;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background var(--dur) var(--ease);
+      font-size: 14px;
+    }
+    .slider-btn:hover { background: rgba(255,255,255,.5); }
+    .slider-btn.prev { left: 16px; }
+    .slider-btn.next { right: 16px; }
+    
+    /* Puntitos indicadores */
+    .slider-dots {
+      position: absolute; bottom: 70px; left: 0; right: 0; z-index: 3;
+      display: flex; justify-content: center; gap: 6px;
+    }
+    .slider-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.4);
+      transition: background 0.3s;
+    }
+    .slider-dot.active { background: var(--white); transform: scale(1.2); }
+
     .modal-img-info {
-      position: absolute; bottom: 16px; left: 20px; right: 52px; z-index: 1;
+      position: absolute; bottom: 16px; left: 20px; right: 52px; z-index: 2;
     }
     .modal-boat-name {
       font-family: var(--font-display); font-size: 1.45rem;
@@ -918,7 +950,7 @@
     }
     .modal-boat-loc { font-size: .68rem; color: rgba(255,255,255,.62); margin-top: 3px; }
     .modal-x {
-      position: absolute; top: 12px; right: 12px; z-index: 2;
+      position: absolute; top: 12px; right: 12px; z-index: 3;
       width: 32px; height: 32px; border-radius: 50%;
       background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
       border: 1px solid rgba(255,255,255,.25);
@@ -1083,7 +1115,6 @@
 <!-- Mobile nav -->
 <div id="mob-nav" role="dialog" aria-label="Mobile navigation">
 
-  <!-- Top bar: logo + brand (tap to go to top) + close -->
   <div class="mob-nav-top">
     <button id="mob-nav-logo" class="mob-nav-logo-btn" aria-label="Go to top of page">
       <img src="images/logo.png" alt="Heart of the Sea" decoding="async"
@@ -1093,7 +1124,6 @@
     <button id="mob-close" aria-label="Close menu">✕</button>
   </div>
 
-  <!-- Navigation links -->
   <nav class="mob-nav-links">
     <a href="#fleet"       onclick="closeMobileNav()">Our Fleet       <span class="arrow">›</span></a>
     <a href="#experiences" onclick="closeMobileNav()">Experiences      <span class="arrow">›</span></a>
@@ -1101,7 +1131,6 @@
     <a href="#faq"         onclick="closeMobileNav()">FAQ              <span class="arrow">›</span></a>
   </nav>
 
-  <!-- Bottom CTA + back button -->
   <div class="mob-nav-bottom">
     <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral" onclick="closeMobileNav()">📩 Get a Free Quote</a>
     <button class="mob-nav-back">← Back to Page</button>
@@ -1165,7 +1194,7 @@
       <div class="stat-lbl">Vessels Available</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">42<sup>′–110′</sup></div>
+      <div class="stat-num">41<sup>′–110′</sup></div>
       <div class="stat-lbl">Fleet Range</div>
     </div>
     <div class="stat-item">
@@ -1250,17 +1279,13 @@
 <section class="sec" id="why-us">
   <div class="sec-inner">
 
-    <!-- Title & subtitle — full width centered -->
     <div class="why-header">
       <div class="sec-label">Why Heart of the Sea</div>
       <h2 class="sec-h">Miami's Trusted <em>Bareboat Charter</em> Experience</h2>
       <p class="sec-sub">Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.</p>
     </div>
 
-    <!-- 3 columns: items | video | items -->
     <div class="why-middle">
-
-      <!-- Left items -->
       <div class="why-col">
         <div class="why-item">
           <div class="wi-icon">👨‍✈️</div>
@@ -1278,11 +1303,8 @@
         </div>
       </div>
 
-      <!-- Center video -->
       <div class="why-video-col">
-        <video autoplay muted loop playsinline preload="auto"
-               poster="images/yate2.jpg"
-               aria-label="Heart of the Sea — Miami Yacht Rentals promo video">
+        <video autoplay muted loop playsinline preload="auto" poster="images/yate2.jpg" aria-label="Heart of the Sea — Miami Yacht Rentals promo video">
           <source src="images/Video%20Promo%20Landing.mp4" type="video/mp4" />
           <source src="images/Video%20Promo%20Landing.MP4" type="video/mp4" />
           <source src="images/Video%20Promo%20Landing.mov" type="video/quicktime" />
@@ -1291,7 +1313,6 @@
         </video>
       </div>
 
-      <!-- Right items -->
       <div class="why-col">
         <div class="why-item">
           <div class="wi-icon">📍</div>
@@ -1308,10 +1329,8 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- CTA -->
     <div class="why-cta">
       <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral">Book via WhatsApp</a>
     </div>
@@ -1476,7 +1495,7 @@
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2025 Heart of the Sea · Miami Yacht Rentals. All rights reserved.</span>
+    <span>© 2026 Heart of the Sea · Miami Yacht Rentals. All rights reserved.</span>
     <div class="foot-legal">
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
@@ -1485,22 +1504,28 @@
 </footer>
 
 <!-- ================================================================
-     BOOKING MODAL
+     BOOKING MODAL (CON SLIDER)
 ================================================================ -->
 <div id="booking-overlay" onclick="overlayClick(event)">
   <div class="modal-card" id="modal-card">
 
-    <!-- Boat image header -->
     <div class="modal-img-wrap">
-      <img id="modal-img" src="" alt="" />
+      <div class="modal-slider-track" id="modal-slider-track"></div>
+      
+      <button class="slider-btn prev" id="slider-prev" onclick="moveSlide(-1)" aria-label="Anterior">❮</button>
+      <button class="slider-btn next" id="slider-next" onclick="moveSlide(1)" aria-label="Siguiente">❯</button>
+      <div class="slider-dots" id="modal-slider-dots"></div>
+
       <button class="modal-x" onclick="closeModal()" aria-label="Close">✕</button>
+      
+      <div class="modal-img-gradient"></div>
+      
       <div class="modal-img-info">
         <div class="modal-boat-name" id="modal-boat-name"></div>
         <div class="modal-boat-loc" id="modal-boat-loc"></div>
       </div>
     </div>
 
-    <!-- Form -->
     <div id="modal-form-wrap">
       <div class="modal-body">
         <div class="modal-sec-lbl">Booking Request</div>
@@ -1584,31 +1609,89 @@
 <script>
 /* ---- YACHT DATA ---- */
 const YACHTS = [
-  { name:"Barbie Pink 42′",                img:"images/yate1.jpg",  loc:"Miami River",          cap:13, ft:42,  tags:["Unique Style","Bluetooth Audio"],     link:"https://www.dropbox.com/scl/fo/o3f8lbb50mhyppysb4v2b/AOYeyGsgyAHYF5c05bEuayM?rlkey=su4wf43et3fb1z4qkzkcaw6h7&st=81mh1sf0&dl=0",                                                                                                feat:true,  sale:true,  price:"$1,000" },
-  { name:"Antago 110′",                    img:"images/yate2.jpg",  loc:"Grove Harbour Marina", cap:13, ft:110, tags:["Premium Sound"],                      link:"https://yachtfleet.smugmug.com/110-Antago",                                                                                                                                                                                                   feat:true,  sale:false, price:"$7,000" },
-  { name:"Dominator 105′",                 img:"images/yate3.jpg",  loc:"Miami Beach Marina",   cap:13, ft:105, tags:["Onboard Jacuzzi"],                    link:"https://drive.google.com/file/d/1eehd52pXM8OlRyKHPGvTYlfzKWf5Zpap/view?usp=share_link",                                                                                                                                                    feat:true,  sale:false, price:"$6,000" },
-  { name:"Azimut 90′ Day Dreamin′",        img:"images/yate4.jpg",  loc:"Miami Beach Marina",   cap:13, ft:90,  tags:["Onboard Jacuzzi"],                    link:"https://jsrking.wixstudio.com/day-dreamin-miami",                                                                                                                                                                                             feat:true,  sale:false, price:"$4,500" },
-  { name:"Pershing 90′",                   img:"images/yate5.jpg",  loc:"Miami River",          cap:13, ft:90,  tags:["Premium Sound"],                      link:"https://rym.smugmug.com/90-Pershing-",                                                                                                                                                                                                       feat:false, sale:false, price:"$7,000" },
-  { name:"Bahia Panther 85′",              img:"images/yate6.jpg",  loc:"Regal Marina",         cap:13, ft:85,  tags:["Onboard Jacuzzi"],                    link:"https://baiapanther85.jsrking.com",                                                                                                                                                                                                           feat:true,  sale:false, price:"$3,000" },
-  { name:"Aicon 80′",                      img:"images/yate7.jpg",  loc:"Epic Hotel",           cap:13, ft:80,  tags:["Bluetooth Audio"],                    link:"https://photos.app.goo.gl/q3hSua7Ut2ySLARJ9",                                                                                                                                                                                                feat:false, sale:false, price:"$3,500" },
-  { name:"Le Grand Bleu 70′",              img:"images/yate8.jpg",  loc:"Haulover",             cap:13, ft:70,  tags:["Premium Sound"],                      link:"https://photos.app.goo.gl/Z9sVkrrUQystsVVG8",                                                                                                                                                                                                feat:true,  sale:false, price:"$3,200" },
-  { name:"Pershing 64′",                   img:"images/yate9.jpg",  loc:"Venetian Marina",      cap:13, ft:64,  tags:["Premium Sound"],                      link:"https://drive.google.com/drive/mobile/folders/1gFbNJ1VIiVMWNR3ercuUwtbmZxjyzobU",                                                                                                                                                           feat:false, sale:false, price:"$3,000" },
-  { name:"Absolute 60′",                   img:"images/yate10.jpg", loc:"Venetian Marina",      cap:13, ft:60,  tags:["Bluetooth Audio"],                    link:"https://www.dropbox.com/scl/fo/fegj08id412p43of8d96f/AOT6ZQPxxeW0wi4vi6ulRwc?rlkey=0for94u51wfy5t8qifp349str&st=n8nho6a2&dl=0",                                                                                                             feat:false, sale:false, price:null   },
-  { name:"Azimut 60′ Freedom",             img:"images/yate11.jpg", loc:"Miami Beach Marina",   cap:13, ft:60,  tags:["Bluetooth Audio"],                    link:"https://azimuth60.jsrking.com",                                                                                                                                                                                                               feat:false, sale:false, price:"$3,000" },
-  { name:"Vandutch 55′ – The Godfather",   img:"images/yate12.jpg", loc:"Miami Beach Marina",   cap:13, ft:55,  tags:["Premium Sound"],                      link:"https://www.dropbox.com/scl/fo/bgotdukd1mm4orrlbyrgq/AOoVH3Cmgd-DhO3qVnK_fD0?rlkey=jnsrn4t0ii7xjz0aa0lla9g1a&st=er41f7qw&",                                                                                                               feat:true,  sale:false, price:"$3,300" },
-  { name:"Viking Princess 55′ Takeella",   img:"images/yate13.jpg", loc:"Regal Marina",         cap:13, ft:55,  tags:["Premium Sound"],                      link:"https://photos.app.goo.gl/NLMt7BmyCMFP6MwY9",                                                                                                                                                                                                feat:false, sale:false, price:"$1,800" },
-  { name:"SeaRay Serenity 58′",            img:"images/yate14.jpg", loc:"Miami Beach Marina",   cap:13, ft:58,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/u/0/mobile/folders/1-HSnIPAlI8VcyZteT7zHrMcxe-QTpFVE",                                                                                                                                                      feat:false, sale:false, price:"$2,500" },
-  { name:"Azimut 55′ Flybridge",           img:"images/yate15.jpg", loc:"Venetian Marina",      cap:13, ft:55,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/1bH6b-6qGJ27o6ABXputjTLEmlNCp5dCY?usp=share_link",                                                                                                                                                   feat:false, sale:false, price:"$2,600" },
-  { name:"Cruiser Sport 55′",              img:"images/yate16.jpg", loc:"Venetian Marina",      cap:13, ft:55,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/1yRTLnai8kPA3aCbEoR927QD-QswRjzEU",                                                                                                                                                                   feat:false, sale:false, price:"$2,200" },
-  { name:"Beneteau Flybridge 52′",         img:"images/yate17.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/1zAScbzWszWbsJEJWq0iFi72azoQhdd3t?usp=share_link",                                                                                                                                                   feat:false, sale:false, price:"$2,300" },
-  { name:"Fairline 52′",                   img:"images/yate18.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Premium Sound"],                      link:"https://drive.google.com/drive/mobile/folders/1rfDq-nFbhImoEFYWQliPsizjRW7EGH_H?usp=sharing",                                                                                                                                               feat:false, sale:false, price:"$2,300" },
-  { name:"SeaRay 50′",                     img:"images/yate19.jpg", loc:"Jones Boat Yard",      cap:13, ft:50,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/17WFNEiWfx0-KuuYsmupYmEg2HK4oAYkX?usp=share_link",                                                                                                                                           feat:false, sale:false, price:"$1,400" },
-  { name:"Cruiser Sport Fly 50′ Remedy",   img:"images/yate20.jpg", loc:"Miami Beach Marina",   cap:13, ft:50,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/1SJ9aN7D4WwWcw-UPlrtETIqwHOiE-ozO?usp=share_link",                                                                                                                                          feat:false, sale:false, price:"$1,700" },
-  { name:"Pershing 50′",                   img:"images/yate21.jpg", loc:"Venetian Marina",      cap:13, ft:50,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/1r-9NnmQJtXQjJhF7FAT0nrjTaXJNMsRf?usp=share_link",                                                                                                                                          feat:false, sale:false, price:"$2,300" },
-  { name:"SeaRay 48′",                     img:"images/yate22.jpg", loc:"Venetian Marina",      cap:13, ft:48,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/1Fs6zGEB8OMJrKSja3W2u1eZAyAsFoe1o",                                                                                                                                                                   feat:false, sale:false, price:"$2,300" },
-  { name:"Harmony 44′",                    img:"images/yate24.jpg", loc:"Jones Boat Yard",      cap:13, ft:44,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/1v3WsCIbACu8JJG5mBkz65Tt2UdWWHJxG",                                                                                                                                                          feat:false, sale:false, price:"$1,300" },
-  { name:"Lady G 41′",                     img:"images/yate25.jpg", loc:"Jones Boat Yard",      cap:13, ft:41,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/1OpjJ38ucbu5AzoefYPwwbo0kCAeMomcz",                                                                                                                                                                   feat:true,  sale:false, price:"$1,300" },
-  { name:"Azimut 53′",                     img:"images/yate26.jpg", loc:"Regal Marina",         cap:13, ft:53,  tags:["Bluetooth Audio"],                    link:"https://www.dropbox.com/scl/fo/ank1joy2v6hkvl1msf2q5/AIxkcKe6Hb3aioehb5ImyfU?rlkey=cczgkqinwf6m68scwpp8xp42u&st=nd7b7vrd&dl=0",                                                                                                           feat:false, sale:false, price:"$2,500" },
+  { name:"Barbie Pink 42′",                img:"images/yate1.jpg",  loc:"Miami River",          cap:13, ft:42,  tags:["Unique Style","Bluetooth Audio"],     link:"https://www.dropbox.com/scl/fo/...",  feat:true,  sale:true,  price:"$1,000",
+    gallery: ["images/yate1.jpg", "images/barbie-42/1.jpg", "images/barbie-42/2.jpg"]
+  },
+  
+  /* --- 110 a 100 Pies --- */
+  { name:"Antago 110′",                    img:"images/antago-110´/1.jpg",  loc:"Grove Harbour Marina", cap:13, ft:110, tags:["Premium Sound"],                      link:"https://yachtfleet.smugmug.com/110-Antago",                 feat:true,  sale:false, price:"$7,000",
+    gallery: ["images/antago-110´/1.jpg", "images/antago-110´/2.jpg", "images/antago-110´/3.jpg", "images/antago-110´/4.jpg", "images/antago-110´/5.jpg", "images/antago-110´/6.jpg", "images/antago-110´/7.jpg", "images/antago-110´/8.jpg", "images/antago-110´/9.jpg", "images/antago-110´/10.jpg", "images/antago-110´/11.jpg"]
+  },
+  { name:"Dominator 105′",                 img:"images/yate3.jpg",  loc:"Miami Beach Marina",   cap:13, ft:105, tags:["Onboard Jacuzzi"],                    link:"https://drive.google.com/file/d/...",                       feat:true,  sale:false, price:"$6,000" },
+  { name:"Carpe Diem 105′",                img:"images/carpediem-105´/1.jpg", loc:"Miami Beach Marina", cap:13, ft:105, tags:["Onboard Jacuzzi"],                    link:"",                                                          feat:true,  sale:false, price:"$0,000",
+    gallery: ["images/carpediem-105´/1.jpg", "images/carpediem-105´/2.jpg", "images/carpediem-105´/3.jpg", "images/carpediem-105´/4.jpg", "images/carpediem-105´/5.jpg", "images/carpediem-105´/6.jpg", "images/carpediem-105´/7.jpg", "images/carpediem-105´/8.jpg", "images/carpediem-105´/9.jpg"]
+  },
+  { name:"Scarlet 103′",                   img:"images/scarlet-103´/1.jpg",   loc:"Miami Beach Marina", cap:13, ft:103, tags:["Premium Sound", "Onboard Jacuzzi"],   link:"",                                                          feat:true,  sale:false, price:"$0,000",
+    gallery: ["images/scarlet-103´/1.jpg", "images/scarlet-103´/2.jpg", "images/scarlet-103´/3.jpg", "images/scarlet-103´/4.jpg", "images/scarlet-103´/5.jpg", "images/scarlet-103´/6.jpg", "images/scarlet-103´/7.jpg", "images/scarlet-103´/8.jpg", "images/scarlet-103´/9.jpg", "images/scarlet-103´/10.jpg", "images/scarlet-103´/11.jpg"]
+  },
+
+  /* --- 99 a 80 Pies --- */
+  { name:"Azimut 90′ Day Dreamin′",        img:"images/azimut-90´/1.jpg",  loc:"Miami Beach Marina",   cap:13, ft:90,  tags:["Onboard Jacuzzi"],                    link:"https://jsrking.wixstudio.com/day-dreamin-miami",           feat:true,  sale:false, price:"$4,500",
+    gallery: ["images/azimut-90´/1.jpg", "images/azimut-90´/2.jpg", "images/azimut-90´/3.jpg", "images/azimut-90´/4.jpg", "images/azimut-90´/5.jpg", "images/azimut-90´/6.jpg", "images/azimut-90´/7.jpg", "images/azimut-90´/8.jpg", "images/azimut-90´/9.jpg", "images/azimut-90´/10.jpg", "images/azimut-90´/11.jpg"]
+  },
+  { name:"Pershing 90′",                   img:"images/pershing-90´/1.jpg",  loc:"Miami River",          cap:13, ft:90,  tags:["Premium Sound"],                      link:"https://rym.smugmug.com/90-Pershing-",                      feat:false, sale:false, price:"$7,000",
+    gallery: ["images/pershing-90´/1.jpg", "images/pershing-90´/2.jpg", "images/pershing-90´/3.jpg", "images/pershing-90´/4.jpg", "images/pershing-90´/5.jpg", "images/pershing-90´/6.jpg", "images/pershing-90´/7.jpg", "images/pershing-90´/8.jpg", "images/pershing-90´/9.jpg", "images/pershing-90´/10.jpg", "images/pershing-90´/11.jpg", "images/pershing-90´/12.jpg"]
+  },
+  { name:"Sirena 88′",                     img:"images/sirena-88´/1.jpg", loc:"Miami Beach Marina", cap:13, ft:88,  tags:["Premium Sound"],                      link:"",                                                          feat:false, sale:false, price:"$0,000",
+    gallery: ["images/sirena-88´/1.jpg", "images/sirena-88´/2.jpg", "images/sirena-88´/3.jpg", "images/sirena-88´/4.jpg", "images/sirena-88´/5.jpg", "images/sirena-88´/6.jpg", "images/sirena-88´/7.jpg", "images/sirena-88´/8.jpg", "images/sirena-88´/9.jpg", "images/sirena-88´/10.jpg", "images/sirena-88´/11.jpg"]
+  },
+  { name:"Sunseeker 88′",                  img:"images/sunseeker-88´/1.jpg", loc:"Miami Beach Marina", cap:13, ft:88,  tags:["Premium Sound"],                      link:"",                                                          feat:false, sale:false, price:"$0,000",
+    gallery: ["images/sunseeker-88´/1.jpg", "images/sunseeker-88´/2.jpg", "images/sunseeker-88´/3.jpg", "images/sunseeker-88´/4.jpg", "images/sunseeker-88´/5.jpg", "images/sunseeker-88´/6.jpg", "images/sunseeker-88´/7.jpg", "images/sunseeker-88´/8.jpg", "images/sunseeker-88´/9.jpg", "images/sunseeker-88´/10.jpg", "images/sunseeker-88´/11.jpg"]
+  },
+  { name:"Bahia Panther 85′",              img:"images/bahiapanther-85´/1.jpg",  loc:"Regal Marina",         cap:13, ft:85,  tags:["Onboard Jacuzzi"],                    link:"https://baiapanther85.jsrking.com",                         feat:true,  sale:false, price:"$3,000",
+    gallery: ["images/bahiapanther-85´/1.jpg", "images/bahiapanther-85´/2.jpg", "images/bahiapanther-85´/3.jpg", "images/bahiapanther-85´/4.jpg", "images/bahiapanther-85´/5.jpg", "images/bahiapanther-85´/6.jpg", "images/bahiapanther-85´/7.jpg", "images/bahiapanther-85´/8.jpg", "images/bahiapanther-85´/9.jpg", "images/bahiapanther-85´/10.jpg", "images/bahiapanther-85´/11.jpg"]
+  },
+  { name:"Aicon 80′",                      img:"images/aicon-80´/1.jpg",  loc:"Epic Hotel",           cap:13, ft:80,  tags:["Bluetooth Audio"],                    link:"https://photos.app.goo.gl/q3hSua7Ut2ySLARJ9",               feat:false, sale:false, price:"$3,500",
+    gallery: ["images/aicon-80´/1.jpg", "images/aicon-80´/2.jpg", "images/aicon-80´/3.jpg", "images/aicon-80´/4.jpg", "images/aicon-80´/5.jpg", "images/aicon-80´/6.jpg", "images/aicon-80´/7.jpg", "images/aicon-80´/8.jpg", "images/aicon-80´/9.jpg", "images/aicon-80´/10.jpg"]
+  },
+
+  /* --- 79 a 60 Pies --- */
+  { name:"Le Grand Bleu 70′",              img:"images/legrandbleu-70´/1.jpg",  loc:"Haulover",             cap:13, ft:70,  tags:["Premium Sound"],                      link:"https://photos.app.goo.gl/Z9sVkrrUQystsVVG8",               feat:true,  sale:false, price:"$3,200",
+    gallery: ["images/legrandbleu-70´/1.jpg", "images/legrandbleu-70´/2.jpg", "images/legrandbleu-70´/3.jpg", "images/legrandbleu-70´/4.jpg", "images/legrandbleu-70´/5.jpg", "images/legrandbleu-70´/6.jpg", "images/legrandbleu-70´/7.jpg", "images/legrandbleu-70´/8.jpg", "images/legrandbleu-70´/9.jpg", "images/legrandbleu-70´/10.jpg"]
+  },
+  { name:"Galeon 68′",                     img:"images/galeon-68´/1.jpg", loc:"Miami Beach Marina", cap:13, ft:68, tags:["Bluetooth Audio"],                     link:"",                                                          feat:false, sale:false, price:"$0,000",
+    gallery: ["images/galeon-68´/1.jpg", "images/galeon-68´/2.jpg", "images/galeon-68´/3.jpg", "images/galeon-68´/4.jpg", "images/galeon-68´/5.jpg", "images/galeon-68´/6.jpg", "images/galeon-68´/7.jpg", "images/galeon-68´/8.jpg", "images/galeon-68´/9.jpg", "images/galeon-68´/10.jpg", "images/galeon-68´/11.jpg"]
+  },
+  { name:"Pershing 64′",                   img:"images/pershing-64´/1.jpg",  loc:"Venetian Marina",      cap:13, ft:64,  tags:["Premium Sound"],                      link:"https://drive.google.com/drive/mobile/folders/...",         feat:false, sale:false, price:"$3,000",
+    gallery: ["images/pershing-64´/1.jpg", "images/pershing-64´/2.jpg", "images/pershing-64´/3.jpg", "images/pershing-64´/4.jpg", "images/pershing-64´/5.jpg", "images/pershing-64´/6.jpg", "images/pershing-64´/7.jpg", "images/pershing-64´/8.jpg", "images/pershing-64´/9.jpg", "images/pershing-64´/10.jpg", "images/pershing-64´/11.jpg"]
+  },
+  { name:"Azimut 60′ Freedom",             img:"images/azimutfreedom-60´/1.jpg", loc:"Miami Beach Marina",   cap:13, ft:60,  tags:["Bluetooth Audio"],                    link:"https://azimuth60.jsrking.com",                             feat:false, sale:false, price:"$3,000",
+    gallery: ["images/azimutfreedom-60´/1.jpg", "images/azimutfreedom-60´/2.jpg", "images/azimutfreedom-60´/3.jpg", "images/azimutfreedom-60´/4.jpg", "images/azimutfreedom-60´/5.jpg", "images/azimutfreedom-60´/6.jpg", "images/azimutfreedom-60´/7.jpg", "images/azimutfreedom-60´/8.jpg", "images/azimutfreedom-60´/9.jpg", "images/azimutfreedom-60´/10.jpg", "images/azimutfreedom-60´/11.jpg"]
+  },
+
+  /* --- 59 a 40 Pies --- */
+  { name:"SeaRay Serenity 58′",            img:"images/searayserenity-58´/1.jpg", loc:"Miami Beach Marina",   cap:13, ft:58,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/u/0/mobile/folders/...",     feat:false, sale:false, price:"$2,500",
+    gallery: ["images/searayserenity-58´/1.jpg", "images/searayserenity-58´/2.jpg", "images/searayserenity-58´/3.jpg", "images/searayserenity-58´/4.jpg", "images/searayserenity-58´/5.jpg", "images/searayserenity-58´/6.jpg", "images/searayserenity-58´/7.jpg", "images/searayserenity-58´/8.jpg", "images/searayserenity-58´/9.jpg", "images/searayserenity-58´/10.jpg"]
+  },
+  { name:"Vandutch 55′ – The Godfather",   img:"images/vandutch-55´/1.jpg", loc:"Miami Beach Marina",   cap:13, ft:55,  tags:["Premium Sound"],                      link:"https://www.dropbox.com/scl/fo/...",                        feat:true,  sale:false, price:"$3,300",
+    gallery: ["images/vandutch-55´/1.jpg", "images/vandutch-55´/2.jpg", "images/vandutch-55´/3.jpg", "images/vandutch-55´/4.jpg", "images/vandutch-55´/5.jpg", "images/vandutch-55´/6.jpg", "images/vandutch-55´/7.jpg"]
+  },
+  { name:"Viking Princess 55′ Takeella",   img:"images/vikingprincess-55´/1.jpg", loc:"Regal Marina",         cap:13, ft:55,  tags:["Premium Sound"],                      link:"https://photos.app.goo.gl/NLMt7BmyCMFP6MwY9",               feat:false, sale:false, price:"$1,800",
+    gallery: ["images/vikingprincess-55´/1.jpg", "images/vikingprincess-55´/2.jpg", "images/vikingprincess-55´/3.jpg", "images/vikingprincess-55´/4.jpg", "images/vikingprincess-55´/5.jpg", "images/vikingprincess-55´/6.jpg", "images/vikingprincess-55´/7.jpg", "images/vikingprincess-55´/8.jpg", "images/vikingprincess-55´/9.jpg", "images/vikingprincess-55´/10.jpg"]
+  },
+  { name:"Azimut 55′ Flybridge",           img:"images/yate15.jpg", loc:"Venetian Marina",      cap:13, ft:55,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/...",               feat:false, sale:false, price:"$2,600" },
+  { name:"Cruiser Sport 55′",              img:"images/cruisersport-55´/1.jpg", loc:"Venetian Marina",      cap:13, ft:55,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/...",               feat:false, sale:false, price:"$2,200",
+    gallery: ["images/cruisersport-55´/1.jpg", "images/cruisersport-55´/2.jpg", "images/cruisersport-55´/3.jpg", "images/cruisersport-55´/4.jpg", "images/cruisersport-55´/5.jpg", "images/cruisersport-55´/6.jpg", "images/cruisersport-55´/7.jpg", "images/cruisersport-55´/8.jpg", "images/cruisersport-55´/9.jpg", "images/cruisersport-55´/10.jpg"]
+  },
+  { name:"Azimut 53′",                     img:"images/azimut-53´/1.jpg", loc:"Regal Marina",         cap:13, ft:53,  tags:["Bluetooth Audio"],                    link:"https://www.dropbox.com/scl/fo/...",                        feat:false, sale:false, price:"$2,500",
+    gallery: ["images/azimut-53´/1.jpg", "images/azimut-53´/2.jpg", "images/azimut-53´/3.jpg", "images/azimut-53´/4.jpg", "images/azimut-53´/5.jpg", "images/azimut-53´/6.jpg", "images/azimut-53´/7.jpg"]
+  },
+  { name:"Beneteau Flybridge 52′",         img:"images/yate17.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/...",               feat:false, sale:false, price:"$2,300" },
+  { name:"Fairline 52′",                   img:"images/fairline-52´/1.jpg", loc:"Venetian Marina",      cap:13, ft:52,  tags:["Premium Sound"],                      link:"https://drive.google.com/drive/mobile/folders/...",         feat:false, sale:false, price:"$2,300",
+    gallery: ["images/fairline-52´/1.jpg", "images/fairline-52´/2.jpg", "images/fairline-52´/3.jpg", "images/fairline-52´/4.jpg", "images/fairline-52´/5.jpg", "images/fairline-52´/6.jpg", "images/fairline-52´/7.jpg", "images/fairline-52´/8.jpg"]
+  },
+  { name:"SeaRay 50′",                     img:"images/yate19.jpg", loc:"Jones Boat Yard",      cap:13, ft:50,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/...",         feat:false, sale:false, price:"$1,400" },
+  { name:"Cruiser Sport Fly 50′ Remedy",   img:"images/cruisersportflyremedy-50´/1.jpg", loc:"Miami Beach Marina",   cap:13, ft:50,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/...",         feat:false, sale:false, price:"$1,700",
+    gallery: ["images/cruisersportflyremedy-50´/1.jpg", "images/cruisersportflyremedy-50´/2.jpg", "images/cruisersportflyremedy-50´/3.jpg", "images/cruisersportflyremedy-50´/4.jpg", "images/cruisersportflyremedy-50´/5.jpg", "images/cruisersportflyremedy-50´/6.jpg", "images/cruisersportflyremedy-50´/7.jpg", "images/cruisersportflyremedy-50´/8.jpg", "images/cruisersportflyremedy-50´/9.jpg"]
+  },
+  { name:"Pershing 50′",                   img:"images/yate21.jpg", loc:"Venetian Marina",      cap:13, ft:50,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/...",         feat:false, sale:false, price:"$2,300" },
+  { name:"SeaRay 48′",                     img:"images/searay-48´/1.jpg", loc:"Venetian Marina",      cap:13, ft:48,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/...",               feat:false, sale:false, price:"$2,300",
+    gallery: ["images/searay-48´/1.jpg", "images/searay-48´/2.jpg", "images/searay-48´/3.jpg", "images/searay-48´/4.jpg", "images/searay-48´/5.jpg", "images/searay-48´/6.jpg", "images/searay-48´/7.jpg", "images/searay-48´/8.jpg", "images/searay-48´/9.jpg", "images/searay-48´/10.jpg"]
+  },
+  { name:"Harmony 44′",                    img:"images/harmony-44´/1.jpg", loc:"Jones Boat Yard",      cap:13, ft:44,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/mobile/folders/...",         feat:false, sale:false, price:"$1,300",
+    gallery: ["images/harmony-44´/1.jpg", "images/harmony-44´/2.jpg", "images/harmony-44´/3.jpg", "images/harmony-44´/4.jpg", "images/harmony-44´/5.jpg", "images/harmony-44´/6.jpg"]
+  },
+  { name:"Lady G 41′",                     img:"images/yate25.jpg", loc:"Jones Boat Yard",      cap:13, ft:41,  tags:["Bluetooth Audio"],                    link:"https://drive.google.com/drive/folders/...",               feat:true,  sale:false, price:"$1,300" }
 ];
 
 /* ---- CATEGORY ---- */
@@ -1626,6 +1709,7 @@ function buildCard(y, idx, priority) {
   // Only show audio and jacuzzi — everything else is optional/add-on
   const SHOW_TAGS   = ['Onboard Jacuzzi', 'Premium Sound', 'Bluetooth Audio'];
   const visibleTags = y.tags.filter(t => SHOW_TAGS.includes(t));
+  
   return `
     <div class="y-card">
       <div class="y-img-wrap" data-name="${y.name}">
@@ -1634,8 +1718,8 @@ function buildCard(y, idx, priority) {
         ${y.sale ? '<span class="y-badge-sale">SALE</span>' : (y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : '')}
         <span class="y-badge-size">${y.ft}′</span>
         <div class="y-img-book" onclick="openModal(${idx})">
-          <div class="y-img-book-ico">📅</div>
-          <div class="y-img-book-lbl">Request Booking</div>
+          <div class="y-img-book-ico">📸</div>
+          <div class="y-img-book-lbl">View Gallery & Book</div>
         </div>
       </div>
       <div class="y-body">
@@ -1647,8 +1731,8 @@ function buildCard(y, idx, priority) {
         </div>
         <div class="y-footer">
           <div class="y-cap">👥 Up to <strong>${y.cap} guests</strong></div>
-          <a href="${y.link}" target="_blank" class="y-link">
-            View Photos <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <a class="y-link" onclick="openModal(${idx})" style="cursor:pointer;">
+            View Gallery <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
       </div>
@@ -1722,21 +1806,48 @@ function toggleFaq(i) {
 }
 
 /* ================================================================
-   BOOKING MODAL
+   BOOKING MODAL & SLIDER LOGIC
 ================================================================ */
 let activeYacht = null;
+let currentSlide = 0;
+let slideCount = 0;
 
 function openModal(idx) {
   activeYacht = YACHTS[idx];
   const y = activeYacht;
 
-  // Populate header
-  document.getElementById('modal-img').src = y.img;
-  document.getElementById('modal-img').alt = y.name;
+  // 1. Configurar la Galería
+  const galleryPhotos = (y.gallery && y.gallery.length > 0) ? y.gallery : [y.img];
+  slideCount = galleryPhotos.length;
+  currentSlide = 0;
+
+  // Inyectar imágenes en la pista
+  const track = document.getElementById('modal-slider-track');
+  track.innerHTML = galleryPhotos.map(src => `<img src="${src}" alt="${y.name}" />`).join('');
+
+  // Configurar botones y puntitos
+  const prevBtn = document.getElementById('slider-prev');
+  const nextBtn = document.getElementById('slider-next');
+  const dotsContainer = document.getElementById('modal-slider-dots');
+
+  if (slideCount > 1) {
+    prevBtn.style.display = 'flex';
+    nextBtn.style.display = 'flex';
+    dotsContainer.innerHTML = galleryPhotos.map((_, i) => `<div class="slider-dot ${i === 0 ? 'active' : ''}"></div>`).join('');
+  } else {
+    // Si solo hay 1 foto, ocultamos las flechas y puntos
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    dotsContainer.innerHTML = '';
+  }
+
+  updateSliderPosition();
+
+  // 2. Poblar textos
   document.getElementById('modal-boat-name').textContent = y.name;
   document.getElementById('modal-boat-loc').textContent = '📍 ' + y.loc + '  ·  👥 Up to ' + y.cap + ' guests';
 
-  // Reset form & success state
+  // 3. Reset form & success state
   document.getElementById('modal-form-wrap').style.display = '';
   document.getElementById('modal-success').classList.remove('show');
   ['fg-name','fg-phone','fg-date','fg-people'].forEach(id =>
@@ -1753,6 +1864,22 @@ function openModal(idx) {
   // Open overlay
   document.getElementById('booking-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+// Funciones para mover las fotos
+function moveSlide(direction) {
+  currentSlide = (currentSlide + direction + slideCount) % slideCount;
+  updateSliderPosition();
+}
+
+function updateSliderPosition() {
+  const track = document.getElementById('modal-slider-track');
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  const dots = document.querySelectorAll('.slider-dot');
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentSlide);
+  });
 }
 
 function closeModal() {
