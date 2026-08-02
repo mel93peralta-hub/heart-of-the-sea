@@ -412,9 +412,9 @@
     .gallery-dot.on { background: var(--white); transform: scale(1.25); }
     /* Counter */
     .gallery-counter { position: absolute; top: 10px; left: 10px; z-index: 3; font-size: .65rem; font-weight: 700; color: rgba(200,151,63,.85); background: rgba(0,0,0,.3); padding: 3px 9px; border-radius: 20px; backdrop-filter: blur(4px); }
-    /* View full gallery link */
-    .gallery-full-link { display: block; text-align: center; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); padding: 10px 20px 0; }
-    .gallery-full-link:hover { color: var(--coral-dark); }
+    
+    
+    
 
     /* Form */
     .modal-body { padding: 16px 22px 0; }
@@ -768,7 +768,7 @@
         <div class="modal-boat-loc" id="modal-boat-loc"></div>
       </div>
     </div>
-    <a id="gallery-full-link" class="gallery-full-link" href="#" target="_blank">📷 View Full Photo Gallery ↗</a>
+    
 
     <!-- Form -->
     <div id="modal-form-wrap">
@@ -921,7 +921,7 @@ function buildCard(y, idx, priority) {
         <div class="y-tags">${visibleTags.map(t => `<span class="y-tag">${t}</span>`).join('')}</div>
         <div class="y-footer">
           <div class="y-cap">👥 Up to <strong>${y.cap} guests</strong></div>
-          <a href="${y.link}" target="_blank" class="y-link">View Gallery <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          
         </div>
       </div>
     </div>`;
@@ -989,7 +989,7 @@ function openModal(idx) {
 
   // Gallery
   renderGallery();
-  document.getElementById('gallery-full-link').href = y.link;
+  
   document.getElementById('modal-boat-name').textContent = y.name;
   document.getElementById('modal-boat-loc').textContent  = '📍 ' + y.loc + '  ·  👥 Up to ' + y.cap + ' guests';
 
