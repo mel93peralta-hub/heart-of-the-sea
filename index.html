@@ -983,6 +983,7 @@ function openModal(idx) {
   galleryIdx  = 0;
   const y = activeYacht;
   if (window.fbq) fbq('track', 'ViewContent', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : undefined), currency: 'USD' });
+  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD', num_items: 1 });
 
   // Gallery
   renderGallery();
@@ -1117,7 +1118,7 @@ function fmtDate(raw) {
 function sendRequest(channel) {
   if (!validateForm()) return;
   const y    = activeYacht;
-  if (window.fbq) fbq('track', 'Lead', { content_name: y.name, content_category: 'yacht_charter', channel: channel });
+  if (window.fbq) fbq('track', 'Lead', { content_name: y.name, content_category: 'yacht_charter', channel: channel, value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD' });
   const name = document.getElementById('f-name').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const date  = fmtDate(document.getElementById('f-date').value);
