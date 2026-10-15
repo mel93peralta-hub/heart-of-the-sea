@@ -1132,10 +1132,18 @@ function fmtDate(raw) {
 
 function sendRequest(channel) {
   if (!validateForm()) return;
-  const y    = activeYacht;
-  if (window.fbq) fbq('track', 'Lead', { content_name: y.name, content_category: 'yacht_charter', channel: channel, value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD' });
-  const name = document.getElementById('f-name').value.trim();
+  const y     = activeYacht;
+  const name  = document.getElementById('f-name').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
+  if (window.fbq) {
+    // Manual Advanced Matching: Meta Pixel hashes (SHA-256) these client-side before sending.
+    const nameParts  = name.split(/\s+/).filter(Boolean);
+    const fbFirstName = (nameParts[0] || '').toLowerCase();
+    const fbLastName  = nameParts.slice(1).join(' ').toLowerCase();
+    const fbPhone     = phone.replace(/[^0-9]/g, '');
+    fbq('set', 'userData', { fn: fbFirstName, ln: fbLastName, ph: fbPhone });
+    fbq('track', 'Lead', { content_name: y.name, content_category: 'yacht_charter', channel: channel, value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD' });
+  }
   const date  = fmtDate(document.getElementById('f-date').value);
   const ppl   = document.getElementById('f-people').value;
   const lines = [
