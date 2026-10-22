@@ -366,14 +366,19 @@
     .step-p { font-size: .82rem; color: var(--text-mid); line-height: 1.65; }
 
     /* REVIEWS */
-    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 20px; }
-    .rv-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 26px; }
-    .rv-stars { color: #f4a623; letter-spacing: 2px; font-size: .85rem; margin-bottom: 14px; }
-    .rv-text { font-size: .86rem; color: var(--text-mid); line-height: 1.72; margin-bottom: 20px; font-style: italic; }
-    .rv-author { display: flex; align-items: center; gap: 12px; }
-    .rv-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--off-white); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .rv-name { font-size: .82rem; font-weight: 700; color: var(--navy); }
-    .rv-meta { font-size: .7rem; color: var(--text-light); }
+    #reviews-wrap { position: relative; overflow: hidden; margin-top: 52px; }
+    #reviews-wrap::before, #reviews-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 1; pointer-events: none; }
+    #reviews-wrap::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+    #reviews-wrap::after { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+    .rv-track { display: flex; align-items: stretch; white-space: nowrap; width: max-content; animation: tickerScroll 85s linear infinite; will-change: transform; gap: 22px; padding: 8px 11px; }
+    .rv-track:hover { animation-play-state: paused; }
+    .rv-card-m { display: inline-flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 26px 28px; width: 320px; white-space: normal; flex-shrink: 0; box-shadow: var(--sh-sm); }
+    .rv-stars-m { color: #f4a623; font-size: .88rem; letter-spacing: 3px; margin-bottom: 14px; }
+    .rv-text-m { font-size: .84rem; color: var(--text-mid); line-height: 1.72; flex: 1; font-style: italic; margin-bottom: 20px; }
+    .rv-author-m { border-top: 1px solid var(--border); padding-top: 14px; }
+    .rv-name-m { font-size: .8rem; font-weight: 700; color: var(--navy); }
+    .rv-date-m { font-size: .7rem; color: var(--text-light); margin-top: 3px; }
+    @media (prefers-reduced-motion:reduce) { .rv-track { animation: none; } }
 
     /* FAQ */
     .faq-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
@@ -712,10 +717,30 @@
     <div class="sec-label">What Our Guests Say</div>
     <h2 class="sec-h">Real Experiences, <em>Real Smiles</em></h2>
     <p class="sec-sub">Thousands of guests have sailed with us. Here's what a few of them had to say.</p>
-    <div class="reviews-grid">
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">"Absolutely the best birthday I've ever had. The captain knew all the best spots, the crew was incredible, and the boat was stunning. Will 100% be back next year!"</p><div class="rv-author"><div class="rv-avatar">👩</div><div><div class="rv-name">Maria L.</div><div class="rv-meta">Birthday Charter · Miami Beach Marina</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">"We did our bachelorette on the Sirena 88′ and it was PERFECT. They set everything up beautifully, the music was incredible, and the vibes were immaculate all day long."</p><div class="rv-author"><div class="rv-avatar">🥂</div><div><div class="rv-name">Jessica R.</div><div class="rv-meta">Bachelorette Party · Brickell</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">"From booking to drop-off, Heart of the Sea handled absolutely everything. Our corporate team of 20 had an unforgettable afternoon on the 110' Antago. Can't recommend them enough."</p><div class="rv-author"><div class="rv-avatar">💼</div><div><div class="rv-name">David K.</div><div class="rv-meta">Corporate Event · Grove Harbour Marina</div></div></div></div>
+  </div>
+  <div id="reviews-wrap">
+    <div class="rv-track">
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Excelente servicio! 100% recomendado. Todo el cumpleaños me ayudaron a planificarlo y decorarlo. ¡Gracias!"</p><div class="rv-author-m"><div class="rv-name-m">Laura Boza Serrano</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Best experience ever. Beatris and Rances are the best crew. If you need a crew for any event, these two are next level. I love our experience."</p><div class="rv-author-m"><div class="rv-name-m">Esmirna Jauregui</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Excelente atención! Beatriz y Rancé super amables, atentos. El yate impecable. ¡Gracias por hacer fantástica nuestra experiencia!"</p><div class="rv-author-m"><div class="rv-name-m">Lorena Ramirez</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Amazing experience! Beautiful yacht, professional crew, and excellent service. Everything was perfect from start to finish."</p><div class="rv-author-m"><div class="rv-name-m">Vladimir Morales</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Amazing customer service and really transparent through the entire process. Highly recommend."</p><div class="rv-author-m"><div class="rv-name-m">Adrian Maciques</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Wonderful experience booking a family reunion charter. Professional, helpful, and stress-free from start to finish. Couldn't have asked for a better way to bring the family together."</p><div class="rv-author-m"><div class="rv-name-m">Eduardo Elias</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"I rented a yacht for my birthday in Miami — such a memorable experience! A beautiful way to celebrate with friends. I'd love to book again!"</p><div class="rv-author-m"><div class="rv-name-m">Annie Song</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Experiencia maravillosa! Servicio excelente. Gracias por hacernos pasar un día en familia inolvidable — ya planeando mi próximo paseo!"</p><div class="rv-author-m"><div class="rv-name-m">Cristina</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Beautiful yacht, everything was clean and looked brand new. The crew was amazing and the service was excellent. Definitely worth it!"</p><div class="rv-author-m"><div class="rv-name-m">Rohamy Elias</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Great experience! Beautiful, clean yacht and a super friendly, attentive crew. The whole trip went smoothly. Would definitely book again!"</p><div class="rv-author-m"><div class="rv-name-m">Lisette Campos Dieguez</div><div class="rv-date-m">Google Review</div></div></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Excelente servicio! 100% recomendado. Todo el cumpleaños me ayudaron a planificarlo y decorarlo. ¡Gracias!"</p><div class="rv-author-m"><div class="rv-name-m">Laura Boza Serrano</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Best experience ever. Beatris and Rances are the best crew. If you need a crew for any event, these two are next level. I love our experience."</p><div class="rv-author-m"><div class="rv-name-m">Esmirna Jauregui</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Excelente atención! Beatriz y Rancé super amables, atentos. El yate impecable. ¡Gracias por hacer fantástica nuestra experiencia!"</p><div class="rv-author-m"><div class="rv-name-m">Lorena Ramirez</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Amazing experience! Beautiful yacht, professional crew, and excellent service. Everything was perfect from start to finish."</p><div class="rv-author-m"><div class="rv-name-m">Vladimir Morales</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Amazing customer service and really transparent through the entire process. Highly recommend."</p><div class="rv-author-m"><div class="rv-name-m">Adrian Maciques</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Wonderful experience booking a family reunion charter. Professional, helpful, and stress-free from start to finish. Couldn't have asked for a better way to bring the family together."</p><div class="rv-author-m"><div class="rv-name-m">Eduardo Elias</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"I rented a yacht for my birthday in Miami — such a memorable experience! A beautiful way to celebrate with friends. I'd love to book again!"</p><div class="rv-author-m"><div class="rv-name-m">Annie Song</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Experiencia maravillosa! Servicio excelente. Gracias por hacernos pasar un día en familia inolvidable — ya planeando mi próximo paseo!"</p><div class="rv-author-m"><div class="rv-name-m">Cristina</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Beautiful yacht, everything was clean and looked brand new. The crew was amazing and the service was excellent. Definitely worth it!"</p><div class="rv-author-m"><div class="rv-name-m">Rohamy Elias</div><div class="rv-date-m">Google Review</div></div></div>
+      <div class="rv-card-m"><div class="rv-stars-m">★★★★★</div><p class="rv-text-m">"Great experience! Beautiful, clean yacht and a super friendly, attentive crew. The whole trip went smoothly. Would definitely book again!"</p><div class="rv-author-m"><div class="rv-name-m">Lisette Campos Dieguez</div><div class="rv-date-m">Google Review</div></div></div>
     </div>
   </div>
 </section>
