@@ -483,6 +483,23 @@
 
     @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } .fg.span2 { grid-column: 1; } }
 
+    /* Occasion chips */
+    .occ-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px; }
+    .occ-chip { padding: 10px 13px; border-radius: 22px; border: 1.5px solid var(--border); background: var(--white); color: var(--text-mid); font-family: var(--font-body); font-size: .74rem; font-weight: 600; cursor: pointer; transition: border-color .2s, background .2s, color .2s; text-align: left; line-height: 1.3; white-space: normal; }
+    .occ-chip:hover { border-color: var(--coral); color: var(--coral); }
+    .occ-chip.selected { border-color: var(--coral); background: var(--coral); color: var(--white); }
+    .fg.has-err .occ-grid .occ-chip { border-color: #e05f5f; }
+    .fg.has-err .occ-grid .occ-chip.selected { border-color: var(--coral); background: var(--coral); }
+    @media (max-width: 500px) { .occ-grid { grid-template-columns: 1fr; } }
+
+    /* General modal header (no specific boat) */
+    .modal-general-hdr { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 130px; background: linear-gradient(135deg, var(--navy) 0%, #0a2d5e 100%); border-radius: var(--r-lg) var(--r-lg) 0 0; position: relative; padding: 32px 24px 24px; text-align: center; }
+    .modal-general-hdr.show { display: flex; }
+    .modal-general-hdr .modal-x { position: absolute; top: 10px; right: 10px; }
+    .modal-general-hdr-ico { font-size: 2.4rem; margin-bottom: 8px; line-height: 1; }
+    .modal-general-hdr-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 300; color: var(--white); line-height: 1.15; }
+    .modal-general-hdr-sub { font-size: .67rem; color: rgba(200,151,63,.9); margin-top: 6px; letter-spacing: .1em; text-transform: uppercase; }
+
     /* RESPONSIVE */
     @media (max-width: 1100px) { .exp-grid { grid-template-columns: repeat(3,1fr); } }
     @media (max-width: 680px)  { .exp-grid { grid-template-columns: repeat(2,1fr); } }
@@ -528,7 +545,7 @@
       <a href="#experiences">Experiences</a>
       <a href="#why-us">About</a>
       <a href="#faq">FAQ</a>
-      <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn-cta">📩 Get a Quote</a>
+      <a href="#" onclick="openGeneralModal();return false;" class="btn-cta">📩 Get a Quote</a>
     </nav>
     <button class="hdr-hamburger" id="hdr-ham" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -551,7 +568,7 @@
     <a href="#faq"         onclick="closeMobileNav()">FAQ              <span class="arrow">›</span></a>
   </nav>
   <div class="mob-nav-bottom">
-    <a href="http://wa.me/17867644608" target="_blank" class="btn btn-coral" onclick="if(window.fbq)fbq('track','Contact');closeMobileNav()">📩 Get a Free Quote</a>
+    <a href="#" class="btn btn-coral" onclick="closeMobileNav();openGeneralModal();return false;">📩 Get a Free Quote</a>
     <button class="mob-nav-back">← Back to Page</button>
   </div>
 </div>
@@ -566,7 +583,7 @@
     <div class="hero-kicker">Private Yacht Experience</div>
     <h1 class="hero-h1"><span>Your Vision.</span><br><span>Our Passion.</span><br><span>Your Experience.</span></h1>
     <div class="hero-actions">
-      <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
+      <a href="#" onclick="openGeneralModal();return false;" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
       <a href="#fleet" class="btn btn-ghost">Browse Our Fleet</a>
     </div>
   </div>
@@ -646,7 +663,7 @@
         <div class="why-cta-kicker">Start Your Journey</div>
         <h3 class="why-cta-h">Ready to <em>Cast Off?</em></h3>
         <p class="why-cta-p">Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.</p>
-        <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
+        <a href="#" onclick="openGeneralModal();return false;" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
       </div>
     </div>
   </div>
@@ -829,6 +846,14 @@
     </div>
     
 
+    <!-- General header (shown when no specific boat is selected) -->
+    <div class="modal-general-hdr" id="modal-general-hdr">
+      <button class="modal-x" onclick="closeModal()" aria-label="Close">✕</button>
+      <div class="modal-general-hdr-ico">⛵</div>
+      <div class="modal-general-hdr-title">Get a Free Quote</div>
+      <div class="modal-general-hdr-sub">Tell us about your perfect day on the water</div>
+    </div>
+
     <!-- Form -->
     <div id="modal-form-wrap">
       <div class="modal-body">
@@ -861,6 +886,19 @@
               <option value="13+ guests (large group)">13+ guests (large group)</option>
             </select>
             <span class="err">Please indicate how many guests.</span>
+          </div>
+          <div class="fg span2" id="fg-occasion">
+            <label>Occasion</label>
+            <div class="occ-grid">
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Family or Friends Gathering">👨‍👩‍👧 Family or Friends</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Birthday Party">🎂 Birthday Party</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Romantic Occasion">💕 Romantic Occasion</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Bachelorette / Bachelor">🥂 Bachelorette / Bachelor</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Corporate Event">💼 Corporate Event</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Just Because">⛵ Just Because</button>
+            </div>
+            <input type="hidden" id="f-occasion" value="" />
+            <span class="err">Please select an occasion.</span>
           </div>
         </div>
       </div>
@@ -1054,14 +1092,19 @@ function openModal(idx) {
   // Reset form
   document.getElementById('modal-form-wrap').style.display = '';
   document.getElementById('modal-success').classList.remove('show');
-  ['fg-name','fg-phone','fg-date','fg-people'].forEach(id =>
+  ['fg-name','fg-phone','fg-date','fg-people','fg-occasion'].forEach(id =>
     document.getElementById(id).classList.remove('has-err'));
   document.getElementById('f-name').value   = '';
   document.getElementById('f-phone').value  = '';
   document.getElementById('f-people').value = '';
+  document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('f-occasion').value = '';
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('f-date').min   = today;
   document.getElementById('f-date').value = '';
+  // Show gallery, hide general header
+  document.querySelector('.modal-gallery-area').style.display = '';
+  document.getElementById('modal-general-hdr').classList.remove('show');
 
   document.getElementById('booking-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1153,10 +1196,11 @@ document.addEventListener('keydown', e => {
 
 function validateForm() {
   const fields = [
-    { id:'fg-name',   input:'f-name',   check: v => v.trim().length >= 3 },
-    { id:'fg-phone',  input:'f-phone',  check: v => v.trim().length >= 7 },
-    { id:'fg-date',   input:'f-date',   check: v => v !== '' },
-    { id:'fg-people', input:'f-people', check: v => v !== '' },
+    { id:'fg-name',     input:'f-name',     check: v => v.trim().length >= 3 },
+    { id:'fg-phone',    input:'f-phone',    check: v => v.trim().length >= 7 },
+    { id:'fg-date',     input:'f-date',     check: v => v !== '' },
+    { id:'fg-people',   input:'f-people',   check: v => v !== '' },
+    { id:'fg-occasion', input:'f-occasion', check: v => v !== '' },
   ];
   let ok = true;
   fields.forEach(f => {
@@ -1180,33 +1224,72 @@ function sendRequest(channel) {
   const y     = activeYacht;
   const name  = document.getElementById('f-name').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
+  const occ   = document.getElementById('f-occasion').value;
+  const yVal  = y && y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500;
+  const yName = y ? y.name : 'General Inquiry';
   if (window.fbq) {
     // Manual Advanced Matching: Meta Pixel hashes (SHA-256) these client-side before sending.
-    const nameParts  = name.split(/\s+/).filter(Boolean);
+    const nameParts   = name.split(/\s+/).filter(Boolean);
     const fbFirstName = (nameParts[0] || '').toLowerCase();
     const fbLastName  = nameParts.slice(1).join(' ').toLowerCase();
     const fbPhone     = phone.replace(/[^0-9]/g, '');
     fbq('set', 'userData', { fn: fbFirstName, ln: fbLastName, ph: fbPhone });
-    fbq('track', 'Lead', { content_name: y.name, content_category: 'yacht_charter', channel: channel, value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD' });
+    fbq('track', 'Lead', { content_name: yName, content_category: 'yacht_charter', channel: channel, value: yVal, currency: 'USD' });
   }
-  if (window.gtag) gtag('event', 'generate_lead', { currency: 'USD', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), yacht: y.name, channel: channel });
+  if (window.gtag) gtag('event', 'generate_lead', { currency: 'USD', value: yVal, yacht: yName, channel: channel });
   const date  = fmtDate(document.getElementById('f-date').value);
   const ppl   = document.getElementById('f-people').value;
+  const vesselLines = y
+    ? [`*Vessel:* ${y.name}`, `*Marina:* ${y.loc}`, '']
+    : [`*Vessel:* No preference — please suggest options`, ''];
   const lines = [
     '🛥️ *BOOKING REQUEST — Heart of the Sea*','',
-    `*Vessel:* ${y.name}`,`*Marina:* ${y.loc}`,'',
+    ...vesselLines,
     `*Name:* ${name}`,`*Phone:* ${phone}`,
-    `*Desired Date:* ${date}`,`*Approx. Guests:* ${ppl}`,'',
-    'Hi! I\'d like to book this vessel. Could you confirm availability? 🙏',
+    `*Desired Date:* ${date}`,`*Approx. Guests:* ${ppl}`,`*Occasion:* ${occ}`,'',
+    'Hi! I\'d like to get a quote. Could you confirm availability? 🙏',
   ];
-  const text = lines.join('\n');
+  const text    = lines.join('\n');
+  const subject = y ? `Booking Request — ${y.name}` : 'Quote Request — Heart of the Sea';
   if (channel === 'whatsapp') {
     window.open('https://wa.me/17867644608?text=' + encodeURIComponent(text), '_blank');
   } else {
-    window.open('mailto:heartoftheseasales@gmail.com?subject=' + encodeURIComponent('Booking Request — ' + y.name) + '&body=' + encodeURIComponent(lines.join('\r\n')), '_blank');
+    window.open('mailto:heartoftheseasales@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\r\n')), '_blank');
   }
   document.getElementById('modal-form-wrap').style.display = 'none';
   document.getElementById('modal-success').classList.add('show');
+}
+
+function selectOccasion(chip) {
+  document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
+  chip.classList.add('selected');
+  document.getElementById('f-occasion').value = chip.dataset.val;
+  document.getElementById('fg-occasion').classList.remove('has-err');
+}
+
+function openGeneralModal() {
+  activeYacht = null;
+  galleryIdx  = 0;
+  // Hide gallery area, show branded general header
+  document.querySelector('.modal-gallery-area').style.display = 'none';
+  document.getElementById('modal-general-hdr').classList.add('show');
+  // Reset form
+  document.getElementById('modal-form-wrap').style.display = '';
+  document.getElementById('modal-success').classList.remove('show');
+  ['fg-name','fg-phone','fg-date','fg-people','fg-occasion'].forEach(id =>
+    document.getElementById(id).classList.remove('has-err'));
+  document.getElementById('f-name').value   = '';
+  document.getElementById('f-phone').value  = '';
+  document.getElementById('f-people').value = '';
+  document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('f-occasion').value = '';
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('f-date').min   = today;
+  document.getElementById('f-date').value = '';
+  document.getElementById('booking-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: 'General Quote', content_category: 'yacht_charter', currency: 'USD' });
+  if (window.gtag) gtag('event', 'begin_checkout', { currency: 'USD', item_category: 'general_quote' });
 }
 
 /* ---- HEADER SCROLL ---- */
