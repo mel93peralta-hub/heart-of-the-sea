@@ -1310,7 +1310,7 @@ function openGeneralModal() {
   document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('f-occasion').value = '';
   // Show and reset budget field (general modal only)
-  document.getElementById('fg-budget').style.display = '';
+  document.getElementById('fg-budget').style.display = 'block';
   document.querySelectorAll('#fg-budget .occ-chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('f-budget').value = '';
   const today = new Date().toISOString().split('T')[0];
