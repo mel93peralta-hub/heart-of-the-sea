@@ -492,6 +492,9 @@
     .fg.has-err .occ-grid .occ-chip.selected { border-color: var(--coral); background: var(--coral); }
     @media (max-width: 500px) { .occ-grid { grid-template-columns: 1fr; } }
 
+    /* Budget field — hidden by default, shown only in general modal */
+    #fg-budget { display: none; }
+
     /* General modal header (no specific boat) */
     .modal-general-hdr { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 130px; background: linear-gradient(135deg, var(--navy) 0%, #0a2d5e 100%); border-radius: var(--r-lg) var(--r-lg) 0 0; position: relative; padding: 32px 24px 24px; text-align: center; }
     .modal-general-hdr.show { display: flex; }
@@ -900,6 +903,20 @@
             <input type="hidden" id="f-occasion" value="" />
             <span class="err">Please select an occasion.</span>
           </div>
+
+          <!-- Approximate Budget (general modal only) -->
+          <div class="fg span2" id="fg-budget">
+            <label>Approximate Budget <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <div class="occ-grid">
+              <button type="button" class="occ-chip" onclick="selectBudget(this)" data-val="Under $1,000">💵 Under $1,000</button>
+              <button type="button" class="occ-chip" onclick="selectBudget(this)" data-val="$1,000 – $2,500">💵 $1,000 – $2,500</button>
+              <button type="button" class="occ-chip" onclick="selectBudget(this)" data-val="$2,500 – $5,000">💵 $2,500 – $5,000</button>
+              <button type="button" class="occ-chip" onclick="selectBudget(this)" data-val="$5,000 – $10,000">💵 $5,000 – $10,000</button>
+              <button type="button" class="occ-chip" onclick="selectBudget(this)" data-val="$10,000+">💵 $10,000+</button>
+              <button type="button" class="occ-chip" onclick="selectBudget(this)" data-val="Flexible / Not sure">🤷 Flexible / Not sure</button>
+            </div>
+            <input type="hidden" id="f-budget" value="" />
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -1237,16 +1254,19 @@ function sendRequest(channel) {
     fbq('track', 'Lead', { content_name: yName, content_category: 'yacht_charter', channel: channel, value: yVal, currency: 'USD' });
   }
   if (window.gtag) gtag('event', 'generate_lead', { currency: 'USD', value: yVal, yacht: yName, channel: channel });
-  const date  = fmtDate(document.getElementById('f-date').value);
-  const ppl   = document.getElementById('f-people').value;
+  const date   = fmtDate(document.getElementById('f-date').value);
+  const ppl    = document.getElementById('f-people').value;
+  const budget = document.getElementById('f-budget') ? document.getElementById('f-budget').value : '';
   const vesselLines = y
     ? [`*Vessel:* ${y.name}`, `*Marina:* ${y.loc}`, '']
     : [`*Vessel:* No preference — please suggest options`, ''];
+  const budgetLine = (!y && budget) ? [`*Approximate Budget:* ${budget}`] : [];
   const lines = [
     '🛥️ *BOOKING REQUEST — Heart of the Sea*','',
     ...vesselLines,
     `*Name:* ${name}`,`*Phone:* ${phone}`,
-    `*Desired Date:* ${date}`,`*Approx. Guests:* ${ppl}`,`*Occasion:* ${occ}`,'',
+    `*Desired Date:* ${date}`,`*Approx. Guests:* ${ppl}`,`*Occasion:* ${occ}`,
+    ...budgetLine,'',
     'Hi! I\'d like to get a quote. Could you confirm availability? 🙏',
   ];
   const text    = lines.join('\n');
@@ -1267,6 +1287,12 @@ function selectOccasion(chip) {
   document.getElementById('fg-occasion').classList.remove('has-err');
 }
 
+function selectBudget(chip) {
+  document.querySelectorAll('#fg-budget .occ-chip').forEach(c => c.classList.remove('selected'));
+  chip.classList.add('selected');
+  document.getElementById('f-budget').value = chip.dataset.val;
+}
+
 function openGeneralModal() {
   activeYacht = null;
   galleryIdx  = 0;
@@ -1283,6 +1309,10 @@ function openGeneralModal() {
   document.getElementById('f-people').value = '';
   document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('f-occasion').value = '';
+  // Show and reset budget field (general modal only)
+  document.getElementById('fg-budget').style.display = '';
+  document.querySelectorAll('#fg-budget .occ-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('f-budget').value = '';
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('f-date').min   = today;
   document.getElementById('f-date').value = '';
