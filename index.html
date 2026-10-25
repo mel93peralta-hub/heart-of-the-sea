@@ -1106,23 +1106,8 @@ function openModal(idx) {
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('f-date').min   = today;
   document.getElementById('f-date').value = '';
-  // Show budget field with tiers filtered to >= boat's price
-  document.getElementById('fg-budget').style.display = 'block';
-  const priceVal = y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 0;
-  const budgetTiers = [
-    { max: 1000,        label: 'Under $1,000' },
-    { max: 2500,        label: '$1,000 – $2,500' },
-    { max: 5000,        label: '$2,500 – $5,000' },
-    { max: 10000,       label: '$5,000 – $10,000' },
-    { max: Infinity,    label: '$10,000+' },
-  ];
-  const selBudget = document.getElementById('f-budget');
-  selBudget.innerHTML = '<option value="">Select a range...</option>' +
-    budgetTiers.filter(t => t.max > priceVal).map(t =>
-      `<option value="${t.label}">${t.label}</option>`
-    ).join('') +
-    '<option value="Flexible / Not sure">Flexible / Not sure</option>';
-  selBudget.value = '';
+  // Hide budget field (per-boat modal — not needed here)
+  document.getElementById('fg-budget').style.display = 'none';
   // Show gallery, hide general header
   document.querySelector('.modal-gallery-area').style.display = '';
   document.getElementById('modal-general-hdr').classList.remove('show');
@@ -1264,7 +1249,7 @@ function sendRequest(channel) {
   const vesselLines = y
     ? [`*Vessel:* ${y.name}`, `*Marina:* ${y.loc}`, '']
     : [`*Vessel:* No preference — please suggest options`, ''];
-  const budgetLine = budget ? [`*Approximate Budget:* ${budget}`] : [];
+  const budgetLine = (!y && budget) ? [`*Approximate Budget:* ${budget}`] : [];
   const lines = [
     '🛥️ *BOOKING REQUEST — Heart of the Sea*','',
     ...vesselLines,
