@@ -600,6 +600,29 @@
       .foot-bottom { flex-direction: column; text-align: center; }
       .stats-inner { grid-template-columns: 1fr 1fr; }
     }
+
+  /* ---- LANG TOGGLE ---- */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 0;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 100px;
+    padding: 3px 5px;
+  }
+  .lang-toggle button {
+    background: transparent; border: none;
+    color: rgba(255,255,255,.55);
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    cursor: pointer; padding: 3px 7px; border-radius: 100px;
+    transition: background .18s, color .18s;
+    font-family: var(--font-body);
+  }
+  .lang-toggle button.active {
+    background: rgba(255,255,255,.18);
+    color: #fff;
+  }
+  .lang-sep { color: rgba(255,255,255,.3); font-size: 11px; user-select:none; }
+  .lang-toggle-mob { margin: 0 auto 10px; width: fit-content; }
   </style>
 </head>
 <body>
@@ -614,11 +637,16 @@
       </div>
     </a>
     <nav class="hdr-nav">
-      <a href="#fleet">Our Fleet</a>
-      <a href="#experiences">Experiences</a>
-      <a href="#why-us">About</a>
-      <a href="#faq">FAQ</a>
-      <a href="#" onclick="openGeneralModal();return false;" class="btn-cta">📩 Get a Quote</a>
+      <a href="#fleet" data-i18n="nav.fleet">Our Fleet</a>
+      <a href="#experiences" data-i18n="nav.exp">Experiences</a>
+      <a href="#why-us" data-i18n="nav.about">About</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <div class="lang-toggle">
+        <button onclick="setLanguage('en')" id="lang-en" class="active">EN</button>
+        <span class="lang-sep">|</span>
+        <button onclick="setLanguage('es')" id="lang-es">ES</button>
+      </div>
+      <a href="#" onclick="openGeneralModal();return false;" class="btn-cta" data-i18n="nav.quote">📩 Get a Quote</a>
     </nav>
     <button class="hdr-hamburger" id="hdr-ham" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -635,14 +663,19 @@
     <button id="mob-close" aria-label="Close menu">✕</button>
   </div>
   <nav class="mob-nav-links">
-    <a href="#fleet"       onclick="closeMobileNav()">Our Fleet       <span class="arrow">›</span></a>
-    <a href="#experiences" onclick="closeMobileNav()">Experiences      <span class="arrow">›</span></a>
-    <a href="#why-us"      onclick="closeMobileNav()">About Us         <span class="arrow">›</span></a>
-    <a href="#faq"         onclick="closeMobileNav()">FAQ              <span class="arrow">›</span></a>
+    <a href="#fleet"       onclick="closeMobileNav()"><span data-i18n="nav.fleet">Our Fleet</span>       <span class="arrow">›</span></a>
+    <a href="#experiences" onclick="closeMobileNav()"><span data-i18n="nav.exp">Experiences</span>      <span class="arrow">›</span></a>
+    <a href="#why-us"      onclick="closeMobileNav()"><span data-i18n="mob.about">About Us</span>         <span class="arrow">›</span></a>
+    <a href="#faq"         onclick="closeMobileNav()"><span data-i18n="nav.faq">FAQ</span>              <span class="arrow">›</span></a>
   </nav>
   <div class="mob-nav-bottom">
-    <a href="#" class="btn btn-coral" onclick="closeMobileNav();openGeneralModal();return false;">📩 Get a Free Quote</a>
-    <button class="mob-nav-back">← Back to Page</button>
+    <div class="lang-toggle lang-toggle-mob">
+      <button onclick="setLanguage('en')" id="lang-en-mob" class="active">EN</button>
+      <span class="lang-sep">|</span>
+      <button onclick="setLanguage('es')" id="lang-es-mob">ES</button>
+    </div>
+    <a href="#" class="btn btn-coral" onclick="closeMobileNav();openGeneralModal();return false;" data-i18n="mob.quote">📩 Get a Free Quote</a>
+    <button class="mob-nav-back" data-i18n="mob.back">← Back to Page</button>
   </div>
 </div>
 
@@ -653,19 +686,19 @@
          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
   </div>
   <div class="hero-content">
-    <div class="hero-kicker">Private Yacht Experience</div>
-    <h1 class="hero-h1"><span>Your Vision.</span><br><span>Our Passion.</span><br><span>Your Experience.</span></h1>
+    <div class="hero-kicker" data-i18n="hero.kicker">Private Yacht Experience</div>
+    <h1 class="hero-h1" data-i18n="hero.h1"><span>Your Vision.</span><br><span>Our Passion.</span><br><span>Your Experience.</span></h1>
     <div class="hero-actions">
-      <a href="#" onclick="openGeneralModal();return false;" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote</a>
-      <a href="#fleet" class="btn btn-ghost">Browse Our Fleet</a>
+      <a href="#" onclick="openGeneralModal();return false;" class="btn btn-coral btn-coral-lg" data-i18n="hero.cta1">📩 Get a Free Quote</a>
+      <a href="#fleet" class="btn btn-ghost" data-i18n="hero.cta2">Browse Our Fleet</a>
     </div>
   </div>
-  <div class="hero-scroll"><div class="scroll-line"></div> Scroll</div>
+  <div class="hero-scroll"><div class="scroll-line"></div> <span data-i18n="hero.scroll">Scroll</span></div>
 </section>
 
 <div id="ticker-bar">
   <div class="ticker-track">
-    <span class="t-item"><span class="t-star">✦</span> Add-Ons for Your Experience</span>
+    <span class="t-item"><span class="t-star">✦</span> <span data-i18n="tick.addons">Add-Ons for Your Experience</span></span>
     <span class="t-item"><span class="t-star">✦</span> 👨‍🍳 Chef</span>
     <span class="t-item"><span class="t-star">✦</span> 🍽️ Catering</span>
     <span class="t-item"><span class="t-star">✦</span> 🎵 DJs</span>
@@ -673,7 +706,7 @@
     <span class="t-item"><span class="t-star">✦</span> 🎉 Decorations</span>
     <span class="t-item"><span class="t-star">✦</span> 🏄 Water Toys</span>
     <span class="t-item"><span class="t-star">✦</span> ✨ And More</span>
-    <span class="t-item"><span class="t-star">✦</span> Add-Ons for Your Experience</span>
+    <span class="t-item"><span class="t-star">✦</span> <span data-i18n="tick.addons">Add-Ons for Your Experience</span></span>
     <span class="t-item"><span class="t-star">✦</span> 👨‍🍳 Chef</span>
     <span class="t-item"><span class="t-star">✦</span> 🍽️ Catering</span>
     <span class="t-item"><span class="t-star">✦</span> 🎵 DJs</span>
@@ -686,24 +719,24 @@
 
 <div id="stats">
   <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num">5,000<sup>+</sup></div><div class="stat-lbl">Happy Guests</div></div>
-    <div class="stat-item"><div class="stat-num">30<sup>+</sup></div><div class="stat-lbl">Vessels Available</div></div>
-    <div class="stat-item"><div class="stat-num">42<sup>′–110′</sup></div><div class="stat-lbl">Fleet Range</div></div>
-    <div class="stat-item"><div class="stat-num">5<sup>★</sup></div><div class="stat-lbl">Rated Experience</div></div>
+    <div class="stat-item"><div class="stat-num">5,000<sup>+</sup></div><div class="stat-lbl" data-i18n="stat.guests">Happy Guests</div></div>
+    <div class="stat-item"><div class="stat-num">30<sup>+</sup></div><div class="stat-lbl" data-i18n="stat.vessels">Vessels Available</div></div>
+    <div class="stat-item"><div class="stat-num">42<sup>′–110′</sup></div><div class="stat-lbl" data-i18n="stat.range">Fleet Range</div></div>
+    <div class="stat-item"><div class="stat-num">5<sup>★</sup></div><div class="stat-lbl" data-i18n="stat.rated">Rated Experience</div></div>
   </div>
 </div>
 
 <section class="sec" id="fleet">
   <div class="sec-inner">
-    <div class="sec-label">Choose Your Vessel</div>
-    <h2 class="sec-h">Our Featured <em>Fleet</em></h2>
-    <p class="sec-sub">From intimate sunset cruises to grand celebrations, we have the perfect yacht for every occasion. Browse our most popular vessels below, or ask us about our full 30+ selection.</p>
+    <div class="sec-label" data-i18n="fleet.label">Choose Your Vessel</div>
+    <h2 class="sec-h" data-i18n="fleet.h">Our Featured <em>Fleet</em></h2>
+    <p class="sec-sub" data-i18n="fleet.sub">From intimate sunset cruises to grand celebrations, we have the perfect yacht for every occasion. Browse our most popular vessels below, or ask us about our full 30+ selection.</p>
     <div class="fleet-filters">
-      <button class="f-btn on" onclick="filterFleet('all',this)">All Yachts</button>
-      <button class="f-btn" onclick="filterFleet('mega',this)">Mega Yachts 80′+</button>
+      <button class="f-btn on" onclick="filterFleet('all',this)" data-i18n="fleet.all">All Yachts</button>
+      <button class="f-btn" onclick="filterFleet('mega',this)" data-i18n="fleet.mega">Mega Yachts 80′+</button>
       <button class="f-btn" onclick="filterFleet('super',this)">60′ – 79′</button>
       <button class="f-btn" onclick="filterFleet('mid',this)">45′ – 59′</button>
-      <button class="f-btn" onclick="filterFleet('sport',this)">Under 45′</button>
+      <button class="f-btn" onclick="filterFleet('sport',this)" data-i18n="fleet.sport">Under 45′</button>
     </div>
     <div class="fleet-grid" id="fleet-grid"></div>
   </div>
@@ -712,14 +745,14 @@
 <section class="sec" id="why-us">
   <div class="sec-inner">
     <div class="why-header">
-      <div class="sec-label">Why Heart of the Sea</div>
-      <h2 class="sec-h">Miami's Trusted <em>Bareboat Charter</em> Experience</h2>
-      <p class="sec-sub">Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.</p>
+      <div class="sec-label" data-i18n="why.label">Why Heart of the Sea</div>
+      <h2 class="sec-h" data-i18n="why.h">Miami's Trusted <em>Bareboat Charter</em> Experience</h2>
+      <p class="sec-sub" data-i18n="why.sub">Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.</p>
     </div>
     <div class="why-middle">
       <div class="why-col">
-        <div class="why-item"><div class="wi-icon">👨‍✈️</div><div><div class="wi-h">Choose Your Own Qualified Captain &amp; Crew</div><p class="wi-p">As the charterer, you have the right to select and hire your own qualified captain and crew. For your convenience, we can provide a list of independent, qualified professionals to choose from.</p></div></div>
-        <div class="why-item"><div class="wi-icon">💳</div><div><div class="wi-h">Transparent Charter Pricing</div><p class="wi-p">Vessel charter fees and independent crew fees are clearly disclosed and handled separately. No surprises — just clear information before you book.</p></div></div>
+        <div class="why-item"><div class="wi-icon">👨‍✈️</div><div><div class="wi-h" data-i18n="why.item1.h">Choose Your Own Qualified Captain &amp; Crew</div><p class="wi-p" data-i18n="why.item1.p">As the charterer, you have the right to select and hire your own qualified captain and crew. For your convenience, we can provide a list of independent, qualified professionals to choose from.</p></div></div>
+        <div class="why-item"><div class="wi-icon">💳</div><div><div class="wi-h" data-i18n="why.item2.h">Transparent Charter Pricing</div><p class="wi-p" data-i18n="why.item2.p">Vessel charter fees and independent crew fees are clearly disclosed and handled separately. No surprises — just clear information before you book.</p></div></div>
       </div>
       <div class="why-video-col">
         <video autoplay muted loop playsinline preload="none" poster="images/yate2.jpg" aria-label="Heart of the Sea — Miami Yacht Rentals promo video">
@@ -727,16 +760,16 @@
         </video>
       </div>
       <div class="why-col">
-        <div class="why-item"><div class="wi-icon">📍</div><div><div class="wi-h">Multiple Miami Marina Locations</div><p class="wi-p">Departing from convenient locations throughout Miami, depending on the vessel and availability.</p></div></div>
-        <div class="why-item"><div class="wi-icon">⚡</div><div><div class="wi-h">Fast &amp; Easy WhatsApp Inquiries</div><p class="wi-p">Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.</p></div></div>
+        <div class="why-item"><div class="wi-icon">📍</div><div><div class="wi-h" data-i18n="why.item3.h">Multiple Miami Marina Locations</div><p class="wi-p" data-i18n="why.item3.p">Departing from convenient locations throughout Miami, depending on the vessel and availability.</p></div></div>
+        <div class="why-item"><div class="wi-icon">⚡</div><div><div class="wi-h" data-i18n="why.item4.h">Fast &amp; Easy WhatsApp Inquiries</div><p class="wi-p" data-i18n="why.item4.p">Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.</p></div></div>
       </div>
     </div>
     <div class="why-cta">
       <div style="position:relative;z-index:1">
-        <div class="why-cta-kicker">Start Your Journey</div>
-        <h3 class="why-cta-h">Ready to <em>Cast Off?</em></h3>
-        <p class="why-cta-p">Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.</p>
-        <a href="#" onclick="openGeneralModal();return false;" class="btn btn-coral btn-coral-lg">📩 Get a Free Quote on WhatsApp</a>
+        <div class="why-cta-kicker" data-i18n="why.cta.kicker">Start Your Journey</div>
+        <h3 class="why-cta-h" data-i18n="why.cta.h">Ready to <em>Cast Off?</em></h3>
+        <p class="why-cta-p" data-i18n="why.cta.p">Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.</p>
+        <a href="#" onclick="openGeneralModal();return false;" class="btn btn-coral btn-coral-lg" data-i18n="why.cta.btn">📩 Get a Free Quote on WhatsApp</a>
       </div>
     </div>
   </div>
@@ -744,9 +777,9 @@
 
 <section class="sec sec-dark" id="experiences">
   <div class="sec-inner">
-    <div class="sec-label">Special Events &amp; Add-Ons</div>
-    <h2 class="sec-h">Elevate Your <em>Charter Experience</em></h2>
-    <p class="sec-sub">Every charter can be taken to the next level. Tap any card to discover what we can add to your day on the water.</p>
+    <div class="sec-label" data-i18n="exp.label">Special Events &amp; Add-Ons</div>
+    <h2 class="sec-h" data-i18n="exp.h">Elevate Your <em>Charter Experience</em></h2>
+    <p class="sec-sub" data-i18n="exp.sub">Every charter can be taken to the next level. Tap any card to discover what we can add to your day on the water.</p>
     <div class="exp-grid">
 
       <!-- 1. Birthday Bundle -->
@@ -755,7 +788,7 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-birthday.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
               <h3 class="exp-flip-title">🎂 Birthday Bundle</h3>
             </div>
           </div>
@@ -767,15 +800,15 @@
                   <h3 class="exp-flip-back-title">🎂 Birthday Bundle</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <p class="exp-flip-price">$275 · Para 13 personas</p>
-                <ul class="exp-flip-items">
-                  <li>Platos, cubiertos y vasos</li>
-                  <li>Pastel de cumpleaños</li>
-                  <li>Mini ramo de globos</li>
-                  <li>Velas de cumpleaños</li>
-                  <li>Gorros de cumpleaños</li>
+                <p class="exp-flip-price" data-i18n="exp.card1.price">$275 · For 13 people</p>
+                <ul class="exp-flip-items" data-i18n="exp.card1.items">
+                  <li>Plates, cutlery &amp; cups</li>
+                  <li>Birthday cake</li>
+                  <li>Mini balloon bouquet</li>
+                  <li>Birthday candles</li>
+                  <li>Birthday hats</li>
                 </ul>
-                <p class="exp-flip-cta">Agrégalo a cualquier charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">Escríbenos por WhatsApp</a> para reservar.</p>
+                <p class="exp-flip-cta" data-i18n="exp.card1.cta">Add to any charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">WhatsApp us</a> to book.</p>
               </div>
             </div>
           </div>
@@ -788,7 +821,7 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-bachelorette.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
               <h3 class="exp-flip-title">💍 Bachelorette</h3>
             </div>
           </div>
@@ -800,14 +833,14 @@
                   <h3 class="exp-flip-back-title">💍 Bachelorette</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <p class="exp-flip-price">$215 · Para 13 personas</p>
-                <ul class="exp-flip-items">
-                  <li>Ramo de globos</li>
-                  <li>Set de novia: velo y cintillo</li>
-                  <li>Lentes de corazón ×13</li>
-                  <li>Collar de shot glass ×13</li>
+                <p class="exp-flip-price" data-i18n="exp.card2.price">$215 · For 13 people</p>
+                <ul class="exp-flip-items" data-i18n="exp.card2.items">
+                  <li>Balloon bouquet</li>
+                  <li>Bride set: veil &amp; headband</li>
+                  <li>Heart-shaped glasses ×13</li>
+                  <li>Shot glass necklace ×13</li>
                 </ul>
-                <p class="exp-flip-cta">Agrégalo a cualquier charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">Escríbenos por WhatsApp</a> para reservar.</p>
+                <p class="exp-flip-cta" data-i18n="exp.card2.cta">Add to any charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">WhatsApp us</a> to book.</p>
               </div>
             </div>
           </div>
@@ -820,7 +853,7 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-romantic.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
               <h3 class="exp-flip-title">🌹 Romantic Occasion</h3>
             </div>
           </div>
@@ -832,15 +865,15 @@
                   <h3 class="exp-flip-back-title">🌹 Romantic Occasion</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <p class="exp-flip-price">$250 · Para dos</p>
-                <ul class="exp-flip-items">
-                  <li>Mini ramo de rosas</li>
-                  <li>Mesa romántica con pétalos y velas LED</li>
-                  <li>Tarjeta de amor personalizada</li>
-                  <li>Fresas con chocolate</li>
-                  <li>Tabla de charcutería gourmet</li>
+                <p class="exp-flip-price" data-i18n="exp.card3.price">$250 · For two</p>
+                <ul class="exp-flip-items" data-i18n="exp.card3.items">
+                  <li>Mini rose bouquet</li>
+                  <li>Romantic table with petals &amp; LED candles</li>
+                  <li>Personalized love card</li>
+                  <li>Chocolate-covered strawberries</li>
+                  <li>Gourmet charcuterie board</li>
                 </ul>
-                <p class="exp-flip-cta">Agrégalo a cualquier charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">Escríbenos por WhatsApp</a> para reservar.</p>
+                <p class="exp-flip-cta" data-i18n="exp.card3.cta">Add to any charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">WhatsApp us</a> to book.</p>
               </div>
             </div>
           </div>
@@ -853,8 +886,8 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-chef.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
-              <h3 class="exp-flip-title">👨‍🍳 Chef Abel y su Team</h3>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <h3 class="exp-flip-title" data-i18n="exp.card4.title">👨‍🍳 Chef Abel &amp; His Team</h3>
             </div>
           </div>
           <div class="exp-flip-back">
@@ -862,16 +895,16 @@
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title">👨‍🍳 Chef Abel y su Team</h3>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card4.title">👨‍🍳 Chef Abel &amp; His Team</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <ul class="exp-flip-items">
-                  <li>Menú gourmet personalizado a bordo</li>
-                  <li>Platos preparados en vivo frente a tus invitados</li>
-                  <li>Atención profesional durante todo el charter</li>
-                  <li>Experiencia gastronómica de lujo en el agua</li>
+                <ul class="exp-flip-items" data-i18n="exp.card4.items">
+                  <li>Custom gourmet menu on board</li>
+                  <li>Dishes prepared live in front of your guests</li>
+                  <li>Professional service throughout the charter</li>
+                  <li>Luxury culinary experience on the water</li>
                 </ul>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn">Pedir presupuesto</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
           </div>
@@ -884,8 +917,8 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-bartender.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
-              <h3 class="exp-flip-title">🍸 Bartender Frank y su Team</h3>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <h3 class="exp-flip-title" data-i18n="exp.card5.title">🍸 Bartender Frank &amp; His Team</h3>
             </div>
           </div>
           <div class="exp-flip-back">
@@ -893,16 +926,16 @@
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title">🍸 Bartender Frank y su Team</h3>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card5.title">🍸 Bartender Frank &amp; His Team</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <ul class="exp-flip-items">
-                  <li>Cócteles signature preparados a bordo</li>
-                  <li>Servicio de barra premium durante el charter</li>
-                  <li>Mixología personalizada para tu evento</li>
-                  <li>Presentación elegante y profesional</li>
+                <ul class="exp-flip-items" data-i18n="exp.card5.items">
+                  <li>Signature cocktails prepared on board</li>
+                  <li>Premium bar service throughout the charter</li>
+                  <li>Custom mixology for your event</li>
+                  <li>Elegant and professional presentation</li>
                 </ul>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn">Pedir presupuesto</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
           </div>
@@ -915,8 +948,8 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-dj.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
-              <h3 class="exp-flip-title">🎧 DJ, Fotos y Videos</h3>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <h3 class="exp-flip-title" data-i18n="exp.card6.title">🎧 DJ, Photos &amp; Videos</h3>
             </div>
           </div>
           <div class="exp-flip-back">
@@ -924,16 +957,16 @@
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title">🎧 DJ, Fotos y Videos</h3>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card6.title">🎧 DJ, Photos &amp; Videos</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <ul class="exp-flip-items">
-                  <li>DJ en vivo con equipo profesional Pioneer</li>
-                  <li>Sesión fotográfica a bordo</li>
-                  <li>Video profesional de tu experiencia</li>
-                  <li>Entrega editada de tus memorias</li>
+                <ul class="exp-flip-items" data-i18n="exp.card6.items">
+                  <li>Live DJ with professional Pioneer setup</li>
+                  <li>On-board photo session</li>
+                  <li>Professional video of your experience</li>
+                  <li>Edited delivery of your memories</li>
                 </ul>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn">Pedir presupuesto</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
           </div>
@@ -946,7 +979,7 @@
           <div class="exp-flip-front">
             <div class="exp-flip-bg" data-bg="images/events/exp-custom.jpg"></div>
             <div class="exp-flip-front-overlay">
-              <div class="exp-hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
+              <div class="exp-hint" data-i18n="exp.hint"><span class="exp-hint-icon">↩</span>Tap to discover</div>
               <h3 class="exp-flip-title">✨ Custom Celebration</h3>
             </div>
           </div>
@@ -958,13 +991,13 @@
                   <h3 class="exp-flip-back-title">✨ Custom Celebration</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
-                <ul class="exp-flip-items">
-                  <li>Aniversario, propuesta, graduación — lo que imagines</li>
-                  <li>Cuéntanos tu visión y creamos la experiencia perfecta</li>
-                  <li>Propuesta personalizada con detalles y presupuesto</li>
-                  <li>Todo coordinado para que solo disfrutes el momento</li>
+                <ul class="exp-flip-items" data-i18n="exp.card7.items">
+                  <li>Anniversary, proposal, graduation — whatever you dream of</li>
+                  <li>Tell us your vision and we'll craft the perfect experience</li>
+                  <li>Personalized proposal with details and pricing</li>
+                  <li>Everything coordinated so you just enjoy the moment</li>
                 </ul>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn">Cuéntanos tu idea</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.custom.btn">Tell Us Your Idea</a>
               </div>
             </div>
           </div>
@@ -978,9 +1011,9 @@
 
 <section class="sec" id="reviews">
   <div class="sec-inner">
-    <div class="sec-label">What Our Guests Say</div>
-    <h2 class="sec-h">Real Experiences, <em>Real Smiles</em></h2>
-    <p class="sec-sub">Thousands of guests have sailed with us. Here's what a few of them had to say.</p>
+    <div class="sec-label" data-i18n="rv.label">What Our Guests Say</div>
+    <h2 class="sec-h" data-i18n="rv.h">Real Experiences, <em>Real Smiles</em></h2>
+    <p class="sec-sub" data-i18n="rv.sub">Thousands of guests have sailed with us. Here's what a few of them had to say.</p>
   </div>
   <div id="reviews-wrap">
     <div class="rv-track">
@@ -1013,10 +1046,10 @@
   <div class="sec-inner">
     <div class="faq-layout">
       <div class="faq-intro">
-        <div class="sec-label">FAQs</div>
-        <h2 class="sec-h">Everything You <em>Need to Know</em></h2>
-        <p class="sec-sub" style="margin-bottom:32px">Can't find the answer you're looking for? Chat with us directly — we reply fast.</p>
-        <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral">Ask Us Anything</a>
+        <div class="sec-label" data-i18n="faq.label">FAQs</div>
+        <h2 class="sec-h" data-i18n="faq.h">Everything You <em>Need to Know</em></h2>
+        <p class="sec-sub" style="margin-bottom:32px" data-i18n="faq.sub">Can't find the answer you're looking for? Chat with us directly — we reply fast.</p>
+        <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="btn btn-coral" data-i18n="faq.btn">Ask Us Anything</a>
       </div>
       <div class="faq-list" id="faq-list"></div>
     </div>
@@ -1029,7 +1062,7 @@
   <div class="foot-grid">
     <div>
       <img src="images/logo.png" alt="Heart of the Sea" class="foot-brand-logo" loading="lazy" decoding="async" onerror="this.style.display='none'" />
-      <p class="foot-brand-desc">Miami's premier yacht charter company. Luxury made effortless — memories made for a lifetime.</p>
+      <p class="foot-brand-desc" data-i18n="foot.desc">Miami's premier yacht charter company. Luxury made effortless — memories made for a lifetime.</p>
       <div class="foot-social">
         <a href="https://www.instagram.com/heartoftheseaexperience" target="_blank" class="foot-soc-link" aria-label="Instagram">IG</a>
         <a href="https://www.facebook.com/profile.php?id=61591140609475" target="_blank" class="foot-soc-link" aria-label="Facebook">FB</a>
@@ -1038,38 +1071,38 @@
       </div>
     </div>
     <div class="foot-col">
-      <div class="foot-col-h">Explore</div>
+      <div class="foot-col-h" data-i18n="foot.explore">Explore</div>
       <ul>
-        <li><a href="#fleet">Our Fleet</a></li>
-        <li><a href="#experiences">Experiences</a></li>
-        <li><a href="#why-us">About Us</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://linktr.ee/heartofthesea" target="_blank">Full Directory</a></li>
+        <li><a href="#fleet" data-i18n="foot.fleet">Our Fleet</a></li>
+        <li><a href="#experiences" data-i18n="foot.exp">Experiences</a></li>
+        <li><a href="#why-us" data-i18n="foot.about">About Us</a></li>
+        <li><a href="#faq" data-i18n="foot.faq">FAQ</a></li>
+        <li><a href="https://linktr.ee/heartofthesea" target="_blank" data-i18n="foot.dir">Full Directory</a></li>
       </ul>
     </div>
     <div class="foot-col">
-      <div class="foot-col-h">Experiences</div>
+      <div class="foot-col-h" data-i18n="foot.exp.col">Experiences</div>
       <ul>
-        <li><a href="#experiences">Birthday Parties</a></li>
-        <li><a href="#experiences">Bachelorettes</a></li>
-        <li><a href="#experiences">Sunset Cruises</a></li>
-        <li><a href="#experiences">Corporate Events</a></li>
-        <li><a href="#experiences">Family Charters</a></li>
+        <li><a href="#experiences" data-i18n="foot.exp.bday">Birthday Parties</a></li>
+        <li><a href="#experiences" data-i18n="foot.exp.bach">Bachelorettes</a></li>
+        <li><a href="#experiences" data-i18n="foot.exp.sunset">Sunset Cruises</a></li>
+        <li><a href="#experiences" data-i18n="foot.exp.corp">Corporate Events</a></li>
+        <li><a href="#experiences" data-i18n="foot.exp.family">Family Charters</a></li>
       </ul>
     </div>
     <div class="foot-col">
-      <div class="foot-col-h">Contact</div>
+      <div class="foot-col-h" data-i18n="foot.contact">Contact</div>
       <ul>
         <li><a href="tel:+17867644608">📞 (786) 764-4608</a></li>
-        <li><a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank">💬 WhatsApp Us</a></li>
-        <li><a href="mailto:heartoftheseasales@gmail.com">✉️ Email Us</a></li>
+        <li><a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" data-i18n="foot.wa">💬 WhatsApp Us</a></li>
+        <li><a href="mailto:heartoftheseasales@gmail.com" data-i18n="foot.email">✉️ Email Us</a></li>
         <li><a href="#fleet">📍 Miami, FL</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2025 Heart of the Sea · Private Yacht Experience. All rights reserved.</span>
-    <div class="foot-legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
+    <span data-i18n="foot.copy">© 2025 Heart of the Sea · Private Yacht Experience. All rights reserved.</span>
+    <div class="foot-legal"><a href="privacy-policy.html" data-i18n="foot.privacy">Privacy Policy</a><a href="terms-of-service.html" data-i18n="foot.terms">Terms of Service</a></div>
   </div>
 </footer>
 
@@ -1097,32 +1130,32 @@
     <div class="modal-general-hdr" id="modal-general-hdr">
       <button class="modal-x" onclick="closeModal()" aria-label="Close">✕</button>
       <div class="modal-general-hdr-ico">⛵</div>
-      <div class="modal-general-hdr-title">Get a Free Quote</div>
-      <div class="modal-general-hdr-sub">Tell us about your perfect day on the water</div>
+      <div class="modal-general-hdr-title" data-i18n="modal.hdr.title">Get a Free Quote</div>
+      <div class="modal-general-hdr-sub" data-i18n="modal.hdr.sub">Tell us about your perfect day on the water</div>
     </div>
 
     <!-- Form -->
     <div id="modal-form-wrap">
       <div class="modal-body">
-        <div class="modal-sec-lbl">Booking Request</div>
+        <div class="modal-sec-lbl" data-i18n="modal.sec.lbl">Booking Request</div>
         <div class="form-grid">
           <div class="fg span2" id="fg-name">
-            <label for="f-name">Full Name</label>
+            <label for="f-name" data-i18n="modal.name.lbl">Full Name</label>
             <input id="f-name" type="text" placeholder="John Smith" autocomplete="name" />
-            <span class="err">Please enter your full name.</span>
+            <span class="err" data-i18n="modal.name.err">Please enter your full name.</span>
           </div>
           <div class="fg" id="fg-phone">
-            <label for="f-phone">Phone Number</label>
+            <label for="f-phone" data-i18n="modal.phone.lbl">Phone Number</label>
             <input id="f-phone" type="tel" placeholder="+1 (305) 000-0000" autocomplete="tel" />
-            <span class="err">Please enter your phone number.</span>
+            <span class="err" data-i18n="modal.phone.err">Please enter your phone number.</span>
           </div>
           <div class="fg" id="fg-date">
-            <label for="f-date">Desired Date</label>
+            <label for="f-date" data-i18n="modal.date.lbl">Desired Date</label>
             <input id="f-date" type="date" />
-            <span class="err">Please select a date.</span>
+            <span class="err" data-i18n="modal.date.err">Please select a date.</span>
           </div>
           <div class="fg span2" id="fg-people">
-            <label for="f-people">Approximate Guests</label>
+            <label for="f-people" data-i18n="modal.guests.lbl">Approximate Guests</label>
             <select id="f-people">
               <option value="">Select a range...</option>
               <option value="1 - 2 guests">1 - 2 guests</option>
@@ -1132,25 +1165,25 @@
               <option value="11 - 12 guests">11 - 12 guests</option>
               <option value="13+ guests (large group)">13+ guests (large group)</option>
             </select>
-            <span class="err">Please indicate how many guests.</span>
+            <span class="err" data-i18n="modal.guests.err">Please indicate how many guests.</span>
           </div>
           <div class="fg span2" id="fg-occasion">
-            <label>Occasion</label>
+            <label data-i18n="modal.occ.lbl">Occasion</label>
             <div class="occ-grid">
-              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Family or Friends Gathering">👨‍👩‍👧 Family or Friends</button>
-              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Birthday Party">🎂 Birthday Party</button>
-              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Romantic Occasion">💕 Romantic Occasion</button>
-              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Bachelorette / Bachelor">🥂 Bachelorette / Bachelor</button>
-              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Corporate Event">💼 Corporate Event</button>
-              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Just Because">⛵ Just Because</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Family or Friends Gathering" data-i18n="modal.occ.fam">👨‍👩‍👧 Family or Friends</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Birthday Party" data-i18n="modal.occ.bday">🎂 Birthday Party</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Romantic Occasion" data-i18n="modal.occ.rom">💕 Romantic Occasion</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Bachelorette / Bachelor" data-i18n="modal.occ.bach">🥂 Bachelorette / Bachelor</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Corporate Event" data-i18n="modal.occ.corp">💼 Corporate Event</button>
+              <button type="button" class="occ-chip" onclick="selectOccasion(this)" data-val="Just Because" data-i18n="modal.occ.just">⛵ Just Because</button>
             </div>
             <input type="hidden" id="f-occasion" value="" />
-            <span class="err">Please select an occasion.</span>
+            <span class="err" data-i18n="modal.occ.err">Please select an occasion.</span>
           </div>
 
           <!-- Approximate Budget (general modal only) -->
           <div class="fg span2" id="fg-budget">
-            <label for="f-budget">Approximate Budget <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <label for="f-budget" data-i18n="modal.budget.lbl">Approximate Budget <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
             <select id="f-budget">
               <option value="">Select a range...</option>
               <option value="Under $1,000">Under $1,000</option>
@@ -1166,18 +1199,18 @@
       <div class="modal-footer">
         <button class="btn-modal-wa" onclick="sendRequest('whatsapp')">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Send via WhatsApp
+          <span data-i18n="modal.btn.wa">Send via WhatsApp</span>
         </button>
-        <button class="btn-modal-email" onclick="sendRequest('email')">✉️ &nbsp;Send via Email</button>
+        <button class="btn-modal-email" onclick="sendRequest('email')" data-i18n="modal.btn.email">✉️ &nbsp;Send via Email</button>
       </div>
-      <p class="modal-note">Clicking will open WhatsApp or your email app with the details pre-filled. Our team responds in minutes.</p>
+      <p class="modal-note" data-i18n="modal.note">Clicking will open WhatsApp or your email app with the details pre-filled. Our team responds in minutes.</p>
     </div>
 
     <div id="modal-success">
       <div class="succ-ico">🛥️</div>
-      <h3 class="succ-h">Booking <em>Confirmed!</em></h3>
-      <p class="succ-p">Your request was sent successfully. Our team will review it and contact you shortly to confirm availability and details.</p>
-      <button class="btn-succ-close" onclick="closeModal()">Close</button>
+      <h3 class="succ-h" data-i18n="modal.succ.h">Booking <em>Confirmed!</em></h3>
+      <p class="succ-p" data-i18n="modal.succ.p">Your request was sent successfully. Our team will review it and contact you shortly to confirm availability and details.</p>
+      <button class="btn-succ-close" onclick="closeModal()" data-i18n="modal.succ.btn">Close</button>
     </div>
   </div>
 </div>
@@ -1255,8 +1288,8 @@ function buildCard(y, idx, priority) {
   const SHOW_TAGS   = ['Onboard Jacuzzi', 'Premium Sound', 'Bluetooth Audio'];
   const visibleTags = y.tags.filter(t => SHOW_TAGS.includes(t));
   const badge = y.sale
-    ? '<span class="y-badge-sale">SALE</span>'
-    : (y.feat ? '<span class="y-badge-feat">⭐ Featured</span>' : '');
+    ? `<span class="y-badge-sale">${t('card.sale')}</span>`
+    : (y.feat ? `<span class="y-badge-feat">⭐ ${t('card.feat')}</span>` : '');
   return `
     <div class="y-card">
       <div class="y-img-wrap" data-name="${y.name}">
@@ -1266,16 +1299,16 @@ function buildCard(y, idx, priority) {
         <span class="y-badge-size">${y.ft}′</span>
         <div class="y-img-book" onclick="openModal(${idx})">
           <div class="y-img-book-ico">📷</div>
-          <div class="y-img-book-lbl">View Gallery &amp; Book</div>
+          <div class="y-img-book-lbl">${t('card.gallery')}</div>
         </div>
       </div>
       <div class="y-body">
         <div class="y-loc">📍 ${y.loc}</div>
         <h3 class="y-name">${y.name}</h3>
-        ${y.price ? `<div class="y-price"><span class="y-price-from">Starting at</span><span class="y-price-amount">${y.price}</span></div>` : ''}
+        ${y.price ? `<div class="y-price"><span class="y-price-from">${t('card.from')}</span><span class="y-price-amount">${y.price}</span></div>` : ''}
         <div class="y-tags">${visibleTags.map(t => `<span class="y-tag">${t}</span>`).join('')}</div>
         <div class="y-footer">
-          <div class="y-cap">👥 Up to <strong>${y.cap} guests</strong></div>
+          <div class="y-cap">👥 ${t('card.upto')} <strong>${y.cap} ${t('card.guests')}</strong></div>
           
         </div>
       </div>
@@ -1302,21 +1335,33 @@ function renderFleet(filter) {
 function filterFleet(filter, btn) {
   document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
+  window._currentFleetFilter = filter;
   renderFleet(filter);
 }
 
 /* ---- FAQ ---- */
-const FAQS = [
-  { q:"What's included in the charter price?", a:"The charter price includes the vessel and its listed amenities. Captain and crew are selected and paid separately by the charterer. Additional services are available upon request." },
-  { q:"How many guests can we bring?", a:"Bareboat charters may accommodate up to 13 individuals total, including the charterer and guests, subject to the vessel's legal capacity. Captain and crew are not included in the charter party count." },
-  { q:"How much does a yacht charter cost?", a:"Pricing varies by vessel, date, and duration. Starting at $800. Contact us directly for a personalized quote based on your needs." },
-  { q:"Can we bring our own food and drinks?", a:"Absolutely! You're welcome to bring your own food and beverages. Optional catering and additional services are also available upon request." },
-  { q:"Where do we depart from?", a:"We have vessels at Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, Grove Harbour, Jones Boat Yard, and the Epic Hotel. Your booking agent will confirm the exact marina when you book." },
-  { q:"How do I confirm my booking?", a:"Message us on WhatsApp to check availability and get your personalized quote. Once confirmed, we'll send a secure link to submit your deposit. Fast, safe, and simple — no lengthy forms." },
-];
+const FAQS = {
+  en: [
+    { q:"What's included in the charter price?", a:"The charter price includes the vessel and its listed amenities. Captain and crew are selected and paid separately by the charterer. Additional services are available upon request." },
+    { q:"How many guests can we bring?", a:"Bareboat charters may accommodate up to 13 individuals total, including the charterer and guests, subject to the vessel's legal capacity. Captain and crew are not included in the charter party count." },
+    { q:"How much does a yacht charter cost?", a:"Pricing varies by vessel, date, and duration. Starting at $800. Contact us directly for a personalized quote based on your needs." },
+    { q:"Can we bring our own food and drinks?", a:"Absolutely! You're welcome to bring your own food and beverages. Optional catering and additional services are also available upon request." },
+    { q:"Where do we depart from?", a:"We have vessels at Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, Grove Harbour, Jones Boat Yard, and the Epic Hotel. Your booking agent will confirm the exact marina when you book." },
+    { q:"How do I confirm my booking?", a:"Message us on WhatsApp to check availability and get your personalized quote. Once confirmed, we'll send a secure link to submit your deposit. Fast, safe, and simple — no lengthy forms." },
+  ],
+  es: [
+    { q:"¿Qué incluye el precio del charter?", a:"El precio del charter incluye la embarcación y sus amenidades. El capitán y la tripulación son seleccionados y pagados por separado por el arrendador. Servicios adicionales disponibles bajo solicitud." },
+    { q:"¿Cuántos invitados podemos traer?", a:"Los charters pueden acomodar hasta 13 personas en total, incluyendo al arrendador e invitados, sujeto a la capacidad legal de la embarcación. El capitán y la tripulación no cuentan dentro de este número." },
+    { q:"¿Cuánto cuesta alquilar un yate?", a:"El precio varía según la embarcación, la fecha y la duración. Desde $800. Contáctanos directamente para una cotización personalizada según tus necesidades." },
+    { q:"¿Podemos traer nuestra propia comida y bebidas?", a:"¡Por supuesto! Puedes traer tu propia comida y bebidas. También tenemos opciones de catering y servicios adicionales disponibles bajo solicitud." },
+    { q:"¿Desde dónde salimos?", a:"Tenemos embarcaciones en Miami Beach Marina, Venetian Marina, Miami River, Regal Marina, Haulover, Grove Harbour, Jones Boat Yard y el Epic Hotel. Tu agente de reservas confirmará la marina exacta al momento de tu reserva." },
+    { q:"¿Cómo confirmo mi reserva?", a:"Escríbenos por WhatsApp para verificar disponibilidad y recibir tu cotización personalizada. Una vez confirmada, te enviaremos un enlace seguro para pagar el depósito. Rápido, seguro y sencillo — sin formularios largos." },
+  ]
+};
 
 function buildFaq() {
-  document.getElementById('faq-list').innerHTML = FAQS.map((f, i) => `
+  const faqs = FAQS[window.LANG || 'en'];
+  document.getElementById('faq-list').innerHTML = faqs.map((f, i) => `
     <div class="faq-item" id="faq-${i}">
       <div class="faq-q" onclick="toggleFaq(${i})">${f.q}<div class="faq-toggle">+</div></div>
       <div class="faq-a">${f.a}</div>
@@ -1348,7 +1393,7 @@ function openModal(idx) {
   renderGallery();
   
   document.getElementById('modal-boat-name').textContent = y.name;
-  document.getElementById('modal-boat-loc').textContent  = '📍 ' + y.loc + '  ·  👥 Up to ' + y.cap + ' guests';
+  document.getElementById('modal-boat-loc').textContent  = '📍 ' + y.loc + '  ·  👥 ' + t('card.upto') + ' ' + y.cap + ' ' + t('card.guests');
 
   // Reset form
   document.getElementById('modal-form-wrap').style.display = '';
@@ -1553,13 +1598,13 @@ function openGeneralModal() {
   // Restore full budget options (per-boat modal may have filtered them) then show/reset
   const selBudgetG = document.getElementById('f-budget');
   selBudgetG.innerHTML =
-    '<option value="">Select a range...</option>' +
+    `<option value="">${t('sel.range')}</option>` +
     '<option value="Under $1,000">Under $1,000</option>' +
     '<option value="$1,000 – $2,500">$1,000 – $2,500</option>' +
     '<option value="$2,500 – $5,000">$2,500 – $5,000</option>' +
     '<option value="$5,000 – $10,000">$5,000 – $10,000</option>' +
     '<option value="$10,000+">$10,000+</option>' +
-    '<option value="Flexible / Not sure">Flexible / Not sure</option>';
+    `<option value="Flexible / Not sure">${t('sel.flexible')}</option>`;
   selBudgetG.value = '';
   document.getElementById('fg-budget').style.display = 'block';
   const today = new Date().toISOString().split('T')[0];
@@ -1637,9 +1682,261 @@ function flipExpCard(card) {
   }
 })();
 
+
+/* ================================================================
+   i18n — EN / ES bilingual system
+================================================================ */
+window.LANG = 'en';
+
+const TRANSLATIONS = {
+  en: {
+    /* nav */
+    'nav.fleet':'Our Fleet','nav.exp':'Experiences','nav.about':'About','nav.faq':'FAQ',
+    'nav.quote':'📩 Get a Quote',
+    'mob.about':'About Us','mob.quote':'📩 Get a Free Quote','mob.back':'← Back to Page',
+    /* hero */
+    'hero.kicker':'Private Yacht Experience',
+    'hero.h1':'<span>Your Vision.</span><br><span>Our Passion.</span><br><span>Your Experience.</span>',
+    'hero.cta1':'📩 Get a Free Quote','hero.cta2':'Browse Our Fleet','hero.scroll':'Scroll',
+    /* ticker */
+    'tick.addons':'Add-Ons for Your Experience',
+    /* stats */
+    'stat.guests':'Happy Guests','stat.vessels':'Vessels Available',
+    'stat.range':'Fleet Range','stat.rated':'Rated Experience',
+    /* fleet */
+    'fleet.label':'Choose Your Vessel',
+    'fleet.h':'Our Featured <em>Fleet</em>',
+    'fleet.sub':'From intimate sunset cruises to grand celebrations, we have the perfect yacht for every occasion. Browse our most popular vessels below, or ask us about our full 30+ selection.',
+    'fleet.all':'All Yachts','fleet.mega':'Mega Yachts 80′+','fleet.sport':'Under 45′',
+    /* why-us */
+    'why.label':'Why Heart of the Sea',
+    'why.h':'Miami\'s Trusted <em>Bareboat Charter</em> Experience',
+    'why.sub':'Enjoy the freedom to customize your time on the water while we make the booking process simple and transparent.',
+    'why.item1.h':'Choose Your Own Qualified Captain &amp; Crew',
+    'why.item1.p':'As the charterer, you have the right to select and hire your own qualified captain and crew. For your convenience, we can provide a list of independent, qualified professionals to choose from.',
+    'why.item2.h':'Transparent Charter Pricing',
+    'why.item2.p':'Vessel charter fees and independent crew fees are clearly disclosed and handled separately. No surprises — just clear information before you book.',
+    'why.item3.h':'Multiple Miami Marina Locations',
+    'why.item3.p':'Departing from convenient locations throughout Miami, depending on the vessel and availability.',
+    'why.item4.h':'Fast &amp; Easy WhatsApp Inquiries',
+    'why.item4.p':'Chat directly with our team, explore available yachts, request charter pricing, and start planning your experience.',
+    'why.cta.kicker':'Start Your Journey',
+    'why.cta.h':'Ready to <em>Cast Off?</em>',
+    'why.cta.p':'Our team responds in minutes. Get a personalized quote and lock in your date before the best vessels are taken.',
+    'why.cta.btn':'📩 Get a Free Quote on WhatsApp',
+    /* experiences */
+    'exp.label':'Special Events &amp; Add-Ons',
+    'exp.h':'Elevate Your <em>Charter Experience</em>',
+    'exp.sub':'Every charter can be taken to the next level. Tap any card to discover what we can add to your day on the water.',
+    'exp.hint':'<span class="exp-hint-icon">↩</span>Tap to discover',
+    'exp.card1.price':'$275 · For 13 people',
+    'exp.card1.items':'<li>Plates, cutlery &amp; cups</li><li>Birthday cake</li><li>Mini balloon bouquet</li><li>Birthday candles</li><li>Birthday hats</li>',
+    'exp.card1.cta':'Add to any charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(\'track\',\'Contact\')" target="_blank">WhatsApp us</a> to book.',
+    'exp.card2.price':'$215 · For 13 people',
+    'exp.card2.items':'<li>Balloon bouquet</li><li>Bride set: veil &amp; headband</li><li>Heart-shaped glasses ×13</li><li>Shot glass necklace ×13</li>',
+    'exp.card2.cta':'Add to any charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(\'track\',\'Contact\')" target="_blank">WhatsApp us</a> to book.',
+    'exp.card3.price':'$250 · For two',
+    'exp.card3.items':'<li>Mini rose bouquet</li><li>Romantic table with petals &amp; LED candles</li><li>Personalized love card</li><li>Chocolate-covered strawberries</li><li>Gourmet charcuterie board</li>',
+    'exp.card3.cta':'Add to any charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(\'track\',\'Contact\')" target="_blank">WhatsApp us</a> to book.',
+    'exp.card4.title':'👨‍🍳 Chef Abel &amp; His Team',
+    'exp.card4.items':'<li>Custom gourmet menu on board</li><li>Dishes prepared live in front of your guests</li><li>Professional service throughout the charter</li><li>Luxury culinary experience on the water</li>',
+    'exp.card5.title':'🍸 Bartender Frank &amp; His Team',
+    'exp.card5.items':'<li>Signature cocktails prepared on board</li><li>Premium bar service throughout the charter</li><li>Custom mixology for your event</li><li>Elegant and professional presentation</li>',
+    'exp.card6.title':'🎧 DJ, Photos &amp; Videos',
+    'exp.card6.items':'<li>Live DJ with professional Pioneer setup</li><li>On-board photo session</li><li>Professional video of your experience</li><li>Edited delivery of your memories</li>',
+    'exp.card7.items':'<li>Anniversary, proposal, graduation — whatever you dream of</li><li>Tell us your vision and we\'ll craft the perfect experience</li><li>Personalized proposal with details and pricing</li><li>Everything coordinated so you just enjoy the moment</li>',
+    'exp.quote.btn':'Request a Quote','exp.custom.btn':'Tell Us Your Idea',
+    /* reviews */
+    'rv.label':'What Our Guests Say',
+    'rv.h':'Real Experiences, <em>Real Smiles</em>',
+    'rv.sub':'Thousands of guests have sailed with us. Here\'s what a few of them had to say.',
+    /* faq */
+    'faq.label':'FAQs',
+    'faq.h':'Everything You <em>Need to Know</em>',
+    'faq.sub':'Can\'t find the answer you\'re looking for? Chat with us directly — we reply fast.',
+    'faq.btn':'Ask Us Anything',
+    /* footer */
+    'foot.desc':'Miami\'s premier yacht charter company. Luxury made effortless — memories made for a lifetime.',
+    'foot.explore':'Explore','foot.fleet':'Our Fleet','foot.exp':'Experiences',
+    'foot.about':'About Us','foot.faq':'FAQ','foot.dir':'Full Directory',
+    'foot.exp.col':'Experiences',
+    'foot.exp.bday':'Birthday Parties','foot.exp.bach':'Bachelorettes',
+    'foot.exp.sunset':'Sunset Cruises','foot.exp.corp':'Corporate Events',
+    'foot.exp.family':'Family Charters',
+    'foot.contact':'Contact','foot.wa':'💬 WhatsApp Us','foot.email':'✉️ Email Us',
+    'foot.copy':'© 2025 Heart of the Sea · Private Yacht Experience. All rights reserved.',
+    'foot.privacy':'Privacy Policy','foot.terms':'Terms of Service',
+    /* modal */
+    'modal.hdr.title':'Get a Free Quote',
+    'modal.hdr.sub':'Tell us about your perfect day on the water',
+    'modal.sec.lbl':'Booking Request',
+    'modal.name.lbl':'Full Name','modal.name.err':'Please enter your full name.',
+    'modal.phone.lbl':'Phone Number','modal.phone.err':'Please enter your phone number.',
+    'modal.date.lbl':'Desired Date','modal.date.err':'Please select a date.',
+    'modal.guests.lbl':'Approximate Guests','modal.guests.err':'Please indicate how many guests.',
+    'modal.occ.lbl':'Occasion','modal.occ.err':'Please select an occasion.',
+    'modal.budget.lbl':'Approximate Budget <span style="font-weight:400;color:var(--text-light)">(optional)</span>',
+    'modal.occ.fam':'👨‍👩‍👧 Family or Friends','modal.occ.bday':'🎂 Birthday Party',
+    'modal.occ.rom':'💕 Romantic Occasion','modal.occ.bach':'🥂 Bachelorette / Bachelor',
+    'modal.occ.corp':'💼 Corporate Event','modal.occ.just':'⛵ Just Because',
+    'modal.btn.wa':'Send via WhatsApp',
+    'modal.btn.email':'✉️ &nbsp;Send via Email',
+    'modal.note':'Clicking will open WhatsApp or your email app with the details pre-filled. Our team responds in minutes.',
+    'modal.succ.h':'Booking <em>Confirmed!</em>',
+    'modal.succ.p':'Your request was sent successfully. Our team will review it and contact you shortly to confirm availability and details.',
+    'modal.succ.btn':'Close',
+    /* card & selects */
+    'card.sale':'SALE','card.feat':'Featured',
+    'card.from':'Starting at','card.upto':'Up to','card.guests':'guests',
+    'card.gallery':'View Gallery &amp; Book',
+    'sel.range':'Select a range...','sel.flexible':'Flexible / Not sure',
+  },
+  es: {
+    /* nav */
+    'nav.fleet':'Nuestra Flota','nav.exp':'Experiencias','nav.about':'Nosotros','nav.faq':'FAQ',
+    'nav.quote':'📩 Cotizar',
+    'mob.about':'Nosotros','mob.quote':'📩 Cotización Gratis','mob.back':'← Volver a la Página',
+    /* hero */
+    'hero.kicker':'Experiencia en Yate Privado',
+    'hero.h1':'<span>Tu Visión.</span><br><span>Nuestra Pasión.</span><br><span>Tu Experiencia.</span>',
+    'hero.cta1':'📩 Cotización Gratis','hero.cta2':'Ver Nuestra Flota','hero.scroll':'Desplaza',
+    /* ticker */
+    'tick.addons':'Extras para tu Experiencia',
+    /* stats */
+    'stat.guests':'Clientes Felices','stat.vessels':'Embarcaciones Disponibles',
+    'stat.range':'Rango de la Flota','stat.rated':'Experiencia 5 Estrellas',
+    /* fleet */
+    'fleet.label':'Elige tu Embarcación',
+    'fleet.h':'Nuestra <em>Flota</em> Destacada',
+    'fleet.sub':'Desde íntimos cruceros al atardecer hasta grandes celebraciones, tenemos el yate perfecto para cada ocasión. Explora nuestras embarcaciones más populares o pregúntanos por nuestra selección completa de 30+.',
+    'fleet.all':'Todos los Yates','fleet.mega':'Mega Yates 80′+','fleet.sport':'Menos de 45′',
+    /* why-us */
+    'why.label':'Por qué Heart of the Sea',
+    'why.h':'La Experiencia de <em>Charter Náutico</em> de Confianza en Miami',
+    'why.sub':'Disfruta la libertad de personalizar tu tiempo en el agua mientras hacemos el proceso de reserva simple y transparente.',
+    'why.item1.h':'Elige tu Propio Capitán y Tripulación',
+    'why.item1.p':'Como arrendador, tienes el derecho de seleccionar y contratar tu propio capitán y tripulación calificados. Para tu comodidad, podemos proporcionarte una lista de profesionales independientes y calificados.',
+    'why.item2.h':'Precios Transparentes de Charter',
+    'why.item2.p':'Las tarifas del charter y de la tripulación independiente se divulgan claramente y se manejan por separado. Sin sorpresas — solo información clara antes de reservar.',
+    'why.item3.h':'Múltiples Marinas en Miami',
+    'why.item3.p':'Salimos desde ubicaciones convenientes en toda Miami, según la embarcación y disponibilidad.',
+    'why.item4.h':'Consultas Rápidas y Fáciles por WhatsApp',
+    'why.item4.p':'Chatea directamente con nuestro equipo, explora los yates disponibles, solicita precios y comienza a planificar tu experiencia.',
+    'why.cta.kicker':'Comienza tu Aventura',
+    'why.cta.h':'¿Listo para <em>Zarpar?</em>',
+    'why.cta.p':'Nuestro equipo responde en minutos. Obtén una cotización personalizada y asegura tu fecha antes de que los mejores yates estén reservados.',
+    'why.cta.btn':'📩 Cotización Gratis por WhatsApp',
+    /* experiences */
+    'exp.label':'Eventos Especiales y Extras',
+    'exp.h':'Eleva tu <em>Experiencia de Charter</em>',
+    'exp.sub':'Cada charter puede llevarse al siguiente nivel. Toca cualquier tarjeta para descubrir lo que podemos agregar a tu día en el agua.',
+    'exp.hint':'<span class="exp-hint-icon">↩</span>Toca para descubrir',
+    'exp.card1.price':'$275 · Para 13 personas',
+    'exp.card1.items':'<li>Platos, cubiertos y vasos</li><li>Pastel de cumpleaños</li><li>Mini ramo de globos</li><li>Velas de cumpleaños</li><li>Gorros de cumpleaños</li>',
+    'exp.card1.cta':'Agrégalo a cualquier charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(\'track\',\'Contact\')" target="_blank">Escríbenos por WhatsApp</a> para reservar.',
+    'exp.card2.price':'$215 · Para 13 personas',
+    'exp.card2.items':'<li>Ramo de globos</li><li>Set de novia: velo y cintillo</li><li>Lentes de corazón ×13</li><li>Collar de shot glass ×13</li>',
+    'exp.card2.cta':'Agrégalo a cualquier charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(\'track\',\'Contact\')" target="_blank">Escríbenos por WhatsApp</a> para reservar.',
+    'exp.card3.price':'$250 · Para dos',
+    'exp.card3.items':'<li>Mini ramo de rosas</li><li>Mesa romántica con pétalos y velas LED</li><li>Tarjeta de amor personalizada</li><li>Fresas con chocolate</li><li>Tabla de charcutería gourmet</li>',
+    'exp.card3.cta':'Agrégalo a cualquier charter. <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(\'track\',\'Contact\')" target="_blank">Escríbenos por WhatsApp</a> para reservar.',
+    'exp.card4.title':'👨‍🍳 Chef Abel y su Team',
+    'exp.card4.items':'<li>Menú gourmet personalizado a bordo</li><li>Platos preparados en vivo frente a tus invitados</li><li>Atención profesional durante todo el charter</li><li>Experiencia gastronómica de lujo en el agua</li>',
+    'exp.card5.title':'🍸 Bartender Frank y su Team',
+    'exp.card5.items':'<li>Cócteles signature preparados a bordo</li><li>Servicio de barra premium durante el charter</li><li>Mixología personalizada para tu evento</li><li>Presentación elegante y profesional</li>',
+    'exp.card6.title':'🎧 DJ, Fotos y Videos',
+    'exp.card6.items':'<li>DJ en vivo con equipo profesional Pioneer</li><li>Sesión fotográfica a bordo</li><li>Video profesional de tu experiencia</li><li>Entrega editada de tus memorias</li>',
+    'exp.card7.items':'<li>Aniversario, propuesta, graduación — lo que imagines</li><li>Cuéntanos tu visión y creamos la experiencia perfecta</li><li>Propuesta personalizada con detalles y presupuesto</li><li>Todo coordinado para que solo disfrutes el momento</li>',
+    'exp.quote.btn':'Pedir presupuesto','exp.custom.btn':'Cuéntanos tu idea',
+    /* reviews */
+    'rv.label':'Lo que dicen nuestros clientes',
+    'rv.h':'Experiencias Reales, <em>Sonrisas Reales</em>',
+    'rv.sub':'Miles de clientes han navegado con nosotros. Esto es lo que algunos tienen que decir.',
+    /* faq */
+    'faq.label':'Preguntas Frecuentes',
+    'faq.h':'Todo lo que <em>Necesitas Saber</em>',
+    'faq.sub':'¿No encuentras la respuesta? Chatea con nosotros directamente — respondemos rápido.',
+    'faq.btn':'Pregúntanos lo que sea',
+    /* footer */
+    'foot.desc':'La empresa líder de charters en Miami. Lujo sin complicaciones — recuerdos para toda la vida.',
+    'foot.explore':'Explorar','foot.fleet':'Nuestra Flota','foot.exp':'Experiencias',
+    'foot.about':'Nosotros','foot.faq':'FAQ','foot.dir':'Directorio Completo',
+    'foot.exp.col':'Experiencias',
+    'foot.exp.bday':'Fiestas de Cumpleaños','foot.exp.bach':'Despedidas de Soltera',
+    'foot.exp.sunset':'Cruceros al Atardecer','foot.exp.corp':'Eventos Corporativos',
+    'foot.exp.family':'Charters Familiares',
+    'foot.contact':'Contacto','foot.wa':'💬 Escríbenos','foot.email':'✉️ Escríbenos',
+    'foot.copy':'© 2025 Heart of the Sea · Private Yacht Experience. Todos los derechos reservados.',
+    'foot.privacy':'Política de Privacidad','foot.terms':'Términos de Servicio',
+    /* modal */
+    'modal.hdr.title':'Cotización Gratis',
+    'modal.hdr.sub':'Cuéntanos sobre tu día perfecto en el agua',
+    'modal.sec.lbl':'Solicitud de Reserva',
+    'modal.name.lbl':'Nombre Completo','modal.name.err':'Por favor ingresa tu nombre completo.',
+    'modal.phone.lbl':'Número de Teléfono','modal.phone.err':'Por favor ingresa tu número de teléfono.',
+    'modal.date.lbl':'Fecha Deseada','modal.date.err':'Por favor selecciona una fecha.',
+    'modal.guests.lbl':'Número de Invitados','modal.guests.err':'Por favor indica cuántos invitados son.',
+    'modal.occ.lbl':'Ocasión','modal.occ.err':'Por favor selecciona una ocasión.',
+    'modal.budget.lbl':'Presupuesto Aproximado <span style="font-weight:400;color:var(--text-light)">(opcional)</span>',
+    'modal.occ.fam':'👨‍👩‍👧 Familia o Amigos','modal.occ.bday':'🎂 Fiesta de Cumpleaños',
+    'modal.occ.rom':'💕 Ocasión Romántica','modal.occ.bach':'🥂 Despedida de Soltera/o',
+    'modal.occ.corp':'💼 Evento Corporativo','modal.occ.just':'⛵ Por Puro Placer',
+    'modal.btn.wa':'Enviar por WhatsApp',
+    'modal.btn.email':'✉️ &nbsp;Enviar por Email',
+    'modal.note':'Al tocar se abrirá WhatsApp o tu app de correo con los detalles prellenados. Nuestro equipo responde en minutos.',
+    'modal.succ.h':'¡Reserva <em>Confirmada!</em>',
+    'modal.succ.p':'Tu solicitud fue enviada exitosamente. Nuestro equipo la revisará y te contactará en breve para confirmar disponibilidad y detalles.',
+    'modal.succ.btn':'Cerrar',
+    /* card & selects */
+    'card.sale':'OFERTA','card.feat':'Destacado',
+    'card.from':'Desde','card.upto':'Hasta','card.guests':'personas',
+    'card.gallery':'Ver Galería y Reservar',
+    'sel.range':'Selecciona un rango...','sel.flexible':'Flexible / No estoy seguro',
+  }
+};
+
+function t(key) {
+  var lang = window.LANG || 'en';
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key] !== undefined)
+    ? TRANSLATIONS[lang][key]
+    : (TRANSLATIONS.en[key] || key);
+}
+
+function setLanguage(lang) {
+  window.LANG = lang;
+  try { localStorage.setItem('hots-lang', lang); } catch(e) {}
+  document.documentElement.lang = lang;
+  /* update all data-i18n elements */
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    var val = t(key);
+    el.innerHTML = val;
+  });
+  /* update lang toggle active state — desktop */
+  var enBtn  = document.getElementById('lang-en');
+  var esBtn  = document.getElementById('lang-es');
+  var enBtnM = document.getElementById('lang-en-mob');
+  var esBtnM = document.getElementById('lang-es-mob');
+  if (enBtn)  enBtn.classList.toggle('active',  lang === 'en');
+  if (esBtn)  esBtn.classList.toggle('active',  lang === 'es');
+  if (enBtnM) enBtnM.classList.toggle('active', lang === 'en');
+  if (esBtnM) esBtnM.classList.toggle('active', lang === 'es');
+  /* re-render dynamic sections */
+  renderFleet(window._currentFleetFilter || 'all');
+  buildFaq();
+}
+
+function initLang() {
+  var saved = null;
+  try { saved = localStorage.getItem('hots-lang'); } catch(e) {}
+  var lang = saved || (navigator.language && navigator.language.startsWith('es') ? 'es' : 'en');
+  setLanguage(lang);
+}
+
 /* ---- INIT ---- */
 renderFleet('all');
 buildFaq();
+initLang();
 
 if (window.matchMedia('(max-width: 680px)').matches) {
   const hdr = document.getElementById('hdr');
