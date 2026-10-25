@@ -271,21 +271,33 @@
     .exp-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
     .exp-flip-card {
       flex: 0 0 calc(25% - 12px); max-width: calc(25% - 12px);
-      height: 380px; perspective: 1200px; cursor: pointer;
+      height: 380px;
+      perspective: 1200px; -webkit-perspective: 1200px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .exp-flip-inner {
       position: relative; width: 100%; height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+      transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
     }
-    .exp-flip-card.is-flipped .exp-flip-inner { transform: rotateY(180deg); }
+    .exp-flip-card.is-flipped .exp-flip-inner {
+      transform: rotateY(180deg); -webkit-transform: rotateY(180deg);
+    }
     .exp-flip-front, .exp-flip-back {
       position: absolute; inset: 0;
       border-radius: var(--r-md); overflow: hidden;
       backface-visibility: hidden; -webkit-backface-visibility: hidden;
       border: 1px solid rgba(200,151,63,.22);
+      transform: translateZ(0); -webkit-transform: translateZ(0);
     }
-    .exp-flip-back { transform: rotateY(180deg); }
+    .exp-flip-back {
+      transform: rotateY(180deg) translateZ(0);
+      -webkit-transform: rotateY(180deg) translateZ(0);
+    }
     .exp-flip-bg {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
@@ -339,6 +351,7 @@
       border-radius: 50%; width: 24px; height: 24px; cursor: pointer;
       font-size: 11px; display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-left: 8px; transition: all .2s ease;
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
     }
     .exp-flip-close:hover { border-color: var(--gold); color: var(--gold); }
     .exp-flip-price { font-size: .78rem; color: rgba(255,255,255,.5); margin-bottom: 12px; letter-spacing: .04em; }
@@ -1580,6 +1593,30 @@ function flipExpCard(card) {
   document.querySelectorAll('.exp-flip-card.is-flipped').forEach(function(c) { c.classList.remove('is-flipped'); });
   if (!wasFlipped) { card.classList.add('is-flipped'); }
 }
+/* Touch handling — fire instantly on touchend, suppress the delayed click */
+(function () {
+  var touchCard = null, tsX = 0, tsY = 0;
+  document.querySelectorAll('.exp-flip-card').forEach(function (card) {
+    card.addEventListener('touchstart', function (e) {
+      touchCard = card; tsX = e.touches[0].clientX; tsY = e.touches[0].clientY;
+    }, { passive: true });
+    card.addEventListener('touchend', function (e) {
+      if (!touchCard) return;
+      var dx = e.changedTouches[0].clientX - tsX;
+      var dy = e.changedTouches[0].clientY - tsY;
+      if (Math.sqrt(dx*dx + dy*dy) < 10) { // tap, not scroll
+        e.preventDefault(); // suppress the 300ms ghost click
+        var isClose = e.target.closest('.exp-flip-close');
+        if (isClose) {
+          flipExpCard(card);
+        } else if (!e.target.closest('a')) {
+          flipExpCard(card);
+        }
+      }
+      touchCard = null;
+    }, { passive: false });
+  });
+}());
 
 /* ---- LAZY-LOAD EXPERIENCE CARD BACKGROUNDS ---- */
 (function() {
