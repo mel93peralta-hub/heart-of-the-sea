@@ -133,6 +133,12 @@
     .hdr-nav .btn-cta { margin-left: 10px; background: var(--coral); color: var(--white) !important; padding: 9px 22px !important; border-radius: 40px !important; }
     .hdr-nav .btn-cta:hover { background: var(--coral-dark) !important; }
     .hdr-hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; margin-left: auto; }
+    .lang-toggle-hdr { display: none; }
+    @media (max-width: 680px) {
+      .lang-toggle-hdr { display: flex; align-items: center; gap: 0; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 100px; padding: 3px 5px; margin-left: auto; margin-right: 8px; }
+      .lang-toggle-hdr button { background: transparent; border: none; color: rgba(255,255,255,.55); font-size: 11px; font-weight: 700; letter-spacing: .5px; cursor: pointer; padding: 3px 7px; border-radius: 100px; transition: background .18s, color .18s; font-family: var(--font-body); }
+      .lang-toggle-hdr button.active { background: rgba(255,255,255,.18); color: #fff; }
+    }
     .hdr-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); transition: transform .3s var(--ease), opacity .3s var(--ease); }
     .hdr-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .hdr-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
@@ -648,6 +654,11 @@
       </div>
       <a href="#" onclick="openGeneralModal();return false;" class="btn-cta" data-i18n="nav.quote">📩 Get a Quote</a>
     </nav>
+    <div class="lang-toggle-hdr">
+      <button onclick="setLanguage('en')" id="lang-en-hdr" class="active">EN</button>
+      <span class="lang-sep">|</span>
+      <button onclick="setLanguage('es')" id="lang-es-hdr">ES</button>
+    </div>
     <button class="hdr-hamburger" id="hdr-ham" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -1912,15 +1923,19 @@ function setLanguage(lang) {
     var val = t(key);
     el.innerHTML = val;
   });
-  /* update lang toggle active state — desktop */
+  /* update lang toggle active state — all instances */
   var enBtn  = document.getElementById('lang-en');
   var esBtn  = document.getElementById('lang-es');
   var enBtnM = document.getElementById('lang-en-mob');
   var esBtnM = document.getElementById('lang-es-mob');
+  var enBtnH = document.getElementById('lang-en-hdr');
+  var esBtnH = document.getElementById('lang-es-hdr');
   if (enBtn)  enBtn.classList.toggle('active',  lang === 'en');
   if (esBtn)  esBtn.classList.toggle('active',  lang === 'es');
   if (enBtnM) enBtnM.classList.toggle('active', lang === 'en');
   if (esBtnM) esBtnM.classList.toggle('active', lang === 'es');
+  if (enBtnH) enBtnH.classList.toggle('active', lang === 'en');
+  if (esBtnH) esBtnH.classList.toggle('active', lang === 'es');
   /* re-render dynamic sections */
   renderFleet(window._currentFleetFilter || 'all');
   buildFaq();
