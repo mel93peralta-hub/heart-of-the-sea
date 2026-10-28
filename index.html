@@ -562,6 +562,8 @@
     .btn-succ-close:hover { background: var(--navy); color: white; border-color: var(--navy); }
 
     @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } .fg.span2 { grid-column: 1; } }
+    /* Prevent iOS auto-zoom on input focus (font-size must be ≥16px) */
+    @media (max-width: 768px) { .fg input, .fg select { font-size: 16px; } }
 
     /* Occasion chips */
     .occ-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px; }
@@ -1403,8 +1405,9 @@ function toggleFaq(i) {
 /* ================================================================
    BOOKING MODAL + GALLERY
 ================================================================ */
-let activeYacht = null;
-let galleryIdx  = 0;
+let activeYacht   = null;
+let galleryIdx    = 0;
+let _savedScrollY = 0;
 
 function openModal(idx) {
   activeYacht = YACHTS[idx];
@@ -1440,8 +1443,12 @@ function openModal(idx) {
   document.querySelector('.modal-gallery-area').style.display = '';
   document.getElementById('modal-general-hdr').classList.remove('show');
 
-  document.getElementById('booking-overlay').classList.add('open');
+  _savedScrollY = window.scrollY;
   document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top      = '-' + _savedScrollY + 'px';
+  document.body.style.width    = '100%';
+  document.getElementById('booking-overlay').classList.add('open');
 }
 
 function renderGallery() {
@@ -1514,7 +1521,11 @@ function jumpPhoto(i) {
 
 function closeModal() {
   document.getElementById('booking-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow  = '';
+  document.body.style.position  = '';
+  document.body.style.top       = '';
+  document.body.style.width     = '';
+  window.scrollTo(0, _savedScrollY);
 }
 
 function overlayClick(e) {
@@ -1640,8 +1651,12 @@ function openGeneralModal() {
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('f-date').min   = today;
   document.getElementById('f-date').value = '';
-  document.getElementById('booking-overlay').classList.add('open');
+  _savedScrollY = window.scrollY;
   document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top      = '-' + _savedScrollY + 'px';
+  document.body.style.width    = '100%';
+  document.getElementById('booking-overlay').classList.add('open');
   if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: 'General Quote', content_category: 'yacht_charter', currency: 'USD' });
   if (window.gtag) gtag('event', 'begin_checkout', { currency: 'USD', item_category: 'general_quote' });
 }
@@ -1652,8 +1667,24 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ---- MOBILE NAV ---- */
-function openMobileNav()  { document.getElementById('mob-nav').classList.add('open');    document.getElementById('hdr-ham').classList.add('open');    document.body.style.overflow='hidden'; }
-function closeMobileNav() { document.getElementById('mob-nav').classList.remove('open'); document.getElementById('hdr-ham').classList.remove('open'); document.body.style.overflow=''; }
+function openMobileNav()  {
+  _savedScrollY = window.scrollY;
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top      = '-' + _savedScrollY + 'px';
+  document.body.style.width    = '100%';
+  document.getElementById('mob-nav').classList.add('open');
+  document.getElementById('hdr-ham').classList.add('open');
+}
+function closeMobileNav() {
+  document.getElementById('mob-nav').classList.remove('open');
+  document.getElementById('hdr-ham').classList.remove('open');
+  document.body.style.overflow  = '';
+  document.body.style.position  = '';
+  document.body.style.top       = '';
+  document.body.style.width     = '';
+  window.scrollTo(0, _savedScrollY);
+}
 function toggleMobileNav() { document.getElementById('mob-nav').classList.contains('open') ? closeMobileNav() : openMobileNav(); }
 function goToTop() { closeMobileNav(); window.scrollTo({ top:0, behavior:'smooth' }); }
 
