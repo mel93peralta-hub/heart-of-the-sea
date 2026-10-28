@@ -1167,10 +1167,6 @@
             <input id="f-name" type="text" placeholder="John Smith" autocomplete="name" />
             <span class="err" data-i18n="modal.name.err">Please enter your full name.</span>
           </div>
-          <div class="fg span2" id="fg-address">
-            <label for="f-address" data-i18n="modal.addr.lbl">Address <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
-            <input id="f-address" type="text" placeholder="123 Main St, Miami, FL" autocomplete="street-address" />
-          </div>
           <div class="fg" id="fg-phone">
             <label for="f-phone" data-i18n="modal.phone.lbl">Phone Number</label>
             <input id="f-phone" type="tel" placeholder="+1 (305) 000-0000" autocomplete="tel" />
@@ -1430,7 +1426,6 @@ function openModal(idx) {
     document.getElementById(id).classList.remove('has-err'));
   document.getElementById('f-name').value    = '';
   document.getElementById('f-phone').value   = '';
-  document.getElementById('f-address').value = '';
   document.getElementById('f-people').value  = '';
   document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('f-occasion').value = '';
@@ -1585,17 +1580,14 @@ function sendRequest(channel) {
   const date    = fmtDate(document.getElementById('f-date').value);
   const ppl     = document.getElementById('f-people').value;
   const budget  = document.getElementById('f-budget') ? document.getElementById('f-budget').value : '';
-  const address = (document.getElementById('f-address') ? document.getElementById('f-address').value.trim() : '');
   const vesselLines = y
     ? [`*Vessel:* ${y.name}`, `*Marina:* ${y.loc}`, '']
     : [`*Vessel:* No preference — please suggest options`, ''];
   const budgetLine  = (!y && budget)  ? [`*Approximate Budget:* ${budget}`]  : [];
-  const addressLine = address         ? [`*Address:* ${address}`]             : [];
   const lines = [
     '🛥️ *BOOKING REQUEST — Heart of the Sea*','',
     ...vesselLines,
     `*Name:* ${name}`,`*Phone:* ${phone}`,
-    ...addressLine,
     `*Desired Date:* ${date}`,`*Approx. Guests:* ${ppl}`,`*Occasion:* ${occ}`,
     ...budgetLine,'',
     'Hi! I\'d like to get a quote. Could you confirm availability? 🙏',
@@ -1632,7 +1624,6 @@ function openGeneralModal() {
     document.getElementById(id).classList.remove('has-err'));
   document.getElementById('f-name').value    = '';
   document.getElementById('f-phone').value   = '';
-  document.getElementById('f-address').value = '';
   document.getElementById('f-people').value  = '';
   document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('f-occasion').value = '';
@@ -1836,7 +1827,6 @@ const TRANSLATIONS = {
     'modal.hdr.sub':'Tell us about your perfect day on the water',
     'modal.sec.lbl':'Booking Request',
     'modal.name.lbl':'Full Name','modal.name.err':'Please enter your full name.',
-    'modal.addr.lbl':'Address <span style="font-weight:400;color:var(--text-light)">(optional)</span>',
     'modal.phone.lbl':'Phone Number','modal.phone.err':'Please enter your phone number.',
     'modal.date.lbl':'Desired Date','modal.date.err':'Please select a date.',
     'modal.guests.lbl':'Approximate Guests','modal.guests.err':'Please indicate how many guests.',
@@ -1943,7 +1933,6 @@ const TRANSLATIONS = {
     'modal.hdr.sub':'Cuéntanos sobre tu día perfecto en el agua',
     'modal.sec.lbl':'Solicitud de Reserva',
     'modal.name.lbl':'Nombre Completo','modal.name.err':'Por favor ingresa tu nombre completo.',
-    'modal.addr.lbl':'Dirección <span style="font-weight:400;color:var(--text-light)">(opcional)</span>',
     'modal.phone.lbl':'Número de Teléfono','modal.phone.err':'Por favor ingresa tu número de teléfono.',
     'modal.date.lbl':'Fecha Deseada','modal.date.err':'Por favor selecciona una fecha.',
     'modal.guests.lbl':'Número de Invitados','modal.guests.err':'Por favor indica cuántos invitados son.',
