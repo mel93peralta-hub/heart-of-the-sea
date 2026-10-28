@@ -369,6 +369,10 @@
     }
     .exp-flip-items li::before { content:'›'; position:absolute; left:2px; color:var(--gold); font-size:1rem; line-height:1.5; }
     .exp-flip-items li:last-child { border-bottom: none; }
+    .exp-flip-items li.exp-sub { color: var(--gold); font-weight: 600; padding-left: 0; border-bottom: none; padding-top: 7px; }
+    .exp-flip-items li.exp-sub::before { content: none; }
+    .exp-flip-items:has(.exp-sub) li { padding-top: 3px; padding-bottom: 3px; }
+    .exp-flip-items:has(.exp-sub) li.exp-sub { padding-top: 6px; }
     .exp-flip-cta {
       font-size: .71rem; color: rgba(255,255,255,.48); line-height: 1.55;
       padding-top: 10px; border-top: 1px solid rgba(200,151,63,.2); margin-top: auto;
@@ -845,8 +849,8 @@
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card2.items">
-                  <li>Balloon bouquet</li>
-                  <li>Bride captain hat with veil</li>
+                  <li>Bridal Balloon Bouquet</li>
+                  <li>Bride’s Captain Hat with Veil</li>
                   <li>Bride-to-be sash</li>
                   <li>Heart-shaped sunglasses ×13</li>
                   <li>Shot glass necklaces ×13</li>
@@ -866,7 +870,7 @@
             <div class="exp-flip-bg" data-bg="images/events/event-romantic-occasion.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
-              <h3 class="exp-flip-title" data-i18n="exp.card3.title">🌹 Romantic Occasion</h3>
+              <h3 class="exp-flip-title" data-i18n="exp.card3.title">🌹 Romantic Experience</h3>
             </div>
           </div>
           <div class="exp-flip-back">
@@ -874,15 +878,15 @@
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title" data-i18n="exp.card3.title">🌹 Romantic Occasion</h3>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card3.title">🌹 Romantic Experience</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card3.items">
-                  <li>Rose bouquet</li>
-                  <li>Table setup with rose petals &amp; LED candles</li>
-                  <li>Personalized love card</li>
-                  <li>Chocolate-covered strawberries</li>
-                  <li>Gourmet charcuterie board</li>
+                  <li>Fresh Rose Bouquet</li>
+                  <li>Romantic Table Setup with Rose Petals &amp; LED Candles</li>
+                  <li>Personalized Love Note</li>
+                  <li>Chocolate-Covered Strawberries</li>
+                  <li>Gourmet Charcuterie Board</li>
                 </ul>
                 <p class="exp-flip-price" data-i18n="exp.card3.price">$250 · For two</p>
                 <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
@@ -899,7 +903,7 @@
             <div class="exp-flip-bg" data-bg="images/events/event-chef-onboard.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
-              <h3 class="exp-flip-title" data-i18n="exp.card4.title">👨‍🍳 Chef Onboard</h3>
+              <h3 class="exp-flip-title" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</h3>
             </div>
           </div>
           <div class="exp-flip-back">
@@ -907,14 +911,14 @@
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title" data-i18n="exp.card4.title">👨‍🍳 Chef Onboard</h3>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card4.items">
                   <li>American Culinary Federation–certified Executive Chef Abel and his team</li>
                   <li>Customized menus</li>
-                  <li>Live cooking by a professional culinary team</li>
-                  <li>Exceptional onboard dining &amp; service</li>
+                  <li>Live Onboard Cooking Experience</li>
+                  <li>Luxury Dining &amp; Personalized Service</li>
                 </ul>
                 <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
@@ -942,10 +946,10 @@
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card5.items">
-                  <li>Professional mixologist onboard</li>
-                  <li>Basic &amp; Premium bar packages available</li>
-                  <li>Selection of signature cocktails</li>
-                  <li>Personalized cocktail service for your celebration</li>
+                  <li>Professional Mixologist</li>
+                  <li>Basic &amp; Premium Bar Packages</li>
+                  <li>Signature Cocktails &amp; Premium Spirits</li>
+                  <li>Customized Cocktail Experience</li>
                 </ul>
                 <p class="exp-flip-price" data-i18n="exp.card5.price">Basic $200/hr · Premium $325/hr</p>
                 <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
@@ -962,7 +966,7 @@
             <div class="exp-flip-bg" data-bg="images/events/event-dj-photos.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
-              <h3 class="exp-flip-title" data-i18n="exp.card6.title">🎧 DJ, Photos &amp; Videos</h3>
+              <h3 class="exp-flip-title" data-i18n="exp.card6.title">🎧 DJ &amp; Photography Onboard</h3>
             </div>
           </div>
           <div class="exp-flip-back">
@@ -970,17 +974,19 @@
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title" data-i18n="exp.card6.title">🎧 DJ, Photos &amp; Videos</h3>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card6.title">🎧 DJ &amp; Photography Onboard</h3>
                   <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card6.items">
+                  <li class="exp-sub">Live DJ Experience</li>
                   <li>Afro House, House, Tech House, Minimal, Salsa &amp; Reggaeton</li>
-                  <li>Music tailored to your vibe</li>
-                  <li>Onboard photoshoot</li>
-                  <li>Limited number of professionally edited photos included</li>
-                  <li>Capture unforgettable moments</li>
+                  <li>Music Tailored to Your Vibe</li>
+                  <li class="exp-sub">Professional Photography</li>
+                  <li>Onboard Photoshoot</li>
+                  <li>Selection of Professionally Edited Photos Included</li>
+                  <li>Capture Unforgettable Moments</li>
                 </ul>
-                <p class="exp-flip-price" data-i18n="exp.card6.price">DJ $250/hr · Photography $250/hr</p>
+                <p class="exp-flip-price" data-i18n="exp.card6.price">DJ Starting at $250/hr · Photography Starting at $250/hr</p>
                 <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
@@ -1747,20 +1753,20 @@ const TRANSLATIONS = {
     'exp.card1.price':'$275 · For 13 people',
     'exp.card1.items':'<li>Birthday cake<\/li><li>Birthday balloon bouquet<\/li><li>Candles<\/li><li>Party hats<\/li><li>Elegant Plates, Cups &amp; Cutlery<\/li>',
     'exp.card2.price':'$215 · For 13 people',
-    'exp.card2.items':'<li>Balloon bouquet<\/li><li>Bride captain hat with veil<\/li><li>Bride-to-be sash<\/li><li>Heart-shaped sunglasses ×13<\/li><li>Shot glass necklaces ×13<\/li>',
+    'exp.card2.items':'<li>Bridal Balloon Bouquet<\/li><li>Bride’s Captain Hat with Veil<\/li><li>Bride-to-be sash<\/li><li>Heart-shaped sunglasses ×13<\/li><li>Shot glass necklaces ×13<\/li>',
     'exp.card3.price':'$250 · For two',
-    'exp.card3.items':'<li>Rose bouquet<\/li><li>Table setup with rose petals &amp; LED candles<\/li><li>Personalized love card<\/li><li>Chocolate-covered strawberries<\/li><li>Gourmet charcuterie board<\/li>',
+    'exp.card3.items':'<li>Fresh Rose Bouquet<\/li><li>Romantic Table Setup with Rose Petals &amp; LED Candles<\/li><li>Personalized Love Note<\/li><li>Chocolate-Covered Strawberries<\/li><li>Gourmet Charcuterie Board<\/li>',
     'exp.card1.title':'🎂 Birthday Bundle',
     'exp.card2.title':'💍 Bachelorette',
-    'exp.card3.title':'🌹 Romantic Occasion',
-    'exp.card4.title':'👨‍🍳 Chef Onboard',
-    'exp.card4.items':'<li>American Culinary Federation–certified Executive Chef Abel and his team<\/li><li>Customized menus<\/li><li>Live cooking by a professional culinary team<\/li><li>Exceptional onboard dining &amp; service<\/li>',
+    'exp.card3.title':'🌹 Romantic Experience',
+    'exp.card4.title':'🧑‍🍳 Private Chef on Board',
+    'exp.card4.items':'<li>American Culinary Federation–certified Executive Chef Abel and his team<\/li><li>Customized menus<\/li><li>Live Onboard Cooking Experience<\/li><li>Luxury Dining &amp; Personalized Service<\/li>',
     'exp.card5.title':'🍸 Bartender Onboard',
-    'exp.card5.items':'<li>Professional mixologist onboard</li><li>Basic & Premium bar packages available</li><li>Selection of signature cocktails</li><li>Personalized cocktail service for your celebration</li>',
+    'exp.card5.items':'<li>Professional Mixologist</li><li>Basic & Premium Bar Packages</li><li>Signature Cocktails & Premium Spirits</li><li>Customized Cocktail Experience</li>',
     'exp.card5.price':'Basic $200/hr · Premium $325/hr',
-    'exp.card6.title':'🎧 DJ, Photos &amp; Videos',
-    'exp.card6.items':'<li>Afro House, House, Tech House, Minimal, Salsa & Reggaeton</li><li>Music tailored to your vibe</li><li>Onboard photoshoot</li><li>Limited number of professionally edited photos included</li><li>Capture unforgettable moments</li>',
-    'exp.card6.price':'DJ $250/hr · Photography $250/hr',
+    'exp.card6.title':'🎧 DJ &amp; Photography Onboard',
+    'exp.card6.items':'<li class="exp-sub">Live DJ Experience</li><li>Afro House, House, Tech House, Minimal, Salsa & Reggaeton</li><li>Music Tailored to Your Vibe</li><li class="exp-sub">Professional Photography</li><li>Onboard Photoshoot</li><li>Selection of Professionally Edited Photos Included</li><li>Capture Unforgettable Moments</li>',
+    'exp.card6.price':'DJ Starting at $250/hr · Photography Starting at $250/hr',
     'exp.card7.items':'<li>Anniversaries, proposals, graduations &amp; special occasions<\/li><li>Custom decorations, flowers, massages &amp; more<\/li><li>Personalized experiences tailored to your vision<\/li><li>We handle every detail, you enjoy the moment<\/li>',
     'exp.card7.title':'✨ Custom Celebration',
     'exp.wa.btn':'Book via WhatsApp',
@@ -1853,20 +1859,20 @@ const TRANSLATIONS = {
     'exp.card1.price':'$275 · Para 13 personas',
     'exp.card1.items':'<li>Pastel de cumpleaños<\/li><li>Ramo de globos de cumpleaños<\/li><li>Velas<\/li><li>Gorros de fiesta<\/li><li>Platos, vasos y cubiertos elegantes<\/li>',
     'exp.card2.price':'$215 · Para 13 personas',
-    'exp.card2.items':'<li>Ramo de globos<\/li><li>Gorra de capitana de novia con velo<\/li><li>Banda de novia<\/li><li>Lentes de corazón ×13<\/li><li>Collares de shot glass ×13<\/li>',
+    'exp.card2.items':'<li>Ramo de globos nupcial<\/li><li>Gorra de capitana de novia con velo<\/li><li>Banda de novia<\/li><li>Lentes de corazón ×13<\/li><li>Collares de shot glass ×13<\/li>',
     'exp.card3.price':'$250 · Para dos',
-    'exp.card3.items':'<li>Ramo de rosas<\/li><li>Mesa con pétalos de rosas y velas LED<\/li><li>Tarjeta de amor personalizada<\/li><li>Fresas con chocolate<\/li><li>Tabla de charcutería gourmet<\/li>',
+    'exp.card3.items':'<li>Ramo de rosas frescas<\/li><li>Mesa romántica con pétalos de rosa y velas LED<\/li><li>Nota de amor personalizada<\/li><li>Fresas cubiertas de chocolate<\/li><li>Tabla de charcutería gourmet<\/li>',
     'exp.card1.title':'🎂 Paquete de Cumpleaños',
     'exp.card2.title':'💍 Despedida de Soltera',
-    'exp.card3.title':'🌹 Ocasión Romántica',
-    'exp.card4.title':'👨‍🍳 Chef Onboard',
-    'exp.card4.items':'<li>Chef ejecutivo certificado por la Federación Culinaria Americana Abel y su equipo<\/li><li>Menús personalizados<\/li><li>Cocina en vivo por un equipo culinario profesional<\/li><li>Comida y servicio excepcional a bordo<\/li>',
+    'exp.card3.title':'🌹 Experiencia Romántica',
+    'exp.card4.title':'🧑‍🍳 Chef Privado a Bordo',
+    'exp.card4.items':'<li>Chef ejecutivo certificado por la Federación Culinaria Americana Abel y su equipo<\/li><li>Menús personalizados<\/li><li>Experiencia de cocina en vivo a bordo<\/li><li>Cena de lujo y servicio personalizado<\/li>',
     'exp.card5.title':'🍸 Bartender Onboard',
-    'exp.card5.items':'<li>Mixólogo profesional a bordo</li><li>Paquetes básicos y premium de barra disponibles</li><li>Selección de cócteles signature</li><li>Servicio de cócteles personalizado para tu celebración</li>',
+    'exp.card5.items':'<li>Mixólogo profesional</li><li>Paquetes de barra Básico y Premium</li><li>Cócteles signature y licores premium</li><li>Experiencia de coctelería personalizada</li>',
     'exp.card5.price':'Básico $200/hr · Premium $325/hr',
-    'exp.card6.title':'🎧 DJ, Fotos y Videos',
-    'exp.card6.items':'<li>Afro House, House, Tech House, Minimal, Salsa & Reggaeton</li><li>Música adaptada a tu vibra</li><li>Sesión de fotos a bordo</li><li>Número limitado de fotos editadas profesionalmente incluidas</li><li>Captura momentos inolvidables</li>',
-    'exp.card6.price':'DJ $250/hr · Fotografía $250/hr',
+    'exp.card6.title':'🎧 DJ y Fotografía a Bordo',
+    'exp.card6.items':'<li class="exp-sub">Experiencia DJ en vivo</li><li>Afro House, House, Tech House, Minimal, Salsa & Reggaeton</li><li>Música adaptada a tu vibra</li><li class="exp-sub">Fotografía profesional</li><li>Sesión de fotos a bordo</li><li>Selección de fotos editadas profesionalmente incluida</li><li>Captura momentos inolvidables</li>',
+    'exp.card6.price':'DJ desde $250/hr · Fotografía desde $250/hr',
     'exp.card7.items':'<li>Aniversarios, propuestas, graduaciones &amp; ocasiones especiales<\/li><li>Decoraciones personalizadas, flores, masajes y más<\/li><li>Experiencias personalizadas adaptadas a tu visión<\/li><li>Nos encargamos de todo, tú disfrutas el momento<\/li>',
     'exp.card7.title':'✨ Celebración Personalizada',
     'exp.wa.btn':'Reservar por WhatsApp',
