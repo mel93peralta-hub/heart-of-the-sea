@@ -132,6 +132,64 @@
     .hdr-nav a:hover { color: var(--gold); background: rgba(200,151,63,.08); }
     .hdr-nav .btn-cta { margin-left: 10px; background: var(--coral); color: var(--white) !important; padding: 9px 22px !important; border-radius: 40px !important; }
     .hdr-nav .btn-cta:hover { background: var(--coral-dark) !important; }
+    /* NAV DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .nav-arrow { font-size: .55rem; margin-left: 2px; display: inline-block; transition: transform var(--dur) var(--ease); }
+    .nav-dropdown:hover .nav-arrow,
+    .nav-dropdown:focus-within .nav-arrow { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: var(--navy); border: 1px solid rgba(200,151,63,.22);
+      border-radius: var(--r-md); padding: 6px 0; min-width: 215px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+      box-shadow: 0 14px 42px rgba(4,27,63,.45); z-index: 300;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-menu::before {
+      content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      border: 7px solid transparent; border-bottom-color: rgba(200,151,63,.22);
+    }
+    .nav-dropdown-menu::after {
+      content: ''; position: absolute; bottom: calc(100% - 1px); left: 50%; transform: translateX(-50%);
+      border: 7px solid transparent; border-bottom-color: var(--navy);
+    }
+    .nav-dropdown-menu a {
+      display: block !important; padding: 9px 18px !important;
+      font-size: .72rem !important; font-weight: 600 !important;
+      letter-spacing: .05em !important; text-transform: uppercase !important;
+      color: rgba(200,151,63,.8) !important; background: none !important;
+      border-radius: 0 !important; white-space: nowrap;
+    }
+    .nav-dropdown-menu a:hover { color: var(--gold) !important; background: rgba(200,151,63,.08) !important; }
+    /* Mobile sub-menu */
+    .mob-exp-wrap { border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .mob-exp-toggle {
+      display: flex; align-items: center; justify-content: space-between; width: 100%;
+      font-family: var(--font-display); font-size: 2rem; font-weight: 300;
+      color: rgba(200,151,63,.85); padding: 14px 0;
+      background: none; border: none; cursor: pointer; text-align: left;
+      transition: color .2s, padding-left .2s; -webkit-tap-highlight-color: transparent;
+    }
+    .mob-exp-toggle:hover, .mob-exp-toggle.open { color: var(--coral); padding-left: 6px; }
+    .mob-exp-arrow { font-size: 1rem; opacity: .4; transition: transform .25s var(--ease); display: inline-block; flex-shrink: 0; }
+    .mob-exp-toggle.open .mob-exp-arrow { transform: rotate(90deg); opacity: .75; }
+    .mob-exp-sub { display: none; flex-direction: column; padding: 0 0 12px 14px; }
+    .mob-exp-sub.open { display: flex; }
+    .mob-exp-sub a {
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 300;
+      color: rgba(200,151,63,.65); padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: color .2s, padding-left .2s;
+    }
+    .mob-exp-sub a:last-child { border-bottom: none; }
+    .mob-exp-sub a:hover { color: var(--coral); padding-left: 4px; }
     .hdr-hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; margin-left: auto; }
     .lang-toggle-hdr { display: none; }
     @media (max-width: 680px) {
@@ -650,7 +708,18 @@
     </a>
     <nav class="hdr-nav">
       <a href="#fleet" data-i18n="nav.fleet">Our Fleet</a>
-      <a href="#experiences" data-i18n="nav.exp">Experiences</a>
+      <div class="nav-dropdown">
+        <a href="#experiences" class="nav-dropdown-toggle" data-i18n="nav.exp">Experiences <span class="nav-arrow">&#9660;</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="#experiences" onclick="scrollToExp(0);return false;" data-i18n="exp.card1.title">&#127874; Birthday Bundle</a>
+          <a href="#experiences" onclick="scrollToExp(1);return false;" data-i18n="exp.card2.title">&#128141; Bachelorette</a>
+          <a href="#experiences" onclick="scrollToExp(2);return false;" data-i18n="exp.card3.title">&#127801; Romantic Experience</a>
+          <a href="#experiences" onclick="scrollToExp(3);return false;" data-i18n="exp.card4.title">&#129473; Private Chef on Board</a>
+          <a href="#experiences" onclick="scrollToExp(4);return false;" data-i18n="exp.card5.title">&#127864; Bartender Onboard</a>
+          <a href="#experiences" onclick="scrollToExp(5);return false;" data-i18n="exp.card6.title">&#127911; DJ &amp; Photography Onboard</a>
+          <a href="#experiences" onclick="scrollToExp(6);return false;" data-i18n="exp.card7.title">&#10024; Custom Celebration</a>
+        </div>
+      </div>
       <a href="#why-us" data-i18n="nav.about">About</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
       <div class="lang-toggle">
@@ -681,7 +750,20 @@
   </div>
   <nav class="mob-nav-links">
     <a href="#fleet"       onclick="closeMobileNav()"><span data-i18n="nav.fleet">Our Fleet</span>       <span class="arrow">›</span></a>
-    <a href="#experiences" onclick="closeMobileNav()"><span data-i18n="nav.exp">Experiences</span>      <span class="arrow">›</span></a>
+    <div class="mob-exp-wrap">
+      <button class="mob-exp-toggle" id="mob-exp-toggle" onclick="toggleMobExpSub(this)">
+        <span data-i18n="nav.exp">Experiences</span><span class="mob-exp-arrow">›</span>
+      </button>
+      <div class="mob-exp-sub" id="mob-exp-sub">
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(0);return false;" data-i18n="exp.card1.title">🎂 Birthday Bundle <span style="opacity:.3">›</span></a>
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(1);return false;" data-i18n="exp.card2.title">💍 Bachelorette <span style="opacity:.3">›</span></a>
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(2);return false;" data-i18n="exp.card3.title">🌹 Romantic Experience <span style="opacity:.3">›</span></a>
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(3);return false;" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board <span style="opacity:.3">›</span></a>
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(4);return false;" data-i18n="exp.card5.title">🍸 Bartender Onboard <span style="opacity:.3">›</span></a>
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(5);return false;" data-i18n="exp.card6.title">🎧 DJ &amp; Photography Onboard <span style="opacity:.3">›</span></a>
+        <a href="#experiences" onclick="closeMobileNav();scrollToExp(6);return false;" data-i18n="exp.card7.title">✨ Custom Celebration <span style="opacity:.3">›</span></a>
+      </div>
+    </div>
     <a href="#why-us"      onclick="closeMobileNav()"><span data-i18n="mob.about">About Us</span>         <span class="arrow">›</span></a>
     <a href="#faq"         onclick="closeMobileNav()"><span data-i18n="nav.faq">FAQ</span>              <span class="arrow">›</span></a>
   </nav>
@@ -1683,6 +1765,22 @@ document.getElementById('hdr-ham').addEventListener('click', toggleMobileNav);
 document.getElementById('mob-close').addEventListener('click', closeMobileNav);
 document.querySelector('.mob-nav-back').addEventListener('click', closeMobileNav);
 document.getElementById('mob-nav-logo').addEventListener('click', goToTop);
+
+/* ---- NAV DROPDOWN: SCROLL TO EXPERIENCE ---- */
+function scrollToExp(idx) {
+  var cards = document.querySelectorAll('.exp-flip-card');
+  var card  = cards[idx];
+  if (!card) return;
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(function() {
+    if (!card.classList.contains('is-flipped')) flipExpCard(card);
+  }, 600);
+}
+function toggleMobExpSub(btn) {
+  var sub = document.getElementById('mob-exp-sub');
+  var isOpen = sub.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
 
 /* ---- EXPERIENCE CARD FLIP ---- */
 function flipExpCard(card) {
