@@ -707,7 +707,16 @@
       </div>
     </a>
     <nav class="hdr-nav">
-      <a href="#fleet" data-i18n="nav.fleet">Our Fleet</a>
+      <div class="nav-dropdown">
+        <a href="#fleet" class="nav-dropdown-toggle" data-i18n="nav.fleet">Our Fleet <span class="nav-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="#fleet" onclick="scrollToFleet('all');return false;" data-i18n="fleet.all">All Yachts</a>
+          <a href="#fleet" onclick="scrollToFleet('mega');return false;" data-i18n="fleet.mega">Mega Yachts 80′+</a>
+          <a href="#fleet" onclick="scrollToFleet('super');return false;" data-i18n="fleet.super">60′ – 79′</a>
+          <a href="#fleet" onclick="scrollToFleet('mid');return false;" data-i18n="fleet.mid">45′ – 59′</a>
+          <a href="#fleet" onclick="scrollToFleet('sport');return false;" data-i18n="fleet.sport">Under 45′</a>
+        </div>
+      </div>
       <div class="nav-dropdown">
         <a href="#experiences" class="nav-dropdown-toggle" data-i18n="nav.exp">Experiences <span class="nav-arrow">&#9660;</span></a>
         <div class="nav-dropdown-menu">
@@ -749,7 +758,18 @@
     <button id="mob-close" aria-label="Close menu">✕</button>
   </div>
   <nav class="mob-nav-links">
-    <a href="#fleet"       onclick="closeMobileNav()"><span data-i18n="nav.fleet">Our Fleet</span>       <span class="arrow">›</span></a>
+    <div class="mob-exp-wrap">
+      <button class="mob-exp-toggle" id="mob-fleet-toggle" onclick="toggleMobFleetSub(this)">
+        <span data-i18n="nav.fleet">Our Fleet</span><span class="mob-exp-arrow">›</span>
+      </button>
+      <div class="mob-exp-sub" id="mob-fleet-sub">
+        <a href="#fleet" onclick="closeMobileNav();scrollToFleet('all');return false;" data-i18n="fleet.all">All Yachts <span style="opacity:.3">›</span></a>
+        <a href="#fleet" onclick="closeMobileNav();scrollToFleet('mega');return false;" data-i18n="fleet.mega">Mega Yachts 80′+ <span style="opacity:.3">›</span></a>
+        <a href="#fleet" onclick="closeMobileNav();scrollToFleet('super');return false;" data-i18n="fleet.super">60′ – 79′ <span style="opacity:.3">›</span></a>
+        <a href="#fleet" onclick="closeMobileNav();scrollToFleet('mid');return false;" data-i18n="fleet.mid">45′ – 59′ <span style="opacity:.3">›</span></a>
+        <a href="#fleet" onclick="closeMobileNav();scrollToFleet('sport');return false;" data-i18n="fleet.sport">Under 45′ <span style="opacity:.3">›</span></a>
+      </div>
+    </div>
     <div class="mob-exp-wrap">
       <button class="mob-exp-toggle" id="mob-exp-toggle" onclick="toggleMobExpSub(this)">
         <span data-i18n="nav.exp">Experiences</span><span class="mob-exp-arrow">›</span>
@@ -1782,6 +1802,25 @@ function toggleMobExpSub(btn) {
   btn.classList.toggle('open', isOpen);
 }
 
+/* ---- NAV DROPDOWN: FLEET FILTER ---- */
+function scrollToFleet(filter) {
+  var section = document.getElementById('fleet');
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(function() {
+    var btn = null;
+    document.querySelectorAll('.f-btn').forEach(function(b) {
+      var oc = b.getAttribute('onclick') || '';
+      if (oc.indexOf(filter) !== -1) btn = b;
+    });
+    if (btn) filterFleet(filter, btn);
+  }, 400);
+}
+function toggleMobFleetSub(btn) {
+  var sub = document.getElementById('mob-fleet-sub');
+  var isOpen = sub.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+
 /* ---- EXPERIENCE CARD FLIP ---- */
 function flipExpCard(card) {
   var wasFlipped = card.classList.contains('is-flipped');
@@ -1857,7 +1896,7 @@ const TRANSLATIONS = {
     'fleet.label':'Choose Your Vessel',
     'fleet.h':'Our Featured <em>Fleet</em>',
     'fleet.sub':'From intimate sunset cruises to grand celebrations, we have the perfect yacht for every occasion. Browse our most popular vessels below, or ask us about our full 30+ selection.',
-    'fleet.all':'All Yachts','fleet.mega':'Mega Yachts 80′+','fleet.sport':'Under 45′',
+    'fleet.all':'All Yachts','fleet.mega':'Mega Yachts 80′+','fleet.super':'60′ – 79′','fleet.mid':'45′ – 59′','fleet.sport':'Under 45′',
     /* why-us */
     'why.label':'Why Heart of the Sea',
     'why.h':'Miami\'s Trusted <em>Bareboat Charter</em> Experience',
@@ -1963,7 +2002,7 @@ const TRANSLATIONS = {
     'fleet.label':'Elige tu Embarcación',
     'fleet.h':'Nuestra <em>Flota</em> Destacada',
     'fleet.sub':'Desde íntimos cruceros al atardecer hasta grandes celebraciones, tenemos el yate perfecto para cada ocasión. Explora nuestras embarcaciones más populares o pregúntanos por nuestra selección completa de 30+.',
-    'fleet.all':'Todos los Yates','fleet.mega':'Mega Yates 80′+','fleet.sport':'Menos de 45′',
+    'fleet.all':'Todos los Yates','fleet.mega':'Mega Yates 80′+','fleet.super':'60′ – 79′','fleet.mid':'45′ – 59′','fleet.sport':'Menos de 45′',
     /* why-us */
     'why.label':'Por qué Heart of the Sea',
     'why.h':'La Experiencia de <em>Charter Náutico</em> de Confianza en Miami',
