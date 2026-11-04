@@ -15,6 +15,26 @@
       gtag('event', 'whatsapp_click', { link_url: a.href, link_text: (a.textContent || '').trim().slice(0, 80) });
     }, true);
   </script>
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1338576037799348');
+    fbq('track', 'PageView');
+    // Meta: WhatsApp clicks from the Instagram link page
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+      if (!a) return;
+      fbq('track', 'Contact', { method: 'whatsapp', source: 'instagram_linkpage' });
+    }, true);
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1338576037799348&ev=PageView&noscript=1" /></noscript>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Heart of the Sea · Links</title>
