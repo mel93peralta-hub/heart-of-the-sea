@@ -14,6 +14,14 @@
       if (!a) return;
       gtag('event', 'whatsapp_click', { link_url: a.href, link_text: (a.textContent || '').trim().slice(0, 80) });
     }, true);
+    // GA4 + Meta: track phone and email clicks
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+      if (!a) return;
+      var isTel = a.getAttribute('href').indexOf('tel:') === 0;
+      gtag('event', isTel ? 'phone_click' : 'email_click', { link_url: a.href });
+      if (window.fbq) fbq('track', 'Contact', { method: isTel ? 'phone' : 'email' });
+    }, true);
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1513,7 +1521,7 @@ function openModal(idx) {
   const y = activeYacht;
   if (window.fbq) fbq('track', 'ViewContent', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : undefined), currency: 'USD' });
   if (window.gtag) gtag('event', 'view_item', { currency: 'USD', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 0), items: [{ item_name: y.name, item_category: 'yacht_charter' }] });
-  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD', num_items: 1 });
+  _formStarted = false;
 
   // Gallery
   renderGallery();
@@ -1750,9 +1758,25 @@ function openGeneralModal() {
   document.body.style.top      = '-' + _savedScrollY + 'px';
   document.body.style.width    = '100%';
   document.getElementById('booking-overlay').classList.add('open');
-  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: 'General Quote', content_category: 'yacht_charter', currency: 'USD' });
-  if (window.gtag) gtag('event', 'begin_checkout', { currency: 'USD', item_category: 'general_quote' });
+  _formStarted = false;
 }
+
+/* ---- TRACKING: booking form started (first interaction with the form, once per modal open) ---- */
+let _formStarted = false;
+function trackFormStart() {
+  if (_formStarted) return;
+  _formStarted = true;
+  const y = activeYacht;
+  const name = y ? y.name : 'General Quote';
+  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: name, content_category: 'yacht_charter', currency: 'USD', num_items: 1 });
+  if (window.gtag) gtag('event', 'begin_checkout', { currency: 'USD', items: [{ item_name: name, item_category: y ? 'yacht_charter' : 'general_quote' }] });
+}
+(function () {
+  const formWrap = document.getElementById('modal-form-wrap');
+  if (!formWrap) return;
+  formWrap.addEventListener('focusin', trackFormStart);
+  formWrap.addEventListener('click', trackFormStart);
+})();
 
 /* ---- HEADER SCROLL ---- */
 window.addEventListener('scroll', () => {
