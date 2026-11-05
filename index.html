@@ -14,14 +14,6 @@
       if (!a) return;
       gtag('event', 'whatsapp_click', { link_url: a.href, link_text: (a.textContent || '').trim().slice(0, 80) });
     }, true);
-    // GA4 + Meta: track phone and email clicks
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
-      if (!a) return;
-      var isTel = a.getAttribute('href').indexOf('tel:') === 0;
-      gtag('event', isTel ? 'phone_click' : 'email_click', { link_url: a.href });
-      if (window.fbq) fbq('track', 'Contact', { method: isTel ? 'phone' : 'email' });
-    }, true);
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -283,7 +275,7 @@
     .y-card { background: var(--white); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--sh-sm); transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); display: flex; flex-direction: column; will-change: transform; contain: layout style; }
     .y-card:hover { transform: translateY(-6px); box-shadow: var(--sh-lg); }
     .y-img-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--off-white); }
-    .y-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
+    .y-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: left center; transition: transform .55s var(--ease); }
     .y-card:hover .y-img-wrap img { transform: scale(1.07); }
     .y-badge-feat { position: absolute; top: 12px; left: 12px; background: var(--coral); color: var(--white); font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
     .y-badge-size { position: absolute; top: 12px; right: 12px; background: rgba(4,27,63,.82); color: var(--white); font-family: var(--font-display); font-size: 1rem; font-weight: 400; padding: 3px 12px; border-radius: 20px; backdrop-filter: blur(4px); }
@@ -726,15 +718,15 @@
         </div>
       </div>
       <div class="nav-dropdown">
-        <a href="#experiences" class="nav-dropdown-toggle" data-i18n="nav.exp">Experiences <span class="nav-arrow">&#9660;</span></a>
+        <a href="#experiences" class="nav-dropdown-toggle" data-i18n="nav.exp">Experiences <span class="nav-arrow">▾</span></a>
         <div class="nav-dropdown-menu">
-          <a href="#experiences" onclick="scrollToExp(0);return false;" data-i18n="exp.card1.title">&#127874; Birthday Bundle</a>
-          <a href="#experiences" onclick="scrollToExp(1);return false;" data-i18n="exp.card2.title">&#128141; Bachelorette</a>
-          <a href="#experiences" onclick="scrollToExp(2);return false;" data-i18n="exp.card3.title">&#127801; Romantic Experience</a>
-          <a href="#experiences" onclick="scrollToExp(3);return false;" data-i18n="exp.card4.title">&#129473; Private Chef on Board</a>
-          <a href="#experiences" onclick="scrollToExp(4);return false;" data-i18n="exp.card5.title">&#127864; Bartender Onboard</a>
-          <a href="#experiences" onclick="scrollToExp(5);return false;" data-i18n="exp.card6.title">&#127911; DJ &amp; Photography Onboard</a>
-          <a href="#experiences" onclick="scrollToExp(6);return false;" data-i18n="exp.card7.title">&#10024; Custom Celebration</a>
+          <a href="#experiences" onclick="scrollToExp(0);return false;" data-i18n="exp.card1.title">🎂 Birthday Bundle</a>
+          <a href="#experiences" onclick="scrollToExp(1);return false;" data-i18n="exp.card2.title">💍 Bachelorette</a>
+          <a href="#experiences" onclick="scrollToExp(2);return false;" data-i18n="exp.card3.title">🌹 Romantic Experience</a>
+          <a href="#experiences" onclick="scrollToExp(3);return false;" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</a>
+          <a href="#experiences" onclick="scrollToExp(4);return false;" data-i18n="exp.card5.title">🍸 Bartender Onboard</a>
+          <a href="#experiences" onclick="scrollToExp(5);return false;" data-i18n="exp.card6.title">🎧 DJ &amp; Photography Onboard</a>
+          <a href="#experiences" onclick="scrollToExp(6);return false;" data-i18n="exp.card7.title">✨ Custom Celebration</a>
         </div>
       </div>
       <a href="#why-us" data-i18n="nav.about">About</a>
@@ -925,7 +917,7 @@
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
                   <h3 class="exp-flip-back-title" data-i18n="exp.card1.title">🎂 Birthday Bundle</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card1.items">
                   <li>Birthday cake</li>
@@ -935,7 +927,7 @@
                   <li>Elegant Plates, Cups &amp; Cutlery</li>
                 </ul>
                 <p class="exp-flip-price" data-i18n="exp.card1.price">$275 · For 13 people</p>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
               </div>
             </div>
           </div>
@@ -958,7 +950,7 @@
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
                   <h3 class="exp-flip-back-title" data-i18n="exp.card2.title">💍 Bachelorette</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card2.items">
                   <li>Bridal Balloon Bouquet</li>
@@ -968,7 +960,7 @@
                   <li>Shot glass necklaces ×13</li>
                 </ul>
                 <p class="exp-flip-price" data-i18n="exp.card2.price">$215 · For 13 people</p>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
               </div>
             </div>
           </div>
@@ -991,7 +983,7 @@
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
                   <h3 class="exp-flip-back-title" data-i18n="exp.card3.title">🌹 Romantic Experience</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card3.items">
                   <li>Fresh Rose Bouquet</li>
@@ -1001,70 +993,72 @@
                   <li>Gourmet Charcuterie Board</li>
                 </ul>
                 <p class="exp-flip-price" data-i18n="exp.card3.price">$250 · For two</p>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.wa.btn">Book via WhatsApp</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 4. Chef Abel y su Team -->
+      <!-- 4. Custom Celebration -->
       <div class="exp-flip-card" onclick="flipExpCard(this)">
         <div class="exp-flip-inner">
           <div class="exp-flip-front">
-            <div class="exp-flip-bg" data-bg="images/events/event-chef-onboard.jpg"></div>
+            <div class="exp-flip-bg" data-bg="images/events/event-custom-celebration.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
-              <h3 class="exp-flip-title" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</h3>
+              <h3 class="exp-flip-title" data-i18n="exp.card7.title">✨ Custom Celebration</h3>
             </div>
           </div>
           <div class="exp-flip-back">
-            <div class="exp-flip-back-img" data-bg="images/events/event-chef-onboard.jpg"></div>
+            <div class="exp-flip-back-img" data-bg="images/events/event-custom-celebration.jpg"></div>
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card7.title">✨ Custom Celebration</h3>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
-                <ul class="exp-flip-items" data-i18n="exp.card4.items">
-                  <li>American Culinary Federation–certified Executive Chef Abel and his team</li>
-                  <li>Customized menus</li>
-                  <li>Live Onboard Cooking Experience</li>
-                  <li>Luxury Dining &amp; Personalized Service</li>
+                <ul class="exp-flip-items" data-i18n="exp.card7.items">
+                  <li>Anniversaries, proposals, graduations &amp; special occasions</li>
+                  <li>Custom decorations, flowers, massages &amp; more</li>
+                  <li>Personalized experiences tailored to your vision</li>
+                  <li>We handle every detail, you enjoy the moment</li>
                 </ul>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.custom.btn">Tell Us Your Idea</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 5. Bartender Frank y su Team -->
+      <!-- 5. Catering -->
       <div class="exp-flip-card" onclick="flipExpCard(this)">
         <div class="exp-flip-inner">
           <div class="exp-flip-front">
-            <div class="exp-flip-bg" data-bg="images/events/event-bartender-onboard.jpg"></div>
+            <div class="exp-flip-bg" data-bg="images/events/event-catering.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
-              <h3 class="exp-flip-title" data-i18n="exp.card5.title">🍸 Bartender Onboard</h3>
+              <h3 class="exp-flip-title">🍽️ Catering</h3>
             </div>
           </div>
           <div class="exp-flip-back">
-            <div class="exp-flip-back-img" data-bg="images/events/event-bartender-onboard.jpg"></div>
+            <div class="exp-flip-back-img" data-bg="images/events/event-catering.jpg"></div>
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title" data-i18n="exp.card5.title">🍸 Bartender Onboard</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <h3 class="exp-flip-back-title">🍽️ Catering</h3>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
-                <ul class="exp-flip-items" data-i18n="exp.card5.items">
-                  <li>Professional Mixologist</li>
-                  <li>Basic &amp; Premium Bar Packages</li>
-                  <li>Signature Cocktails &amp; Premium Spirits</li>
-                  <li>Customized Cocktail Experience</li>
+                <ul class="exp-flip-items">
+                  <li class="exp-sub">Private Charter Grazing &amp; Platters</li>
+                  <li>Charcuterie &amp; Boards</li>
+                  <li>From the Sea — Shrimp &amp; Sushi Platters</li>
+                  <li>Garden Fresh — Veggie &amp; Fruit Platters</li>
+                  <li>Sandwiches &amp; Wraps</li>
+                  <li>Chicken &amp; Bites</li>
+                  <li>Sweets &amp; Treats · Custom Cakes</li>
                 </ul>
-                <p class="exp-flip-price" data-i18n="exp.card5.price">Basic $200/hr · Premium $325/hr</p>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
           </div>
@@ -1087,7 +1081,7 @@
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
                   <h3 class="exp-flip-back-title" data-i18n="exp.card6.title">🎧 DJ &amp; Photography Onboard</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
                 <ul class="exp-flip-items" data-i18n="exp.card6.items">
                   <li class="exp-sub">Live DJ Experience</li>
@@ -1099,38 +1093,70 @@
                   <li>Capture Unforgettable Moments</li>
                 </ul>
                 <p class="exp-flip-price" data-i18n="exp.card6.price">DJ Starting at $250/hr · Photography Starting at $250/hr</p>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 7. Custom Celebration -->
+      <!-- 7. Chef Abel y su Team -->
       <div class="exp-flip-card" onclick="flipExpCard(this)">
         <div class="exp-flip-inner">
           <div class="exp-flip-front">
-            <div class="exp-flip-bg" data-bg="images/events/event-custom-celebration.jpg"></div>
+            <div class="exp-flip-bg" data-bg="images/events/event-chef-onboard.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
-              <h3 class="exp-flip-title" data-i18n="exp.card7.title">✨ Custom Celebration</h3>
+              <h3 class="exp-flip-title" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</h3>
             </div>
           </div>
           <div class="exp-flip-back">
-            <div class="exp-flip-back-img" data-bg="images/events/event-custom-celebration.jpg"></div>
+            <div class="exp-flip-back-img" data-bg="images/events/event-chef-onboard.jpg"></div>
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
-                  <h3 class="exp-flip-back-title" data-i18n="exp.card7.title">✨ Custom Celebration</h3>
-                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest('.exp-flip-card'))">✕</button>
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card4.title">🧑‍🍳 Private Chef on Board</h3>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
                 </div>
-                <ul class="exp-flip-items" data-i18n="exp.card7.items">
-                  <li>Anniversaries, proposals, graduations &amp; special occasions</li>
-                  <li>Custom decorations, flowers, massages &amp; more</li>
-                  <li>Personalized experiences tailored to your vision</li>
-                  <li>We handle every detail, you enjoy the moment</li>
+                <ul class="exp-flip-items" data-i18n="exp.card4.items">
+                  <li>American Culinary Federation–certified Executive Chef Abel and his team</li>
+                  <li>Customized menus</li>
+                  <li>Live Onboard Cooking Experience</li>
+                  <li>Luxury Dining &amp; Personalized Service</li>
                 </ul>
-                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq('track','Contact')" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.custom.btn">Tell Us Your Idea</a>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Bartender Frank y su Team -->
+      <div class="exp-flip-card" onclick="flipExpCard(this)">
+        <div class="exp-flip-inner">
+          <div class="exp-flip-front">
+            <div class="exp-flip-bg" data-bg="images/events/event-bartender-onboard.jpg"></div>
+            <div class="exp-flip-front-overlay">
+              <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
+              <h3 class="exp-flip-title" data-i18n="exp.card5.title">🍸 Bartender Onboard</h3>
+            </div>
+          </div>
+          <div class="exp-flip-back">
+            <div class="exp-flip-back-img" data-bg="images/events/event-bartender-onboard.jpg"></div>
+            <div class="exp-flip-back-overlay">
+              <div class="exp-flip-back-content">
+                <div class="exp-flip-back-header">
+                  <h3 class="exp-flip-back-title" data-i18n="exp.card5.title">🍸 Bartender Onboard</h3>
+                  <button class="exp-flip-close" onclick="event.stopPropagation();flipExpCard(this.closest(‘.exp-flip-card’))">✕</button>
+                </div>
+                <ul class="exp-flip-items" data-i18n="exp.card5.items">
+                  <li>Professional Mixologist</li>
+                  <li>Basic &amp; Premium Bar Packages</li>
+                  <li>Signature Cocktails &amp; Premium Spirits</li>
+                  <li>Customized Cocktail Experience</li>
+                </ul>
+                <p class="exp-flip-price" data-i18n="exp.card5.price">Basic $200/hr · Premium $325/hr</p>
+                <a href="http://wa.me/17867644608" onclick="if(window.fbq)fbq(‘track’,’Contact’)" target="_blank" class="exp-flip-quote-btn" data-i18n="exp.quote.btn">Request a Quote</a>
               </div>
             </div>
           </div>
@@ -1522,7 +1548,7 @@ function openModal(idx) {
   const y = activeYacht;
   if (window.fbq) fbq('track', 'ViewContent', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : undefined), currency: 'USD' });
   if (window.gtag) gtag('event', 'view_item', { currency: 'USD', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 0), items: [{ item_name: y.name, item_category: 'yacht_charter' }] });
-  _formStarted = false;
+  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: y.name, content_category: 'yacht_charter', value: (y.price ? parseInt(String(y.price).replace(/[^0-9]/g,'')) : 500), currency: 'USD', num_items: 1 });
 
   // Gallery
   renderGallery();
@@ -1759,25 +1785,9 @@ function openGeneralModal() {
   document.body.style.top      = '-' + _savedScrollY + 'px';
   document.body.style.width    = '100%';
   document.getElementById('booking-overlay').classList.add('open');
-  _formStarted = false;
+  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: 'General Quote', content_category: 'yacht_charter', currency: 'USD' });
+  if (window.gtag) gtag('event', 'begin_checkout', { currency: 'USD', item_category: 'general_quote' });
 }
-
-/* ---- TRACKING: booking form started (first interaction with the form, once per modal open) ---- */
-let _formStarted = false;
-function trackFormStart() {
-  if (_formStarted) return;
-  _formStarted = true;
-  const y = activeYacht;
-  const name = y ? y.name : 'General Quote';
-  if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: name, content_category: 'yacht_charter', currency: 'USD', num_items: 1 });
-  if (window.gtag) gtag('event', 'begin_checkout', { currency: 'USD', items: [{ item_name: name, item_category: y ? 'yacht_charter' : 'general_quote' }] });
-}
-(function () {
-  const formWrap = document.getElementById('modal-form-wrap');
-  if (!formWrap) return;
-  formWrap.addEventListener('focusin', trackFormStart);
-  formWrap.addEventListener('click', trackFormStart);
-})();
 
 /* ---- HEADER SCROLL ---- */
 window.addEventListener('scroll', () => {
@@ -1835,7 +1845,7 @@ function scrollToFleet(filter) {
     var btn = null;
     document.querySelectorAll('.f-btn').forEach(function(b) {
       var oc = b.getAttribute('onclick') || '';
-      if (oc.indexOf(filter) !== -1) btn = b;
+      if (oc.indexOf("'" + filter + "'") !== -1) btn = b;
     });
     if (btn) filterFleet(filter, btn);
   }, 400);
