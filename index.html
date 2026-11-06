@@ -276,7 +276,8 @@
     .y-card:hover { transform: translateY(-6px); box-shadow: var(--sh-lg); }
     .y-img-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--navy); }
     .y-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .55s var(--ease); }
-    .y-img-wrap img[src*="azimutfreedom"] { object-position: left center; }
+    .y-img-wrap img[src*="azimutfreedom"] { transform: scaleX(-1); }
+    .y-card:hover .y-img-wrap img[src*="azimutfreedom"] { transform: scaleX(-1) scale(1.07); }
     .y-card:hover .y-img-wrap img { transform: scale(1.07); }
     .y-badge-feat { position: absolute; top: 12px; left: 12px; background: var(--coral); color: var(--white); font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
     .y-badge-size { position: absolute; top: 12px; right: 12px; background: rgba(4,27,63,.82); color: var(--white); font-family: var(--font-display); font-size: 1rem; font-weight: 400; padding: 3px 12px; border-radius: 20px; backdrop-filter: blur(4px); }
