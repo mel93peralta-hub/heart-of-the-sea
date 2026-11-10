@@ -280,9 +280,9 @@
     .y-card:hover .y-img-wrap img[src*="azimutfreedom"] { transform: scaleX(-1) scale(1.07); }
     .y-img-wrap img[src*="julia-valentine-52"] { transform: scaleX(-1); }
     .y-card:hover .y-img-wrap img[src*="julia-valentine-52"] { transform: scaleX(-1) scale(1.07); }
-    .exp-flip-bg[data-bg*="event-custom-celebration"] { transform: scaleX(-1); }
-    .exp-flip-front:hover .exp-flip-bg[data-bg*="event-custom-celebration"] { transform: scaleX(-1) scale(1.06); }
-    .exp-flip-back-img[data-bg*="event-custom-celebration"] { transform: scaleX(-1); }
+    .exp-flip-bg.flip-h { transform: scaleX(-1); }
+    .exp-flip-front:hover .exp-flip-bg.flip-h { transform: scaleX(-1) scale(1.06); }
+    .exp-flip-back-img.flip-h { transform: scaleX(-1); }
     .y-card:hover .y-img-wrap img { transform: scale(1.07); }
     .y-badge-feat { position: absolute; top: 12px; left: 12px; background: var(--coral); color: var(--white); font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
     .y-badge-size { position: absolute; top: 12px; right: 12px; background: rgba(4,27,63,.82); color: var(--white); font-family: var(--font-display); font-size: 1rem; font-weight: 400; padding: 3px 12px; border-radius: 20px; backdrop-filter: blur(4px); }
@@ -1011,14 +1011,14 @@
       <div class="exp-flip-card" onclick="flipExpCard(this)">
         <div class="exp-flip-inner">
           <div class="exp-flip-front">
-            <div class="exp-flip-bg" data-bg="images/events/event-custom-celebration.jpg"></div>
+            <div class="exp-flip-bg flip-h" data-bg="images/events/event-custom-celebration.jpg"></div>
             <div class="exp-flip-front-overlay">
               <div class="exp-hint" data-i18n="exp.hint">Tap to discover</div>
               <h3 class="exp-flip-title" data-i18n="exp.card7.title">✨ Custom Celebration</h3>
             </div>
           </div>
           <div class="exp-flip-back">
-            <div class="exp-flip-back-img" data-bg="images/events/event-custom-celebration.jpg"></div>
+            <div class="exp-flip-back-img flip-h" data-bg="images/events/event-custom-celebration.jpg"></div>
             <div class="exp-flip-back-overlay">
               <div class="exp-flip-back-content">
                 <div class="exp-flip-back-header">
