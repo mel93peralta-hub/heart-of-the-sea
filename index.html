@@ -396,6 +396,16 @@
     .y-link:hover { gap: 9px; }
     .fleet-more { text-align: center; margin-top: 52px; }
 
+    /* ── STATIC FEATURED FLEET (Fix 12 — SEO) ──────────────────────────────
+       Hardcoded HTML cards that Googlebot indexes on the FIRST crawl wave,
+       before it queues a JS-rendered pass. Visible to all users too.      */
+    #static-feat { margin-bottom: 36px; }
+    #static-feat .fleet-grid { margin-bottom: 0; }
+    .sfl-hdg { font-size:.62rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+               color:var(--text-light); margin-bottom:16px; padding-left:2px; }
+    .sfl-banner { text-align:center; margin-top:24px; font-size:.7rem;
+                  color:var(--text-light); letter-spacing:.03em; }
+
     /* SALE BADGE & PRICE */
     .y-badge-sale { position: absolute; top: 12px; left: 12px; background: #e63946; color: #fff; font-size: .6rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 11px; border-radius: 4px; box-shadow: 0 2px 10px rgba(230,57,70,.5); animation: salePulse 2s ease-in-out infinite; z-index: 2; }
     @keyframes salePulse { 0%,100%{box-shadow:0 2px 10px rgba(230,57,70,.5);transform:scale(1)} 50%{box-shadow:0 4px 20px rgba(230,57,70,.8);transform:scale(1.06)} }
@@ -955,6 +965,204 @@
     <div class="sec-label" data-i18n="fleet.label">Choose Your Vessel</div>
     <h2 class="sec-h" data-i18n="fleet.h">Miami Yacht Charter <em>Fleet</em></h2>
     <p class="sec-sub" data-i18n="fleet.sub">From intimate sunset cruises to grand celebrations, we have the perfect yacht for every occasion. Browse our most popular vessels below, or ask us about our full 30+ selection.</p>
+    <!-- ★ FIX 12 — STATIC FEATURED FLEET ★
+         6 HTML-rendered cards indexed by Googlebot on the FIRST crawl wave (no JS needed).
+         The full dynamic fleet (#fleet-grid) is populated by JS below. -->
+    <div id="static-feat">
+      <div class="sfl-hdg">Featured Vessels</div>
+      <div class="fleet-grid">
+
+        <!-- 1. Sirena 88' — $10,000 — Brickell -->
+        <article class="y-card">
+          <div class="y-img-wrap">
+            <img src="images/sirena-88%C2%B4/1.jpg" alt="Sirena 88 foot mega yacht charter Miami — Brickell dock, Onboard Jacuzzi" loading="lazy">
+            <span class="y-badge-feat">⭐ Featured</span>
+            <span class="y-badge-size">88′</span>
+          </div>
+          <div class="y-body">
+            <div class="y-loc">📍 Brickell, Miami</div>
+            <h3 class="y-name">Sirena 88′</h3>
+            <div class="y-tags">
+              <span class="y-tag">Onboard Jacuzzi</span>
+              <span class="y-tag">Premium Sound</span>
+            </div>
+            <div class="y-footer">
+              <div>
+                <div class="y-price"><span class="y-price-from">from</span><span class="y-price-amount">$10,000</span></div>
+                <div class="y-cap">Up to <strong>13 guests</strong></div>
+              </div>
+              <a class="y-link" href="https://wa.me/17867644608" target="_blank" rel="noopener">Book →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Scarlet 103' — $8,000 — Miami River -->
+        <article class="y-card">
+          <div class="y-img-wrap">
+            <img src="images/scarlet-103%C2%B4/1.jpg" alt="Scarlet 103 foot luxury mega yacht charter Miami River" loading="lazy">
+            <span class="y-badge-feat">⭐ Featured</span>
+            <span class="y-badge-size">103′</span>
+          </div>
+          <div class="y-body">
+            <div class="y-loc">📍 Miami River</div>
+            <h3 class="y-name">Scarlet 103′</h3>
+            <div class="y-tags">
+              <span class="y-tag">Premium Sound</span>
+            </div>
+            <div class="y-footer">
+              <div>
+                <div class="y-price"><span class="y-price-from">from</span><span class="y-price-amount">$8,000</span></div>
+                <div class="y-cap">Up to <strong>13 guests</strong></div>
+              </div>
+              <a class="y-link" href="https://wa.me/17867644608" target="_blank" rel="noopener">Book →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Carpe Diem 105' — $7,500 — Miami Beach Marina -->
+        <article class="y-card">
+          <div class="y-img-wrap">
+            <img src="images/carpediem-105%E2%80%B2/1.jpg" alt="Carpe Diem 105 foot mega yacht charter Miami Beach Marina — Jacuzzi on deck" loading="lazy">
+            <span class="y-badge-feat">⭐ Featured</span>
+            <span class="y-badge-size">105′</span>
+          </div>
+          <div class="y-body">
+            <div class="y-loc">📍 Miami Beach Marina</div>
+            <h3 class="y-name">Carpe Diem 105′</h3>
+            <div class="y-tags">
+              <span class="y-tag">Onboard Jacuzzi</span>
+              <span class="y-tag">Premium Sound</span>
+            </div>
+            <div class="y-footer">
+              <div>
+                <div class="y-price"><span class="y-price-from">from</span><span class="y-price-amount">$7,500</span></div>
+                <div class="y-cap">Up to <strong>13 guests</strong></div>
+              </div>
+              <a class="y-link" href="https://wa.me/17867644608" target="_blank" rel="noopener">Book →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Horizon 92' — $7,500 — Aston Martin Marina -->
+        <article class="y-card">
+          <div class="y-img-wrap">
+            <img src="https://photos.smugmug.com/92-Horizon/i-2nkKSg8/0/LHQfdzgGKppC6XN7jfQVGZ3pJc9tKVV435qPvbMJS/X3/Image_20261012_213441_955-X3.jpg" alt="Horizon 92 foot luxury yacht with Seabobs and Jetski — Aston Martin Marina Miami" loading="lazy">
+            <span class="y-badge-feat">⭐ Featured</span>
+            <span class="y-badge-size">92′</span>
+          </div>
+          <div class="y-body">
+            <div class="y-loc">📍 Aston Martin Marina</div>
+            <h3 class="y-name">Horizon 92′</h3>
+            <div class="y-tags">
+              <span class="y-tag">2x Seabobs</span>
+              <span class="y-tag">Jetski</span>
+              <span class="y-tag">Premium Sound</span>
+            </div>
+            <div class="y-footer">
+              <div>
+                <div class="y-price"><span class="y-price-from">from</span><span class="y-price-amount">$7,500</span></div>
+                <div class="y-cap">Up to <strong>13 guests</strong></div>
+              </div>
+              <a class="y-link" href="https://yachtfleet.smugmug.com/92-Horizon" target="_blank" rel="noopener">Book →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Antago 110' — $7,000 — Grove Harbour Marina -->
+        <article class="y-card">
+          <div class="y-img-wrap">
+            <img src="images/antago-110%E2%80%B2/1.jpg" alt="Antago 110 foot mega yacht charter Grove Harbour Marina Miami — Jacuzzi on board" loading="lazy">
+            <span class="y-badge-feat">⭐ Featured</span>
+            <span class="y-badge-size">110′</span>
+          </div>
+          <div class="y-body">
+            <div class="y-loc">📍 Grove Harbour Marina</div>
+            <h3 class="y-name">Antago 110′</h3>
+            <div class="y-tags">
+              <span class="y-tag">Onboard Jacuzzi</span>
+              <span class="y-tag">Premium Sound</span>
+            </div>
+            <div class="y-footer">
+              <div>
+                <div class="y-price"><span class="y-price-from">from</span><span class="y-price-amount">$7,000</span></div>
+                <div class="y-cap">Up to <strong>13 guests</strong></div>
+              </div>
+              <a class="y-link" href="https://yachtfleet.smugmug.com/110-Antago" target="_blank" rel="noopener">Book →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Dominator 105' — $6,000 — Miami Beach Marina -->
+        <article class="y-card">
+          <div class="y-img-wrap">
+            <img src="images/dominator-105%E2%80%B2/1.jpg" alt="Dominator 105 foot mega yacht charter Miami Beach — Onboard Jacuzzi" loading="lazy">
+            <span class="y-badge-feat">⭐ Featured</span>
+            <span class="y-badge-size">105′</span>
+          </div>
+          <div class="y-body">
+            <div class="y-loc">📍 Miami Beach Marina</div>
+            <h3 class="y-name">Dominator 105′</h3>
+            <div class="y-tags">
+              <span class="y-tag">Onboard Jacuzzi</span>
+              <span class="y-tag">Premium Sound</span>
+            </div>
+            <div class="y-footer">
+              <div>
+                <div class="y-price"><span class="y-price-from">from</span><span class="y-price-amount">$6,000</span></div>
+                <div class="y-cap">Up to <strong>13 guests</strong></div>
+              </div>
+              <a class="y-link" href="https://wa.me/17867644608" target="_blank" rel="noopener">Book →</a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.fleet-grid -->
+      <p class="sfl-banner">Showing 6 featured vessels · Browse our full fleet of 30+ yachts with the filters below</p>
+    </div><!-- /#static-feat -->
+
+    <noscript>
+      <!-- Full yacht list for crawlers that skip JS execution entirely -->
+      <section style="font-size:14px;line-height:1.9;padding:20px 0 16px;border-top:1px solid #e8e6e2;margin-top:8px;">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:10px;color:#041b3f;">Heart of the Sea Miami — Full Luxury Yacht Charter Fleet (32 Vessels)</h3>
+        <p style="margin-bottom:12px;color:#4a5060;">Private yacht charters in Miami, FL. All vessels accommodate up to 13 guests (commercial passenger vessel certified). Departing from Brickell, Miami Beach Marina, Miami River, Grove Harbour Marina, Venetian Marina, Haulover Park, Coconut Grove, and more.</p>
+        <ul style="column-count:2;column-gap:24px;list-style:disc;padding-left:20px;color:#1a1f2e;">
+          <li>Sirena 88′ — from $10,000 — Brickell — Jacuzzi</li>
+          <li>Scarlet 103′ — from $8,000 — Miami River</li>
+          <li>Carpe Diem 105′ — from $7,500 — Miami Beach Marina — Jacuzzi</li>
+          <li>Horizon 92′ — from $7,500 — Aston Martin Marina — Seabobs · Jetski</li>
+          <li>Antago 110′ — from $7,000 — Grove Harbour Marina — Jacuzzi</li>
+          <li>Pershing 90′ — from $7,000 — Miami River</li>
+          <li>Dominator 105′ — from $6,000 — Miami Beach Marina — Jacuzzi</li>
+          <li>Galeon 68′ — from $5,000 — Miami Beach Marina</li>
+          <li>Houdini 95′ — from $5,000 — Miami Beach Marina — Jacuzzi</li>
+          <li>Azimut 84′ Sky — from $4,800 — Coconut Grove — Jacuzzi · Seabobs</li>
+          <li>Azimut 90′ Day Dreamin′ — from $4,500 — Miami Beach Marina — Jacuzzi</li>
+          <li>Opulence 90′ — from $4,100 — Bayshore Landing Marina — Jacuzzi</li>
+          <li>Le Grand Bleu 70′ — from $3,200 — Haulover</li>
+          <li>Azimut 60′ Freedom — from $3,000 — Miami Beach Marina</li>
+          <li>Bahia Panther 85′ — from $3,000 — Regal Marina — Jacuzzi</li>
+          <li>Pershing 64′ — from $3,000 — Venetian Marina</li>
+          <li>Prestige 70′ Bougie on a Budget — from $3,000 — Miami Beach</li>
+          <li>Azimut 55′ Flybridge — from $2,600 — Venetian Marina</li>
+          <li>SeaRay Serenity 58′ — from $2,500 — Miami Beach Marina</li>
+          <li>Disco 60′ — from $2,500 — Venetian Marina</li>
+          <li>Beneteau Flybridge 52′ — from $2,300 — Venetian Marina</li>
+          <li>Pershing 50′ — from $2,300 — Venetian Marina</li>
+          <li>SeaRay 48′ — from $2,300 — Venetian Marina</li>
+          <li>Julia Valentine 52′ — from $2,300 — Miami River</li>
+          <li>Cruiser Sport 55′ — from $2,200 — Venetian Marina</li>
+          <li>Vandutch 40′ — from $1,950 — Venetian Marina</li>
+          <li>Viking Princess 55′ Takeella — from $1,800 — Regal Marina</li>
+          <li>Cruiser Sport Fly 50′ Remedy — from $1,700 — Miami Beach Marina</li>
+          <li>SeaRay 50′ — from $1,400 — Jones Boat Yard</li>
+          <li>Harmony 44′ — from $1,300 — Jones Boat Yard</li>
+          <li>Lady G 41′ — from $1,300 — Jones Boat Yard</li>
+          <li>Barbie Pink 42′ — from $1,000 — Miami River — Unique Style</li>
+        </ul>
+        <p style="margin-top:12px;color:#4a5060;">Contact us: <strong>+1 (786) 764-4608</strong> · WhatsApp · <a href="mailto:heartoftheseamiami@gmail.com">heartoftheseamiami@gmail.com</a></p>
+      </section>
+    </noscript>
+
     <div class="fleet-filters">
       <button class="f-btn on" onclick="filterFleet('all',this)" data-i18n="fleet.all">All Yachts</button>
       <button class="f-btn" onclick="filterFleet('mega',this)" data-i18n="fleet.mega">Mega Yachts 80′+</button>
